@@ -6,7 +6,7 @@
 		"dev": "turbo dev",
 		"lint": "turbo lint",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
-		"prepare": "node ./prepare.js"
+		"prepare": "husky install"
 	},
 	"devDependencies": {
 		"@repo/eslint-config": "*",
@@ -31,12 +31,11 @@
 		"react-redux": "^9.1.0",
 		"redux": "^5.0.1"
 	},
-	{
-		"lint-staged": {
-			"*.{ts,tsx}": [
-				"prettier --write",
-				"eslint --fix"
-			]
-		}
-	}
+	"lint-staged": {
+		"*.{ts,tsx}": [
+			"prettier --write",
+			"eslint --fix"
+		]
+	},
+	"type": "module"
 }
