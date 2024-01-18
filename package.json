@@ -6,12 +6,13 @@
 		"dev": "turbo dev",
 		"lint": "turbo lint",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
-		"prepare": "husky install .config/husky"
+		"prepare": "node ./prepare.js"
 	},
 	"devDependencies": {
 		"@repo/eslint-config": "*",
 		"@repo/typescript-config": "*",
 		"husky": "^8.0.0",
+		"is-ci": "^3.0.1",
 		"lint-staged": "^15.2.0",
 		"prettier": "^3.1.1",
 		"turbo": "latest"
@@ -30,10 +31,12 @@
 		"react-redux": "^9.1.0",
 		"redux": "^5.0.1"
 	},
-	"lint-staged": {
-		"src/**/*.{js,jsx,ts,tsx}": [
-			"eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-			"prettier --write"
-		]
+	{
+		"lint-staged": {
+			"*.{ts,tsx}": [
+				"prettier --write",
+				"eslint --fix"
+			]
+		}
 	}
 }
