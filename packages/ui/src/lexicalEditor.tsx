@@ -6,6 +6,7 @@ import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 
 function MyCustomAutoFocusPlugin() {
@@ -30,7 +31,7 @@ const LexicalEditor = () => {
   };
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <PlainTextPlugin
+      <RichTextPlugin
         contentEditable={<ContentEditable />}
         placeholder={<div>Enter some text...</div>}
         ErrorBoundary={LexicalErrorBoundary}
