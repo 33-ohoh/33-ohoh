@@ -7,7 +7,6 @@
     "./card": "./src/card.tsx",
     "./code": "./src/code.tsx",
     "./common": "./src/common.ts",
-    "./lexicalEditor": "./src/lexicalEditor.tsx",
     "./quillEditor": "./src/quillEditor.tsx"
   },
   "scripts": {
