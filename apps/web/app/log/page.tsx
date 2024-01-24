@@ -1,4 +1,10 @@
-import React from "react";
+import {
+  titleStyle,
+  bodyStyle,
+  colors,
+  margins,
+  radius,
+} from "@repo/ui/designToken.stylex";
 import QuillEditor from "@repo/ui/quillEditor";
 import * as stylex from "@stylexjs/stylex";
 
@@ -10,21 +16,16 @@ const styles = stylex.create({
     alignItems: "center",
     marginBottom: "20px",
   },
-  pageTitle: {
-    fontSize: "24px",
-    fontWeight: "bold",
-  },
   saveSection: {
     display: "flex",
     alignItems: "center",
     gap: "12px",
   },
   autoSaveText: {
-    fontSize: "14px",
-    color: "#888",
+    color: colors.neutral40,
   },
   tempSaveButton: {
-    padding: "10px 15px",
+    padding: "10px 20px",
     backgroundColor: "#f0f0f0",
     border: "none",
     cursor: "pointer",
@@ -70,9 +71,11 @@ const Log = () => {
   return (
     <section {...stylex.props(styles.wrapper)}>
       <div {...stylex.props(styles.headerSection)}>
-        <h1>게시글 작성</h1>
+        <h1 {...stylex.props(titleStyle.display3)}>게시글 작성</h1>
         <div {...stylex.props(styles.saveSection)}>
-          <p {...stylex.props(styles.autoSaveText)}>자동 저장 21:09:27</p>
+          <p {...stylex.props(titleStyle.subhead1, styles.autoSaveText)}>
+            자동 저장 21:09:27
+          </p>
           <button {...stylex.props(styles.tempSaveButton)}>
             임시저장 | 50
           </button>
