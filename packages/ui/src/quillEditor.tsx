@@ -66,6 +66,9 @@ QuillEditor.formats = [
   "image",
   "video",
   "code-block",
+  "align",
+  "color",
+  "background",
 ];
 
 export default QuillEditor;
