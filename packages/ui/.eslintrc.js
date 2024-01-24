@@ -8,4 +8,8 @@ module.exports = {
     tsconfigRootDir: __dirname,
     sourceType: "module",
   },
+  plugins: ["@stylexjs"],
+  rules: {
+    "@stylexjs/valid-styles": ["error", { ...options }],
+  },
 };
