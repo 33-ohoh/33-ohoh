@@ -1,8 +1,14 @@
 "use client";
 
-import React from "react";
 import * as stylex from "@stylexjs/stylex";
-// import Link from "next/link";
+import Link from "next/link";
+import {
+  bodyStyle,
+  colors,
+  margins,
+  radius,
+  titleStyle,
+} from "../designToken.stylex";
 
 interface ProfileBoxProps {
   username: string;
@@ -19,24 +25,25 @@ const ProfileBox = ({
 }: ProfileBoxProps) => {
   return (
     <div {...stylex.props(styles.profileBox)}>
-      <button {...stylex.props(styles.profileImage)}>
+      <div {...stylex.props(styles.profileImage)}>
         <img src={profileImage} />
-      </button>
+      </div>
       <strong {...stylex.props(styles.username)}>{username}</strong>
 
-      {/* <Link href="/edit-mypage" {...stylex.props(styles.editButton)}>
-				내 프로필 편집
-			</Link> */}
+      <Link href="/edit-mypage" {...stylex.props(styles.editButton)}>
+        내 프로필 편집
+      </Link>
 
-      <div {...stylex.props(styles.buttonWrap)}>
-        <button {...stylex.props(styles.button)}>
+      <div {...stylex.props(styles.followWrap)}>
+        <div {...stylex.props(styles.follow)}>
           <p>팔로우</p>
           <span>{follow}</span>
-        </button>
-        <button {...stylex.props(styles.button)}>
+        </div>
+        <div {...stylex.props(styles.line)}></div>
+        <div {...stylex.props(styles.follow)}>
           <p>팔로워</p>
           <span>{follower}</span>
-        </button>
+        </div>
       </div>
     </div>
   );
@@ -46,21 +53,19 @@ export default ProfileBox;
 
 export const styles = stylex.create({
   profileBox: {
-    background: "#eee",
     display: "flex",
     flexDirection: "column",
     width: "300px",
     alignItems: "center",
-    margin: "50px 0",
+    marginBottom: margins.extraSmall2,
   },
 
   profileImage: {
     width: "180px",
     height: "180px",
     borderRadius: "50%",
-    background: "#ddd",
+    background: colors.neutral5,
     marginBottom: "10px",
-    border: "none",
     overflow: "hidden",
   },
 
@@ -70,23 +75,43 @@ export const styles = stylex.create({
 
   username: {
     marginBottom: "30px",
+    fontSize: titleStyle.subhead1,
   },
 
   editButton: {
     width: "100%",
     padding: "12px 0",
     marginBottom: "15px",
+    background: colors.primary100,
+    borderRadius: radius.radius5,
+    color: colors.white,
+    textAlign: "center",
+    fontSize: bodyStyle.body2M,
+    textDecoration: "none",
   },
 
-  buttonWrap: {
+  followWrap: {
     display: "flex",
     width: "100%",
+    borderRadius: radius.radius5,
+    background: colors.primary10,
+    padding: "10px 0",
+    boxSizing: "border-box",
   },
 
-  button: {
+  follow: {
     flexGrow: "1",
-    borderRadius: "5px",
-    border: "none",
-    background: "#ddd",
+    borderStyle: "none",
+    padding: "15px 0",
+    textAlign: "center",
+    fontSize: bodyStyle.body3M,
+    fontWeight: bodyStyle.body3M,
+    color: colors.primary100,
+  },
+
+  line: {
+    width: "2px",
+    height: "auto",
+    background: colors.primary40,
   },
 });

@@ -1,18 +1,13 @@
-import { stylex } from "@stylexjs/stylex";
-import ProfileBox from "./profileBox.js";
+import * as stylex from "@stylexjs/stylex";
+import ProfileBox from "./profileBox";
+import { colors, margins, radius, titleStyle } from "../designToken.stylex";
+import InfoList from "./infoList";
+import LogButton from "./logButton";
 
 const AsideContainer = () => {
   return (
-    <aside {...stylex.props(layoutStyle.asideLayout)}>
-      <div {...stylex.props(styles.visitingStatus)}>
-        <div>
-          Today <span>122</span>
-        </div>
-        <div>
-          Total <span>12240</span>
-        </div>
-      </div>
-      <div {...stylex.props(layoutStyle.innerLayout)}>
+    <aside {...stylex.props(styles.asideLayout)}>
+      <div {...stylex.props(styles.innerLayout)}>
         <ProfileBox
           username={"홍길동"}
           profileImage={"/"}
@@ -20,19 +15,11 @@ const AsideContainer = () => {
           follower={120}
         />
 
-        <div>
-          <h4>
-            <span>이용약관&개인정보처리방침</span>
-            <img src={""} alt={""} />
-          </h4>
-          <h4>
-            <span>로그아웃</span>
-            <img src={""} alt={""} />
-          </h4>
-          <h4>
-            <span>회원탈퇴</span>
-            <img src={""} alt={""} />
-          </h4>
+        <InfoList />
+
+        <div {...stylex.props(styles.buttons)}>
+          <LogButton icon="" text="새 로그 작성" style={styles.write} />
+          <LogButton icon="" text="내 로그 편집" style={styles.edit} />
         </div>
       </div>
     </aside>
@@ -41,25 +28,48 @@ const AsideContainer = () => {
 
 export default AsideContainer;
 
-export const layoutStyle = stylex.create({
-  wrapper: {
-    display: "flex",
-    margin: "50px 35px",
-  },
-
+const styles = stylex.create({
   asideLayout: {
     width: "375px",
     position: "relative",
+    display: "flex",
+    alignItems: "center",
+    padding: "50px 40px",
+    borderWidth: "1px",
+    borderRadius: radius.radius15,
+    borderStyle: "solid",
+    borderColor: colors.primary50,
   },
 
   innerLayout: {
-    border: "1px solid blue",
-    borderRadius: "15px",
+    width: "300px",
+    margin: "0 auto",
   },
-});
 
-export const styles = stylex.create({
   visitingStatus: {
+    position: "absolute",
+    left: "0",
     display: "flex",
+    fontSize: titleStyle.headline2,
+  },
+
+  buttons: {
+    display: "flex",
+    flexDirection: "column",
+    gap: margins.extraSmall3,
+  },
+
+  write: {
+    background: colors.primary100,
+    color: colors.white,
+    borderColor: colors.primary100,
+    borderStyle: "solid",
+  },
+
+  edit: {
+    background: colors.white,
+    color: colors.primary80,
+    borderColor: colors.primary80,
+    borderStyle: "solid",
   },
 });
