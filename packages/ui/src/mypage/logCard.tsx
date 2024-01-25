@@ -65,7 +65,7 @@ const LogCard = () => {
 
   let logCardItem = logCardData.map((item) => {
     return (
-      <div key={item.id + item.title} {...stylex.props(styles.cardTemplate)}>
+      <li key={item.id + item.title} {...stylex.props(styles.cardTemplate)}>
         <div {...stylex.props(styles.thumbnailWrap)}>
           <div {...stylex.props(styles.userinfoWrap)}>
             <img src={""} alt={"img"} {...stylex.props(styles.profile)} />
@@ -95,16 +95,14 @@ const LogCard = () => {
             </div>
           </div>
         </div>
-      </div>
+      </li>
     );
   });
 
   return (
-    <li>
-      <a href="#" {...stylex.props(styles.layout)}>
-        {logCardItem}
-      </a>
-    </li>
+    <a href="#" {...stylex.props(styles.layout)}>
+      {logCardItem}
+    </a>
   );
 };
 

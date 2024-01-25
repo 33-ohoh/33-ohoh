@@ -93,7 +93,7 @@ const styles = stylex.create({
     borderRadius: "50%",
     background: "#ddd",
     marginBottom: "10px",
-    border: "none",
+    borderStyle: "none",
     overflow: "hidden",
   },
 

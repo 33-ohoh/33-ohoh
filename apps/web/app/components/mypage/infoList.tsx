@@ -1,6 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
-import InfoItem from "./infoItem";
-import { bodyStyle, colors, margins, titleStyle } from "../designToken.stylex";
+import InfoItem from "@repo/ui/infoItem";
+import { bodyStyle, colors, margins, titleStyle } from "@repo/ui/designToken";
+import Image from "next/image";
 
 const InfoList = () => {
   const myActivityData = [
@@ -25,7 +26,7 @@ const InfoList = () => {
         >
           {data.title}
         </a>
-        <img src="" alt=">" />
+        <Image src="" alt=">" />
       </div>
     );
   });
@@ -42,7 +43,7 @@ const InfoList = () => {
         >
           {data.title}
         </a>
-        <img src="" alt=">" />
+        <Image src="" alt=">" />
       </h4>
     );
   });
@@ -62,9 +63,9 @@ const InfoList = () => {
 
         <h4 {...stylex.props(styles.mb10)}>SNS 연동</h4>
         <div>
-          <img src="" alt="KO" />
-          <img src="" alt="NA" />
-          <img src="" alt="GO" />
+          <Image src="" alt="KO" />
+          <Image src="" alt="NA" />
+          <Image src="" alt="GO" />
         </div>
       </InfoItem>
 

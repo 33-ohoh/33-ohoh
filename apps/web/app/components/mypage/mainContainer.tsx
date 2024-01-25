@@ -1,5 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
-import LogCard from "./logCard";
+import LogCard from "@repo/ui/logCard";
 
 const MainContainer = () => {
   const interestLogChip = [

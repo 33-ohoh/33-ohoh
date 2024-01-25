@@ -13,9 +13,9 @@
 		"./hotLogSection": "./src/main/hotLogSection.tsx",
 		"./designToken": "./src/designToken.stylex.ts",
 		"./icon": "./src/icon.tsx",
-		"./asideContainer": "./src/mypage/asideContainer.tsx",
-		"./mainContainer": "./src/mypage/mainContainer.tsx",
-		"./designToken": "./src/designToken.stylex.ts"
+		"./logButton": "./src/mypage/logButton.tsx",
+		"./logCard": "./src/mypage/logCard.tsx",
+		"./infoItem": "./src/mypage/infoItem.tsx"
 	},
 	"scripts": {
 		"lint": "eslint . --max-warnings 0",
