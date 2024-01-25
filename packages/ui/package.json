@@ -9,7 +9,8 @@
     "./common": "./src/common.ts",
     "./quillEditor": "./src/quillEditor.tsx",
     "./hotLogcard": "./src/main/hotLogCard.tsx",
-    "./hotLogList": "./src/main/hotLogList.tsx"
+    "./hotLogList": "./src/main/hotLogList.tsx",
+    "./designToken.stylex": "./src/designToken.stylex.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
