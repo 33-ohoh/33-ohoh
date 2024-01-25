@@ -15,7 +15,6 @@
 		"./icon": "./src/icon.tsx",
 		"./asideContainer": "./src/mypage/asideContainer.tsx",
 		"./mainContainer": "./src/mypage/mainContainer.tsx",
-		"./designToken": "./src/designToken.stylex.ts"
 	},
 	"scripts": {
 		"lint": "eslint . --max-warnings 0",
