@@ -1,10 +1,4 @@
-import {
-  titleStyle,
-  bodyStyle,
-  colors,
-  margins,
-  radius,
-} from "@repo/ui/designToken.stylex";
+import { titleStyle, colors } from "@repo/ui/designToken.stylex";
 import QuillEditor from "@repo/ui/quillEditor";
 import * as stylex from "@stylexjs/stylex";
 
@@ -22,7 +16,8 @@ const styles = stylex.create({
     gap: "12px",
   },
   autoSaveText: {
-    color: colors.neutral40,
+    backgroundColor: colors.primary30,
+    color: colors.systemWarning,
   },
   tempSaveButton: {
     padding: "10px 20px",
@@ -73,9 +68,7 @@ const Log = () => {
       <div {...stylex.props(styles.headerSection)}>
         <h1 {...stylex.props(titleStyle.display3)}>게시글 작성</h1>
         <div {...stylex.props(styles.saveSection)}>
-          <p {...stylex.props(titleStyle.subhead1, styles.autoSaveText)}>
-            자동 저장 21:09:27
-          </p>
+          <p {...stylex.props(styles.autoSaveText)}>자동 저장 21:10:27</p>
           <button {...stylex.props(styles.tempSaveButton)}>
             임시저장 | 50
           </button>
@@ -108,12 +101,7 @@ const Log = () => {
         </div>
         <div {...stylex.props(styles.settingItem)}>
           <span {...stylex.props(styles.settingItemTitle)}>발행시간</span>
-          <input
-            type="checkbox"
-            id="commentAccept"
-            name="commentAccept"
-            checked
-          />
+          <input type="checkbox" id="commentAccept" name="commentAccept" />
           <label htmlFor="commentAccept">현재</label>
           <input type="checkbox" id="commentAccept" name="commentAccept" />
           <label htmlFor="commentAccept">text</label>
