@@ -16,7 +16,7 @@ const styles = stylex.create({
     gap: "12px",
   },
   autoSaveText: {
-    backgroundColor: colors.fuschia60,
+    backgroundColor: colors.primary30,
     color: colors.systemWarning,
   },
   tempSaveButton: {
