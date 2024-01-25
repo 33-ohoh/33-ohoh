@@ -10,7 +10,9 @@
     "./quillEditor": "./src/quillEditor.tsx",
     "./hotLogcard": "./src/main/hotLogCard.tsx",
     "./hotLogList": "./src/main/hotLogList.tsx",
-    "./designToken.stylex": "./src/designToken.stylex.ts"
+    "./hotLogSection": "./src/main/hotLogSection.tsx",
+    "./designToken": "./src/designToken.stylex.ts",
+    "./icon": "./src/icon.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
