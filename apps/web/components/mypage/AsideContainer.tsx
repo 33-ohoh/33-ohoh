@@ -1,8 +1,9 @@
 import * as stylex from "@stylexjs/stylex";
-import ProfileBox from "./profileBox";
-import { colors, margins, radius, titleStyle } from "../designToken.stylex";
-import InfoList from "./infoList";
-import LogButton from "./logButton";
+
+import { colors, margins, radius, titleStyle } from "@repo/ui/designToken";
+import ProfileBox from "./ProfileBox";
+import InfoList from "./InfoList";
+import LogButton from "./LogButton";
 
 const AsideContainer = () => {
   return (
