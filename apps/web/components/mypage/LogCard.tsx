@@ -5,7 +5,8 @@ import {
   margins,
   radius,
   titleStyle,
-} from "../designToken.stylex";
+} from "@repo/ui/designToken";
+import Image from "next/image";
 
 // TODO:: 더미데이터 포켓베이스에 넣어두고, 그거 불러오는 코드 작성하기
 const LogCard = () => {
@@ -68,7 +69,7 @@ const LogCard = () => {
       <div key={item.id + item.title} {...stylex.props(styles.cardTemplate)}>
         <div {...stylex.props(styles.thumbnailWrap)}>
           <div {...stylex.props(styles.userinfoWrap)}>
-            <img src={""} alt={"img"} {...stylex.props(styles.profile)} />
+            <Image src={""} alt={"img"} {...stylex.props(styles.profile)} />
             <div {...stylex.props(styles.profileWrap)}>
               <strong {...stylex.props(bodyStyle.body4M)}>
                 {item.username}
@@ -77,7 +78,7 @@ const LogCard = () => {
             </div>
           </div>
           <button {...stylex.props(styles.badge)}>
-            <img src="" alt="" />
+            <Image src="" alt="" />
           </button>
         </div>
 
@@ -86,11 +87,11 @@ const LogCard = () => {
           <p {...stylex.props(styles.context)}>{item.context}</p>
           <div {...stylex.props(styles.viewerLikeWrap)}>
             <div {...stylex.props(styles.viewerLike)}>
-              <img src="" alt="" />
+              <Image src="" alt="" />
               <span>{item.viewer}</span>
             </div>
             <div {...stylex.props(styles.viewerLike)}>
-              <img src="" alt="" />
+              <Image src="" alt="" />
               <span>{item.like}</span>
             </div>
           </div>
