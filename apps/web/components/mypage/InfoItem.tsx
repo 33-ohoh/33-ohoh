@@ -1,5 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
-import { colors, margins, titleStyle } from "../designToken.stylex";
+import { colors, margins, titleStyle } from "@repo/ui/designToken";
 
 interface InfoItemProps {
   title: string;

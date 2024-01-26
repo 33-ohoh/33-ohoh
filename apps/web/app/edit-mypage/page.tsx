@@ -4,7 +4,7 @@ import EditMypageLayout from "../../../../packages/ui/src/edit-mypage/EditMypage
 import { ImageUpload } from "../../../../packages/ui/src/edit-mypage/ImageUpload";
 import InputForm from "../../../../packages/ui/src/edit-mypage/InputForm";
 
-const EditMypage = () => {
+const Page = () => {
   return (
     <EditMypageLayout>
       <h2>내 프로필 편집</h2>
@@ -53,4 +53,4 @@ const EditMypage = () => {
   );
 };
 
-export default EditMypage;
+export default Page;
