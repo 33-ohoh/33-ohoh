@@ -1,7 +1,7 @@
 import React from "react";
 import QuillEditor from "@repo/ui/quillEditor";
 
-const Log = () => {
+const Page = () => {
   return (
     <div>
       <h1>Your Page</h1>
@@ -10,4 +10,4 @@ const Log = () => {
   );
 };
 
-export default Log;
+export default Page;

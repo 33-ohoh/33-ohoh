@@ -1,5 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
-import { margins, radius, titleStyle } from "../designToken.stylex";
+import { margins, radius, titleStyle } from "@repo/ui/designToken";
+import Image from "next/image";
 
 interface LogButtonProps {
   icon: string;
@@ -11,7 +12,7 @@ const LogButton = ({ icon, text, style }: LogButtonProps) => {
   return (
     <>
       <button type="button" {...stylex.props(styles.button, style)}>
-        <img src={icon} alt="" />
+        <Image src={icon} alt="" />
         <p>{text}</p>
       </button>
     </>

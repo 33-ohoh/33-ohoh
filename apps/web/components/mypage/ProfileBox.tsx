@@ -8,7 +8,8 @@ import {
   margins,
   radius,
   titleStyle,
-} from "../designToken.stylex";
+} from "@repo/ui/designToken";
+import Image from "next/image";
 
 interface ProfileBoxProps {
   username: string;
@@ -26,7 +27,7 @@ const ProfileBox = ({
   return (
     <div {...stylex.props(styles.profileBox)}>
       <div {...stylex.props(styles.profileImage)}>
-        <img src={profileImage} />
+        <Image src={profileImage} alt="" />
       </div>
       <strong {...stylex.props(styles.username)}>{username}</strong>
 
