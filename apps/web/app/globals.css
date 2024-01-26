@@ -85,10 +85,10 @@ time,
 mark,
 audio,
 video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -102,56 +102,142 @@ hgroup,
 menu,
 nav,
 section {
-	display: block;
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
 ol,
 ul {
-	list-style: none;
+  list-style: none;
 }
 blockquote,
 q {
-	quotes: none;
+  quotes: none;
 }
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-	content: "";
-	content: none;
+  content: "";
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border: 0;
+  border-collapse: collapse;
+  border: 0;
 }
 button {
-	cursor: pointer;
+  cursor: pointer;
 }
 *,
 *::after,
 *::before {
-	box-sizing: border-box;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 html {
-	font-size: 16 px;
-	font-family:
-		"Pretendard Variable",
-		Pretendard,
-		-apple-system,
-		BlinkMacSystemFont,
-		system-ui,
-		Roboto,
-		"Helvetica Neue",
-		"Segoe UI",
-		"Apple SD Gothic Neo",
-		"Noto Sans KR",
-		"Malgun Gothic",
-		"Apple Color Emoji",
-		"Segoe UI Emoji",
-		"Segoe UI Symbol",
-		sans-serif;
+  font-size: 16 px;
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    "Segoe UI",
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    "Malgun Gothic",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    sans-serif;
+}
+
+@layer components {
+  .display1 {
+    @apply text-[45px] font-bold leading-[52px];
+  }
+
+  .display2 {
+    @apply text-[36px] font-bold leading-[44px];
+  }
+
+  .display3 {
+    @apply text-[32px] font-bold leading-[40px];
+  }
+
+  .display4 {
+    @apply text-[28px] font-bold leading-[36px];
+  }
+
+  .display5B {
+    @apply text-[24px];
+  }
+
+  .display5R {
+    @apply text-[24px] font-normal leading-[32px];
+  }
+
+  .headline1 {
+    @apply text-[20px] font-bold leading-[28px];
+  }
+
+  .headline2 {
+    @apply text-[18px] font-bold leading-[26px];
+  }
+
+  .subhead1 {
+    @apply text-[16px] font-bold leading-[22px];
+  }
+
+  .subhead2 {
+    @apply text-[14px] font-bold leading-[20px];
+  }
+
+  .body1M {
+    @apply text-[20px] font-medium leading-[28px];
+  }
+
+  .body1R {
+    @apply text-[20px] font-normal leading-[28px];
+  }
+
+  .body2M {
+    @apply text-[18px] font-medium leading-[26px];
+  }
+
+  .body2R {
+    @apply text-[18px] font-normal leading-[26px];
+  }
+
+  .body3M {
+    @apply text-[16px] font-medium leading-[24px];
+  }
+
+  .body3R {
+    @apply text-[16px] font-normal leading-[24px];
+  }
+
+  .body4M {
+    @apply text-[14px] font-medium leading-[20px];
+  }
+
+  .body4R {
+    @apply text-[14px] font-normal leading-[20px];
+  }
+
+  .body5M {
+    @apply text-[12px] font-medium leading-[16px];
+  }
+
+  .body5R {
+    @apply text-[12px] font-normal leading-[16px];
+  }
+
+  .body6R {
+    @apply text-[10px] font-normal leading-[14px];
+  }
 }
