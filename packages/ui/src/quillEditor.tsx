@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import "./quillEditor.css";
 
 const QuillEditor = () => {
   const [text, setText] = useState("");
@@ -16,16 +17,14 @@ const QuillEditor = () => {
   };
 
   return (
-    <div>
-      <ReactQuill
-        value={text}
-        onChange={handleChange}
-        modules={QuillEditor.modules}
-        formats={QuillEditor.formats}
-        bounds={".app"}
-        placeholder="내용을 입력하세요."
-      />
-    </div>
+    <ReactQuill
+      value={text}
+      onChange={handleChange}
+      modules={QuillEditor.modules}
+      formats={QuillEditor.formats}
+      bounds={".app"}
+      placeholder="내용을 입력하세요."
+    />
   );
 };
 
