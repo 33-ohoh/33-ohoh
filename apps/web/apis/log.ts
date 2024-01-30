@@ -1,9 +1,12 @@
-import type { Log, LogsResponse } from "../types/log";
+import type { Log } from "../types/log";
+import type { ErrorResponse, ListResponse } from "../types/response";
 import fetcher from "../utils/fetcher";
 
-export const getLogs = async (url: string): Promise<LogsResponse | null> => {
+export const getLogs = async (
+  url: string,
+): Promise<ListResponse<Log> | ErrorResponse | null> => {
   try {
-    const response = await fetcher<LogsResponse>(url, {
+    const response = await fetcher<ListResponse<Log>>(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -16,7 +19,10 @@ export const getLogs = async (url: string): Promise<LogsResponse | null> => {
   }
 };
 
-export const getLog = async (url: string): Promise<Log | null> => {
+
+export const getLog = async (
+  url: string,
+): Promise<Log | ErrorResponse | null> => {
   try {
     const response = await fetcher<Log>(url, {
       method: "GET",
@@ -34,7 +40,7 @@ export const getLog = async (url: string): Promise<Log | null> => {
 export const createLog = async (
   url: string,
   { arg: { logData, token } }: { arg: { logData: Log; token: string } },
-): Promise<Log | null> => {
+): Promise<Log | ErrorResponse | null> => {
   try {
     const response = await fetcher<Log>(url, {
       method: "POST",
