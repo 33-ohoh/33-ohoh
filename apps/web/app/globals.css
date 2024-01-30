@@ -174,7 +174,7 @@ html {
   }
 
   .display5B {
-    @apply text-[24px];
+    @apply text-[24px] font-bold leading-[32px];
   }
 
   .display5R {
