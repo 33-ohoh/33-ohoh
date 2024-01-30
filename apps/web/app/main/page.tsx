@@ -1,15 +1,9 @@
-"use client";
-import * as stylex from "@stylexjs/stylex";
-import HotLogSection from "@repo/ui/hotLogSection";
-const styles = stylex.create({
-  page: {
-    maxWidth: "1440px",
-  },
-});
+import HotLogCardList from "../../components/main/HotLogCardList";
+
 const MainPage = () => {
   return (
-    <div {...stylex.props(styles.page)}>
-      <HotLogSection />
+    <div className="w-[1440px]">
+      <HotLogCardList />
     </div>
   );
 };
