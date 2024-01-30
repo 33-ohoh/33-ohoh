@@ -1,12 +1,10 @@
 import Image from "next/image";
 import {
-  Bookmark,
-  Comment,
-  Heart,
-  Viewer,
-} from "../../../../packages/ui/src/svg/ProviderIcon";
-
-import userProfile from "../../../../packages/ui/src/public/user-profile.svg";
+  IconBookmark,
+  IconComment,
+  IconHeart,
+  IconViewer,
+} from "../../../../packages/ui/src/svg/IconComponents";
 
 interface LogCardProps {
   id: string;
@@ -40,7 +38,7 @@ const LogCard = async ({ log }: { log: LogCardProps }) => {
       <div className="bg-gray-100 h-[194px] p-[16px]">
         <div className="flex items-center gap-[5px]">
           <Image
-            src={userProfile}
+            src="/default-image.png"
             alt={"img"}
             width={42}
             height={42}
@@ -57,7 +55,7 @@ const LogCard = async ({ log }: { log: LogCardProps }) => {
         <div className="flex">
           <h4 className="text-[18px] font-bold mb-extraSmall5">{title}</h4>
           <button>
-            <Bookmark fill="#000000" />
+            <IconBookmark fill="#000000" />
           </button>
         </div>
         <p className="text-[14px] font-normal text-neutral50 text-ellipsis overflow-hidden whitespace-nowrap mb-extraSmall4">
@@ -65,15 +63,15 @@ const LogCard = async ({ log }: { log: LogCardProps }) => {
         </p>
         <div className="flex text-[10px] text-neutral50 gap-[5px] pb-[10px]">
           <div className="flex gap-[2px] items-center">
-            <Viewer />
+            <IconViewer />
             <span>{viewer}</span>
           </div>
           <div className="flex gap-[2px] items-center">
-            <Heart fill="#EE5C5C" />
+            <IconHeart fill="#EE5C5C" />
             <span>{like}</span>
           </div>
           <div className="flex gap-[2px] items-center">
-            <Comment />
+            <IconComment />
             <span>{comment}</span>
           </div>
         </div>

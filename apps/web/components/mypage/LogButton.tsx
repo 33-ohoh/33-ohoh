@@ -1,7 +1,7 @@
 import {
-  ButtonEdit,
-  ButtonPlue,
-} from "../../../../packages/ui/src/svg/ProviderIcon";
+  IconEdit,
+  IconPlue,
+} from "../../../../packages/ui/src/svg/IconComponents";
 
 interface LogButtonProps {
   icon: string;
@@ -16,9 +16,9 @@ const LogButton = ({ icon, text }: LogButtonProps) => {
         className="bg-primary5 text-primary80 border border-solid border-primary80 rounded-radius5 flex items-center mx-auto gap-[7px] w-full justify-center py-[12px]"
       >
         {icon === "edit" ? (
-          <ButtonEdit width={22} height={22} fill={"#4C8BFF"} />
+          <IconEdit width={22} height={22} fill={"#4C8BFF"} />
         ) : (
-          <ButtonPlue width={22} height={22} fill={"#4C8BFF"} />
+          <IconPlue width={22} height={22} fill={"#4C8BFF"} />
         )}
 
         <p className="font-bold">{text}</p>
