@@ -1,8 +1,8 @@
 .quill {
-  border-radius: 5px;
-  border: 1px solid lime;
+  height: 800px;
 }
 
 .ql-toolbar {
-  background-color: red;
+  background-color: #f5f8ff;
+  border-radius: 15px 15px 0 0;
 }
