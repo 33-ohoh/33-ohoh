@@ -1,3 +1,4 @@
+
 import type { ErrorResponse } from "../types/response";
 interface FetcherOptions {
   method?: string;
@@ -8,7 +9,9 @@ interface FetcherOptions {
 const fetcher = async <T>(
   url: string,
   options: FetcherOptions = {},
+
 ): Promise<T | ErrorResponse | null> => {
+
   const response = await fetch(url, {
     method: options.method || "GET",
     headers: options.headers || {},
