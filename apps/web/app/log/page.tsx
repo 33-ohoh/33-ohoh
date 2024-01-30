@@ -84,11 +84,13 @@ const Page = () => {
         <QuillEditor />
       </div>
       <div className="flex flex-col gap-[15px] mt-small1">
-        <div className="flex items-center">
-          <span className="body1M">태그</span>
-          <button onClick={toggleTags}>
-            {showAllTags ? "간략히" : "더보기"}
-          </button>
+        <div>
+          <div>
+            <span className="body1M">태그</span>
+            <button onClick={toggleTags}>
+              {showAllTags ? "간략히" : "더보기"}
+            </button>
+          </div>
           <ul className="flex flex-wrap">
             {(showAllTags ? tags : selectedTags).map((tag, index) => (
               <li key={index} className="mr-2 mb-2">
@@ -106,7 +108,7 @@ const Page = () => {
           <div className="flex justify-between items-center mb-3">
             <h2 className="text-lg font-bold">썸네일 추천</h2>
             <button
-              className="px-4 py-2 bg-blue-500 text-white rounded-md"
+              className="px-4 py-2 rounded-md"
               onClick={handleImageUpload}
             >
               직접 업로드 하기
