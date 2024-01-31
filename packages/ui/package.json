@@ -12,6 +12,7 @@
     "./code": "./src/code.tsx",
     "./common": "./src/common.ts",
     "./quillEditor": "./src/quillEditor.tsx",
+    "./stepper": "./src/stepper.tsx",
     "./icon": "./src/icon.tsx",
     "./asideContainer": "./src/mypage/asideContainer.tsx",
     "./mainContainer": "./src/mypage/mainContainer.tsx"
