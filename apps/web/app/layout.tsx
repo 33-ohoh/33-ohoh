@@ -1,4 +1,6 @@
+import "@repo/ui/styles.css";
 import "./globals.css";
+
 import Provider from "../app/Provider";
 
 export const metadata = {
