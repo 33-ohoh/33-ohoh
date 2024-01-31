@@ -19,7 +19,6 @@ export const getLogs = async (
   }
 };
 
-
 export const getLog = async (
   url: string,
 ): Promise<Log | ErrorResponse | null> => {

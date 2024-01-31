@@ -7,7 +7,6 @@ import SignupTerm from "../../components/signup/SignupTerm";
 import { useState } from "react";
 import withAuth from "../../utils/withAuth";
 
-
 const Signup = () => {
   const [step, setStep] = useState(1);
   let currentPage = <SignupTerm setStep={setStep} />;
@@ -40,4 +39,3 @@ const Signup = () => {
 };
 
 export default withAuth(Signup);
-
