@@ -1,15 +1,10 @@
 import { SVGProps } from "react";
 
-export const IconArrowMenu = ({
-  width,
-  height,
-  fill,
-  className,
-}: SVGProps<SVGAElement>) => {
+export const IconArrowMenu = ({ fill, className }: SVGProps<SVGAElement>) => {
   return (
     <svg
-      width={width}
-      height={height}
+      width="24"
+      height="24"
       fill={fill}
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
@@ -19,31 +14,30 @@ export const IconArrowMenu = ({
         <path
           id="Vector"
           d="M10.175 18.5793C9.95844 18.5797 9.74858 18.5043 9.58185 18.3661C9.488 18.2883 9.41043 18.1928 9.35357 18.085C9.29672 17.9771 9.26169 17.8591 9.2505 17.7378C9.2393 17.6164 9.25217 17.494 9.28835 17.3776C9.32454 17.2612 9.38333 17.153 9.46137 17.0594L13.6133 12.0919L9.60965 7.11523C9.53267 7.02044 9.47518 6.91136 9.44049 6.79427C9.4058 6.67719 9.39459 6.5544 9.40751 6.43297C9.42043 6.31154 9.45722 6.19385 9.51576 6.08669C9.57431 5.97952 9.65346 5.88498 9.74866 5.8085C9.84455 5.72413 9.95685 5.66049 10.0785 5.62158C10.2001 5.58266 10.3285 5.56931 10.4556 5.58237C10.5826 5.59542 10.7056 5.63459 10.8168 5.69743C10.928 5.76027 11.025 5.84541 11.1017 5.94751L15.578 11.5081C15.7143 11.6739 15.7888 11.8819 15.7888 12.0966C15.7888 12.3112 15.7143 12.5192 15.578 12.6851L10.9442 18.2457C10.8512 18.3578 10.7331 18.4465 10.5995 18.5044C10.4658 18.5624 10.3204 18.588 10.175 18.5793Z"
-          fill="#333333"
+          fill={fill}
         />
       </g>
     </svg>
   );
 };
 
-export const IconPlue = ({ width, height, fill }: SVGProps<SVGAElement>) => {
+export const IconPlue = ({ stroke }: SVGProps<SVGAElement>) => {
   return (
     <svg
-      width={width}
-      height={height}
-      fill={fill}
+      width="24"
+      height="24"
       viewBox="0 0 24 25"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M12 5.96094V19.9609"
-        stroke="#337AFF"
+        stroke={stroke}
         strokeWidth="1.5"
         strokeLinecap="round"
       />
       <path
         d="M5 12.9609H19"
-        stroke="#337AFF"
+        stroke={stroke}
         strokeWidth="1.5"
         strokeLinecap="round"
       />
@@ -51,11 +45,11 @@ export const IconPlue = ({ width, height, fill }: SVGProps<SVGAElement>) => {
   );
 };
 
-export const IconEdit = ({ width, height, fill }: SVGProps<SVGAElement>) => {
+export const IconEdit = ({ fill }: SVGProps<SVGAElement>) => {
   return (
     <svg
-      width={width}
-      height={height}
+      width="24"
+      height="24"
       fill={fill}
       viewBox="0 0 22 21"
       xmlns="http://www.w3.org/2000/svg"
@@ -70,15 +64,11 @@ export const IconEdit = ({ width, height, fill }: SVGProps<SVGAElement>) => {
   );
 };
 
-export const IconBookmark = ({
-  width,
-  height,
-  fill,
-}: SVGProps<SVGAElement>) => {
+export const IconBookmark = ({ fill, stroke }: SVGProps<SVGAElement>) => {
   return (
     <svg
-      width={width}
-      height={height}
+      width="24"
+      height="24"
       fill="none"
       viewBox="0 0 16 20"
       xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +78,7 @@ export const IconBookmark = ({
           id="Vector"
           d="M8.93613 14.1814L8.9361 14.1814C8.36528 13.785 7.63473 13.785 7.0639 14.1814L7.06387 14.1814L1.08053 18.3366C1.03782 18.3662 1.01216 18.3678 1.0007 18.3677C0.985585 18.3675 0.958368 18.3627 0.922386 18.3385C0.849927 18.2899 0.75 18.1622 0.75 17.9394V1.17647C0.75 1.02191 0.803507 0.901894 0.864348 0.830316C0.923832 0.760335 0.974393 0.75 1 0.75H15C15.0256 0.75 15.0762 0.760338 15.1357 0.830314C15.1965 0.901888 15.25 1.0219 15.25 1.17647V17.9394C15.25 18.1622 15.1501 18.2899 15.0776 18.3385C15.0416 18.3627 15.0144 18.3675 14.9993 18.3677C14.9879 18.3678 14.9622 18.3662 14.9195 18.3366L14.4917 18.9526L14.9195 18.3366L8.93613 14.1814Z"
           fill={fill}
-          stroke="#7FACFF"
+          stroke={stroke}
           stroke-width="1.5"
         />
       </g>
@@ -101,12 +91,17 @@ export const IconBookmark = ({
   );
 };
 
-export const IconHeart = ({ width, height, fill }: SVGProps<SVGAElement>) => {
+export const IconHeart = ({
+  width,
+  height,
+  fill,
+  stroke,
+}: SVGProps<SVGAElement>) => {
   return (
     <svg
-      width="12"
-      height="12"
-      fill="none"
+      width={width}
+      height={height}
+      fill={fill}
       viewBox="0 0 10 10"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -115,8 +110,8 @@ export const IconHeart = ({ width, height, fill }: SVGProps<SVGAElement>) => {
           id="Vector"
           d="M4.95234 7.29112L4.95125 7.29016C3.97017 6.42826 3.21796 5.76523 2.70198 5.15407C2.19381 4.55216 2 4.0971 2 3.66469C2 2.98214 2.54914 2.4165 3.3125 2.4165C3.61151 2.4165 3.90902 2.51122 4.15576 2.67622C4.65881 3.01261 5.34119 3.01261 5.84424 2.67622C6.09098 2.51122 6.38849 2.4165 6.6875 2.4165C7.45086 2.4165 8 2.98214 8 3.66469C8 4.09712 7.80619 4.5522 7.29786 5.15472C6.78185 5.76633 6.02983 6.43005 5.04898 7.29358C5.04871 7.29383 5.04843 7.29407 5.04815 7.29432L5.00188 7.33481L4.95234 7.29112Z"
           fill={fill}
-          stroke="#EE5C5C"
-          strokeWidth="1.5"
+          stroke={stroke}
+          strokeWidth="0.8"
         />
       </g>
     </svg>
@@ -126,9 +121,9 @@ export const IconHeart = ({ width, height, fill }: SVGProps<SVGAElement>) => {
 export const IconViewer = ({ width, height, fill }: SVGProps<SVGAElement>) => {
   return (
     <svg
-      width="12"
-      height="12"
-      fill="none"
+      width={width}
+      height={height}
+      fill={fill}
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -136,18 +131,18 @@ export const IconViewer = ({ width, height, fill }: SVGProps<SVGAElement>) => {
         <path
           id="Vector"
           d="M6 3.5C4.45275 3.5 2.73565 4.32581 1.87058 5.5639C1.58272 5.97588 1.58272 6.52412 1.87058 6.9361C2.73565 8.17419 4.45275 9 6 9C7.54725 9 9.26435 8.17419 10.1294 6.9361C10.4173 6.52412 10.4173 5.97588 10.1294 5.5639C9.26435 4.32581 7.54725 3.5 6 3.5ZM6 8.08333C4.99636 8.08333 4.18182 7.262 4.18182 6.25C4.18182 5.238 4.99636 4.41667 6 4.41667C7.00364 4.41667 7.81818 5.238 7.81818 6.25C7.81818 7.262 7.00364 8.08333 6 8.08333ZM6 5.15C5.39636 5.15 4.90909 5.64133 4.90909 6.25C4.90909 6.85867 5.39636 7.35 6 7.35C6.60364 7.35 7.09091 6.85867 7.09091 6.25C7.09091 5.64133 6.60364 5.15 6 5.15Z"
-          fill="#808080"
+          fill={fill}
         />
       </g>
     </svg>
   );
 };
 
-export const IconComment = () => {
+export const IconComment = ({ width, height, fill }: SVGProps<SVGAElement>) => {
   return (
     <svg
-      width="12"
-      height="12"
+      width={width}
+      height={height}
       viewBox="0 0 12 12"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -156,14 +151,14 @@ export const IconComment = () => {
         <path
           id="Vector"
           d="M8.9803 8.12004L8.70107 7.9211C8.63246 8.01737 8.61828 8.14217 8.66359 8.25138L8.9803 8.12004ZM8.11758 8.98208L8.23858 8.6613C8.13175 8.62098 8.01189 8.63652 7.91881 8.70267L8.11758 8.98208ZM9.56402 9.52786L9.44297 9.84864C9.57088 9.89691 9.71524 9.86455 9.81033 9.76635C9.90546 9.66816 9.93312 9.52283 9.88073 9.39652L9.56402 9.52786ZM9.31428 6C9.31428 6.71666 9.08722 7.37925 8.70107 7.9211L9.25952 8.31904C9.72571 7.66487 10 6.86395 10 6H9.31428ZM6 2.68571C7.83044 2.68571 9.31428 4.16957 9.31428 6H10C10 3.79086 8.20914 2 6 2V2.68571ZM2.68571 6C2.68571 4.16957 4.16957 2.68571 6 2.68571V2C3.79086 2 2 3.79086 2 6H2.68571ZM6 9.31428C4.16957 9.31428 2.68571 7.83044 2.68571 6H2C2 8.20914 3.79086 10 6 10V9.31428ZM7.91881 8.70267C7.37737 9.08786 6.71566 9.31428 6 9.31428V10C6.86272 10 7.66263 9.72649 8.3163 9.26144L7.91881 8.70267ZM9.68507 9.20708L8.23858 8.6613L7.99652 9.30286L9.44297 9.84864L9.68507 9.20708ZM8.66359 8.25138L9.24731 9.6592L9.88073 9.39652L9.297 7.98875L8.66359 8.25138Z"
-          fill="#808080"
+          fill={fill}
         />
       </g>
     </svg>
   );
 };
 
-export const IconArrowDropDown = () => (
+export const IconArrowDropDown = ({ stroke }: SVGProps<SVGAElement>) => (
   <svg
     width="22"
     height="14"
@@ -173,15 +168,15 @@ export const IconArrowDropDown = () => (
   >
     <path
       d="M10.9999 12L2 2"
-      stroke="white"
-      stroke-width="3"
-      stroke-linecap="round"
+      stroke={stroke}
+      strokeWidth="3"
+      strokeLinecap="round"
     />
     <path
       d="M11 12L19.9999 2"
-      stroke="white"
-      stroke-width="3"
-      stroke-linecap="round"
+      stroke={stroke}
+      strokeWidth="3"
+      strokeLinecap="round"
     />
   </svg>
 );
@@ -226,15 +221,15 @@ export const IconFix = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M16.4762 17.9921C16.3616 18.3799 16.1996 18.761 15.988 19.1274L10.4453 15.9273L7.8886 20.3556C7.71914 20.6491 7.34913 20.7527 7.06216 20.5871C6.77518 20.4214 6.67991 20.0491 6.84937 19.7556L9.40606 15.3273L3.86368 12.1274C4.07521 11.761 4.32425 11.4301 4.60284 11.137C5.9534 9.71589 7.99862 9.18153 9.83351 9.78735L11.4188 7.04159C10.4622 6.4893 10.1446 5.24848 10.7095 4.27013C11.2743 3.29179 12.5077 2.9464 13.4643 3.49868L18.6604 6.49868C19.617 7.05097 19.9346 8.29179 19.3697 9.27013C18.8049 10.2485 17.5715 10.5939 16.6149 10.0416L15.0297 12.7874C16.4718 14.0735 17.0316 16.1119 16.4762 17.9921Z"
       fill="#7FACFF"
     />
   </svg>
 );
 
-export const IconHambugerMenu = () => (
+export const IconHambugerMenu = ({ fill }: SVGProps<SVGAElement>) => (
   <svg
     width="16"
     height="14"
@@ -243,22 +238,22 @@ export const IconHambugerMenu = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M0 0.777778C0 0.348227 0.307008 0 0.685714 0H15.3143C15.693 0 16 0.348227 16 0.777778C16 1.20734 15.693 1.55556 15.3143 1.55556H0.685714C0.307008 1.55556 0 1.20733 0 0.777778Z"
-      fill="white"
+      fill={fill}
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M0 7C0 6.57046 0.307008 6.22222 0.685714 6.22222H15.3143C15.693 6.22222 16 6.57046 16 7C16 7.42954 15.693 7.77778 15.3143 7.77778H0.685714C0.307008 7.77778 0 7.42954 0 7Z"
-      fill="white"
+      fill={fill}
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M0 13.2222C0 12.7927 0.307008 12.4444 0.685714 12.4444H15.3143C15.693 12.4444 16 12.7927 16 13.2222C16 13.6518 15.693 14 15.3143 14H0.685714C0.307008 14 0 13.6518 0 13.2222Z"
-      fill="white"
+      fill={fill}
     />
   </svg>
 );
@@ -277,25 +272,25 @@ export const IconRegistTemplate = () => (
       r="20"
       fill="#E5EEFF"
       stroke="#196AFF"
-      stroke-linecap="round"
-      stroke-dasharray="2 2"
+      strokeLinecap="round"
+      strokeDasharray="2 2"
     />
     <path
       d="M21 9.91699V30.3337"
       stroke="#196AFF"
-      stroke-width="1.5"
-      stroke-linecap="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
     />
     <path
       d="M10.5 20.125H31.5"
       stroke="#196AFF"
-      stroke-width="1.5"
-      stroke-linecap="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
     />
   </svg>
 );
 
-export const Search = () => (
+export const Search = ({ fill }: SVGProps<SVGAElement>) => (
   <svg
     width="16"
     height="16"
@@ -304,15 +299,15 @@ export const Search = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M12.5 7C12.5 10.0376 10.0376 12.5 7 12.5C3.96243 12.5 1.5 10.0376 1.5 7C1.5 3.96243 3.96243 1.5 7 1.5C10.0376 1.5 12.5 3.96243 12.5 7ZM11.3649 12.4728C10.1681 13.4286 8.65076 14 7 14C3.13401 14 0 10.866 0 7C0 3.13401 3.13401 0 7 0C10.866 0 14 3.13401 14 7C14 8.67487 13.4118 10.2124 12.4307 11.4171L15.5916 14.5321C15.8845 14.825 15.8845 15.2999 15.5916 15.5928C15.2987 15.8857 14.8238 15.8857 14.5309 15.5928L11.3649 12.4728Z"
-      fill="white"
+      fill={fill}
     />
   </svg>
 );
 
-export const IconX = () => (
+export const IconX = ({ fill }: SVGProps<SVGAElement>) => (
   <svg
     width="24"
     height="24"
@@ -321,10 +316,10 @@ export const IconX = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M5.20934 4.20749C4.93268 3.93084 4.48415 3.93084 4.2075 4.20749C3.93084 4.48413 3.93084 4.93268 4.2075 5.20933L10.9982 12L4.20749 18.7906C3.93084 19.0673 3.93084 19.5158 4.20749 19.7925C4.48414 20.0692 4.93268 20.0692 5.20933 19.7925L12 13.0018L18.7907 19.7925C19.0674 20.0692 19.5158 20.0692 19.7925 19.7925C20.0692 19.5158 20.0692 19.0673 19.7925 18.7906L13.0019 12L19.7925 5.20934C20.0692 4.93269 20.0692 4.48414 19.7925 4.2075C19.5158 3.93085 19.0674 3.93085 18.7907 4.2075L12 10.9981L5.20934 4.20749Z"
-      fill="#808080"
+      fill={fill}
     />
   </svg>
 );
