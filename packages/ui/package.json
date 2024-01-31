@@ -12,14 +12,9 @@
     "./code": "./src/code.tsx",
     "./common": "./src/common.ts",
     "./quillEditor": "./src/quillEditor.tsx",
-    "./hotLogcard": "./src/main/hotLogCard.tsx",
-    "./hotLogList": "./src/main/hotLogList.tsx",
-    "./hotLogSection": "./src/main/hotLogSection.tsx",
-    "./designToken": "./src/designToken.stylex.ts",
     "./icon": "./src/icon.tsx",
     "./asideContainer": "./src/mypage/asideContainer.tsx",
-    "./mainContainer": "./src/mypage/mainContainer.tsx",
-    "./stepper": "./src/stepper.tsx"
+    "./mainContainer": "./src/mypage/mainContainer.tsx"
   },
   "scripts": {
     "build": "tailwindcss -i ./src/styles.css -o dist/index.css",

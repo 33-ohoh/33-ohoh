@@ -1,15 +1,6 @@
-"use client";
-
-import * as stylex from "@stylexjs/stylex";
 import Link from "next/link";
-import {
-  bodyStyle,
-  colors,
-  margins,
-  radius,
-  titleStyle,
-} from "@repo/ui/designToken";
 import Image from "next/image";
+import { ButtonEdit } from "../../../../packages/ui/src/svg/ProviderIcon";
 
 interface ProfileBoxProps {
   username: string;
@@ -25,24 +16,38 @@ const ProfileBox = ({
   follower,
 }: ProfileBoxProps) => {
   return (
-    <div {...stylex.props(styles.profileBox)}>
-      <div {...stylex.props(styles.profileImage)}>
-        <Image src={profileImage} alt="" />
+    <div className="w-[300px] text-center mb-extraSmall2">
+      <div className="mb-extraSmall3 overflow-hidden">
+        <Image
+          src={profileImage}
+          alt=""
+          width={180}
+          height={180}
+          className="bg-primary10 rounded-full mx-auto"
+        />
       </div>
-      <strong {...stylex.props(styles.username)}>{username}</strong>
+      <p className="font-bold mb-small4">{username}</p>
 
-      <Link href="/edit-mypage" {...stylex.props(styles.editButton)}>
-        내 프로필 편집
-      </Link>
+      <div className="flex items-center relative">
+        <Link
+          href="/edit-mypage"
+          className="relative w-full bg-primary100 text-white rounded-radius5 block mb-extraSmall3 py-[13px] text-[14px] font-bold"
+        >
+          <div className="absolute top-2 left-20">
+            <ButtonEdit width={22} height={22} fill="#ffffff" />
+          </div>
+          내 프로필 편집
+        </Link>
+      </div>
 
-      <div {...stylex.props(styles.followWrap)}>
-        <div {...stylex.props(styles.follow)}>
-          <p>팔로우</p>
+      <div className="flex bg-primary10 text-primary90 text-center items-center box-border rounded-radius5 py-[10px] font-medium">
+        <div className="flex-grow">
+          <p className="mb-extraSmall5">팔로우</p>
           <span>{follow}</span>
         </div>
-        <div {...stylex.props(styles.line)}></div>
-        <div {...stylex.props(styles.follow)}>
-          <p>팔로워</p>
+        <div className="w-[1px] h-[56px] bg-primary80"></div>
+        <div className="flex-grow">
+          <p className="mb-extraSmall5">팔로워</p>
           <span>{follower}</span>
         </div>
       </div>
@@ -51,68 +56,3 @@ const ProfileBox = ({
 };
 
 export default ProfileBox;
-
-export const styles = stylex.create({
-  profileBox: {
-    display: "flex",
-    flexDirection: "column",
-    width: "300px",
-    alignItems: "center",
-    marginBottom: margins.extraSmall2,
-  },
-
-  profileImage: {
-    width: "180px",
-    height: "180px",
-    borderRadius: "50%",
-    background: colors.neutral5,
-    marginBottom: "10px",
-    overflow: "hidden",
-  },
-
-  input: {
-    height: "100%",
-  },
-
-  username: {
-    marginBottom: "30px",
-    fontSize: titleStyle.subhead1,
-  },
-
-  editButton: {
-    width: "100%",
-    padding: "12px 0",
-    marginBottom: "15px",
-    background: colors.primary100,
-    borderRadius: radius.radius5,
-    color: colors.white,
-    textAlign: "center",
-    fontSize: bodyStyle.body2M,
-    textDecoration: "none",
-  },
-
-  followWrap: {
-    display: "flex",
-    width: "100%",
-    borderRadius: radius.radius5,
-    background: colors.primary10,
-    padding: "10px 0",
-    boxSizing: "border-box",
-  },
-
-  follow: {
-    flexGrow: "1",
-    borderStyle: "none",
-    padding: "15px 0",
-    textAlign: "center",
-    fontSize: bodyStyle.body3M,
-    fontWeight: bodyStyle.body3M,
-    color: colors.primary100,
-  },
-
-  line: {
-    width: "2px",
-    height: "auto",
-    background: colors.primary40,
-  },
-});

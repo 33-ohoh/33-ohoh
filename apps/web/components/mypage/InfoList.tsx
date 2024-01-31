@@ -1,7 +1,10 @@
-import * as stylex from "@stylexjs/stylex";
-import { bodyStyle, colors, margins, titleStyle } from "@repo/ui/designToken";
-import Image from "next/image";
 import InfoItem from "./InfoItem";
+import {
+  MenuArrow,
+  SnsGoogle,
+  SnsKakao,
+  SnsNaver,
+} from "../../../../packages/ui/src/svg/ProviderIcon";
 
 const InfoList = () => {
   const myActivityData = [
@@ -19,31 +22,18 @@ const InfoList = () => {
 
   const myActivity = myActivityData.map((data) => {
     return (
-      <div key={data.id + data.title} {...stylex.props(styles.justifyBetween)}>
-        <a
-          href={data.link}
-          {...stylex.props(styles.noneUnderline, styles.neutral80)}
-        >
-          {data.title}
-        </a>
-        <Image src="" alt=">" />
+      <div key={data.id + data.title} className="flex justify-between">
+        <a href={data.link}>{data.title}</a>
+        <MenuArrow width={22} height={22} />
       </div>
     );
   });
 
   const personalInfoSection = companyData.map((data) => {
     return (
-      <h4
-        key={data.id + data.title}
-        {...stylex.props(styles.justifyBetween, styles.gap20, styles.neutral80)}
-      >
-        <a
-          href={data.link}
-          {...stylex.props(styles.noneUnderline, styles.neutral80)}
-        >
-          {data.title}
-        </a>
-        <Image src="" alt=">" />
+      <h4 key={data.id + data.title} className="flex justify-between font-bold">
+        <a href={data.link}>{data.title}</a>
+        <MenuArrow width={22} height={22} />
       </h4>
     );
   });
@@ -51,43 +41,43 @@ const InfoList = () => {
   return (
     <div>
       <InfoItem title="소개">
-        <p {...stylex.props(styles.context, styles.mb25)}>
+        <p className="mb-extraSmall1">
           개발은 저에게 항상 즐겁고 재밌는 것입니다. 사용자에게 도움이 되는
           서비스를 만들고 싶습니다.
         </p>
-        <p {...stylex.props(styles.context, styles.mb25)}>
+        <p className="mb-extraSmall1">
           [경력]
           <br />
           Frontend Engineer (2017.03.01 ~ 현재)
         </p>
 
-        <h4 {...stylex.props(styles.mb10)}>SNS 연동</h4>
-        <div>
-          <Image src="" alt="KO" />
-          <Image src="" alt="NA" />
-          <Image src="" alt="GO" />
+        <h4 className="font-bold mb-extraSmall4">SNS 연동</h4>
+        <div className="flex gap-[10px]">
+          <SnsKakao width={42} height={42} />
+          <SnsNaver width={42} height={42} />
+          <SnsGoogle width={42} height={42} />
         </div>
       </InfoItem>
 
       <InfoItem title="활동 로그">
-        <div {...stylex.props(styles.activityLog)}>
+        <div className="flex text-center gap-[50px] justify-center">
           <div>
-            <strong {...stylex.props(styles.activityTitle)}>1.4K</strong>
-            <p {...stylex.props(styles.activityText)}>작업로그</p>
+            <strong>1.4K</strong>
+            <p className="text-[12px] text-neutral50">작업로그</p>
           </div>
           <div>
-            <strong {...stylex.props(styles.activityTitle)}>55</strong>
-            <p {...stylex.props(styles.activityText)}>답변 수</p>
+            <strong>55</strong>
+            <p className="text-[12px] text-neutral50">답변 수</p>
           </div>
           <div>
-            <strong {...stylex.props(styles.activityTitle)}>94</strong>
-            <p {...stylex.props(styles.activityText)}>저장된 로그</p>
+            <strong>94</strong>
+            <p className="text-[12px] text-neutral50">저장된 로그</p>
           </div>
         </div>
       </InfoItem>
 
       <InfoItem title="나의 활동">
-        <div {...stylex.props(styles.gap5)}>{myActivity}</div>
+        <div className="">{myActivity}</div>
       </InfoItem>
 
       <InfoItem title="">{personalInfoSection}</InfoItem>
@@ -96,65 +86,3 @@ const InfoList = () => {
 };
 
 export default InfoList;
-
-const styles = stylex.create({
-  mb10: {
-    marginBottom: margins.extraSmall4,
-  },
-
-  mb20: {
-    marginBottom: margins.extraSmall2,
-  },
-
-  mb25: {
-    marginBottom: margins.extraSmall1,
-  },
-
-  context: {
-    fontSize: bodyStyle.body4M,
-    lineHeight: bodyStyle.body3R,
-  },
-
-  activityLog: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    gap: "50px",
-  },
-
-  activityTitle: {
-    marginBottom: margins.extraSmall5,
-    display: "inline-block",
-    fontSize: titleStyle.subhead1,
-  },
-
-  activityText: {
-    fontSize: bodyStyle.body5R,
-    color: colors.neutral50,
-  },
-
-  gap5: {
-    display: "flex",
-    gap: margins.extraSmall5,
-    flexDirection: "column",
-  },
-
-  gap20: {
-    marginBottom: margins.extraSmall2,
-  },
-
-  justifyBetween: {
-    display: "flex",
-    justifyContent: "space-between",
-    gap: margins.extraSmall5,
-  },
-
-  noneUnderline: {
-    textDecoration: "none",
-  },
-
-  neutral80: {
-    color: colors.neutral80,
-  },
-});
