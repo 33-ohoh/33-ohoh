@@ -6,13 +6,15 @@
   ],
   "private": true,
   "exports": {
-    "./styles.css": "./dist/index.css",
+    "./styles.css": "./src/styles.css",
     "./button": "./src/button.tsx",
     "./card": "./src/card.tsx",
     "./code": "./src/code.tsx",
     "./common": "./src/common.ts",
     "./quillEditor": "./src/quillEditor.tsx",
+    "./stepper": "./src/stepper.tsx",
     "./icon": "./src/icon.tsx",
+    "./IconComponents": "./src/svg/IconComponents.tsx",
     "./asideContainer": "./src/mypage/asideContainer.tsx",
     "./mainContainer": "./src/mypage/mainContainer.tsx"
   },
