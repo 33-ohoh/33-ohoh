@@ -4,6 +4,7 @@ import QuillEditor from "@repo/ui/quillEditor";
 import { useState, useEffect } from "react";
 import TemplateModal from "../../components/log/templateModal";
 import Image from "next/image";
+import { IconArrowDropDown } from "@repo/ui/IconComponents";
 
 const Page = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
@@ -92,7 +93,11 @@ const Page = () => {
             임시저장 | 50
           </button>
         </div>
-        <TemplateModal isOpen={isModalOpen} onClose={closeModal}>
+        <TemplateModal
+          title="스팩로그의 템플릿"
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        >
           <h2 className="text-lg font-bold mb-4">템플릿 선택</h2>
         </TemplateModal>
       </div>
@@ -108,13 +113,18 @@ const Page = () => {
       </div>
       <div className="flex flex-col gap-[15px] mt-small1">
         <div>
-          <div>
+          <div className="flex">
             <span className="body1M">태그</span>
             <button
               onClick={toggleTags}
-              className="ml-extraSmall4 body4M text-neutral30"
+              className="ml-extraSmall4 body4M text-neutral30 flex items-center	gap-[5px]"
             >
               {showAllTags ? "간략히" : "더보기"}
+              <IconArrowDropDown
+                width="8.33px"
+                height="13.33px"
+                stroke="#B3B3B3"
+              />
             </button>
           </div>
           <ul className="flex flex-wrap mt-extraSmall3 ">

@@ -21,7 +21,7 @@ export const IconArrowMenu = ({ fill, className }: SVGProps<SVGAElement>) => {
   );
 };
 
-export const IconPlue = ({ stroke }: SVGProps<SVGAElement>) => {
+export const IconPlus = ({ stroke }: SVGProps<SVGAElement>) => {
   return (
     <svg
       width="24"
@@ -158,10 +158,14 @@ export const IconComment = ({ width, height, fill }: SVGProps<SVGAElement>) => {
   );
 };
 
-export const IconArrowDropDown = ({ stroke }: SVGProps<SVGAElement>) => (
+export const IconArrowDropDown = ({
+  width,
+  height,
+  stroke,
+}: SVGProps<SVGAElement>) => (
   <svg
-    width="22"
-    height="14"
+    width={width}
+    height={height}
     viewBox="0 0 22 14"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
