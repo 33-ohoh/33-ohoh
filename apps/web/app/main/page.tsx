@@ -1,9 +1,11 @@
 import HotLogCardList from "../../components/main/HotLogCardList";
+import LogSection from "../../components/main/LogSection";
 
 const MainPage = () => {
   return (
-    <div className="w-[1440px]">
+    <div className="w-[1440px] flex flex-col items-center">
       <HotLogCardList />
+      <LogSection />
     </div>
   );
 };
