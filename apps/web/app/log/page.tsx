@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import TemplateModal from "../../components/log/templateModal";
 import DraftModal from "../../components/log/DraftModal";
 import Image from "next/image";
-import { IconArrowDropDown } from "@repo/ui/IconComponents";
+import { NavDown } from "@repo/ui/index";
 
 const Page = () => {
   const [isTemplateModalOpen, setTemplateModalOpen] = useState(false);
@@ -16,8 +16,18 @@ const Page = () => {
   const [thumbnail, setThumbnail] = useState("");
   const [publishTime, setPublishTime] = useState("now"); // 'now' 또는 'schedule'
 
-  const toggleTemplateModal = () => setTemplateModalOpen(!isTemplateModalOpen);
-  const toggleDraftModal = () => setDraftModalOpen(!isDraftModalOpen);
+  // 템플릿 모달 토글
+  const toggleTemplateModal = () => {
+    setTemplateModalOpen(!isTemplateModalOpen);
+    if (isDraftModalOpen) setDraftModalOpen(false);
+  };
+
+  // 임시저장 모달 토글
+  const toggleDraftModal = () => {
+    setDraftModalOpen(!isDraftModalOpen);
+    if (isTemplateModalOpen) setTemplateModalOpen(false);
+  };
+
   const toggleTags = () => setShowAllTags(!showAllTags);
 
   const tags = [
@@ -103,12 +113,9 @@ const Page = () => {
           onClose={toggleTemplateModal}
         ></TemplateModal>
         <DraftModal
-          title="임시저장 게시물"
           isOpen={isDraftModalOpen}
           onClose={toggleDraftModal}
-        >
-          <h2 className="text-lg font-bold mb-4">템플릿 선택</h2>
-        </DraftModal>
+        ></DraftModal>
       </div>
       <div>
         <input
@@ -129,11 +136,7 @@ const Page = () => {
               className="ml-extraSmall4 body4M text-neutral30 flex items-center	gap-[5px]"
             >
               {showAllTags ? "간략히" : "더보기"}
-              <IconArrowDropDown
-                width="8.33px"
-                height="13.33px"
-                stroke="#B3B3B3"
-              />
+              <NavDown width="8.33px" height="13.33px" stroke="#B3B3B3" />
             </button>
           </div>
           <ul className="flex flex-wrap mt-extraSmall3 ">
