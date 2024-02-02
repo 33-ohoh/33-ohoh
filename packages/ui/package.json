@@ -6,7 +6,7 @@
   ],
   "private": true,
   "exports": {
-    "./styles.css": "./src/styles.css",
+    "./styles.css": "./dist/index.css",
     "./button": "./src/button.tsx",
     "./card": "./src/card.tsx",
     "./code": "./src/code.tsx",
@@ -14,7 +14,7 @@
     "./quillEditor": "./src/quillEditor.tsx",
     "./stepper": "./src/stepper.tsx",
     "./icon": "./src/icon.tsx",
-    "./IconComponents": "./src/icon/IconComponents.tsx",
+    "./IconComponents": "./src/IconComponents.tsx",
     "./asideContainer": "./src/mypage/asideContainer.tsx",
     "./mainContainer": "./src/mypage/mainContainer.tsx",
     "./LogCard": "./src/LogCard.tsx",
