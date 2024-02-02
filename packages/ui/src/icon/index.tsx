@@ -34,4 +34,4 @@ export {
   NavRight,
   NavUp,
   Clock,
-} from "../IconComponents";
+} from "./IconComponents";
