@@ -1,5 +1,5 @@
+import { NavRight } from "@repo/ui/index";
 import InfoItem from "./InfoItem";
-import { IconArrowMenu } from "@repo/ui/IconComponents";
 
 const InfoList = () => {
   const myActivityData = [
@@ -19,7 +19,7 @@ const InfoList = () => {
     return (
       <div key={data.id + data.title} className="flex justify-between">
         <a href={data.link}>{data.title}</a>
-        <IconArrowMenu width={22} height={22} />
+        <NavRight width={22} height={22} />
       </div>
     );
   });
@@ -28,7 +28,7 @@ const InfoList = () => {
     return (
       <h4 key={data.id + data.title} className="flex justify-between font-bold">
         <a href={data.link}>{data.title}</a>
-        <IconArrowMenu width={22} height={22} />
+        <NavRight width={22} height={22} />
       </h4>
     );
   });

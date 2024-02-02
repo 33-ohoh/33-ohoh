@@ -1,9 +1,4 @@
-import {
-  IconBookmark,
-  IconComment,
-  IconHeart,
-  IconViewer,
-} from "@repo/ui/IconComponents";
+import { Bookmark, Chat, Eyes, HeartFull } from "@repo/ui/index";
 import Image from "next/image";
 
 import { useState } from "react";
@@ -83,9 +78,9 @@ const LogCard = ({ log }: { log: LogCardProps }) => {
           </h4>
           <button onClick={handleFavoriteButton}>
             {isFavorite ? (
-              <IconBookmark fill="#7FACFF" />
+              <Bookmark fill="#7FACFF" />
             ) : (
-              <IconBookmark stroke="#7FACFF" />
+              <Bookmark stroke="#7FACFF" />
             )}
           </button>
         </div>
@@ -94,15 +89,15 @@ const LogCard = ({ log }: { log: LogCardProps }) => {
         </p>
         <div className="flex text-[10px] text-neutral50 gap-[5px] pb-[10px]">
           <div className="flex gap-[2px] items-center">
-            <IconViewer width="12" height="12" fill="#808080" />
+            <Eyes width="12" height="12" fill="#808080" />
             <span>{hitCount}</span>
           </div>
           <div className="flex gap-[2px] items-center">
-            <IconHeart width="12" height="12" fill="#EE5C5C" />
+            <HeartFull width="12" height="12" fill="#EE5C5C" />
             <span>{likeCount}</span>
           </div>
           <div className="flex gap-[2px] items-center">
-            <IconComment width="12" height="12" fill="#808080" />
+            <Chat width="12" height="12" fill="#808080" />
             <span>{commentCount}</span>
           </div>
         </div>
