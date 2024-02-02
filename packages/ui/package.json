@@ -14,10 +14,11 @@
 		"./quillEditor": "./src/quillEditor.tsx",
 		"./stepper": "./src/stepper.tsx",
 		"./icon": "./src/icon.tsx",
-		"./IconComponents": "./src/svg/IconComponents.tsx",
+		"./IconComponents": "./src/IconComponents.tsx",
 		"./asideContainer": "./src/mypage/asideContainer.tsx",
 		"./mainContainer": "./src/mypage/mainContainer.tsx",
-		"./LogCard": "./src/LogCard.tsx"
+		"./LogCard": "./src/LogCard.tsx",
+		"./index": "./src/icon/index.tsx"
 	},
 	"scripts": {
 		"build": "tailwindcss -i ./src/styles.css -o dist/index.css",
