@@ -1,61 +1,92 @@
-import Image from "next/image";
 import {
   IconBookmark,
   IconComment,
   IconHeart,
   IconViewer,
-} from "../../../../packages/ui/src/svg/IconComponents";
+} from "@repo/ui/IconComponents";
+import Image from "next/image";
+
+import { useState } from "react";
 
 interface LogCardProps {
   id: string;
   title: string;
   thumbnail: string;
-  username: string;
-  job: string;
+  expand: {
+    user: {
+      name: string;
+      myJob: string;
+    };
+  };
   content: string;
-  viewer: number;
-  like: number;
-  comment: number;
+  hitCount: number;
+  likeCount: number;
+  commentCount: number;
+  collectionId: string;
 }
 
-const LogCard = async ({ log }: { log: LogCardProps }) => {
+const LogCard = ({ log }: { log: LogCardProps }) => {
   const {
     id,
     title,
     thumbnail,
-    username,
-    job,
+    expand,
     content,
-    viewer,
-    like,
-    comment,
-  } = log || {};
+    hitCount,
+    likeCount,
+    commentCount,
+    collectionId,
+  } = log;
+
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const handleFavoriteButton = () => {
+    setIsFavorite((prev) => !prev);
+  };
+
   return (
     <li
       key={id + title}
-      className="w-[320px] h-[302px] rounded-[10px] overflow-hidden border border-solid border-neutral20"
+      className="w-[320px] h-[302px] rounded-[10px] overflow-hidden border border-solid border-neutral20 cursor-pointer"
     >
-      <div className="bg-gray-100 h-[194px] p-[16px]">
+      <div
+        className="bg-gray-100 h-[194px] p-[16px]"
+        style={{
+          backgroundImage: `url(http://13.209.16.46:8090/api/files/${collectionId}/${id}/${thumbnail})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+        }}
+      >
         <div className="flex items-center gap-[5px]">
-          <Image
-            src="/default-image.png"
-            alt={"img"}
-            width={42}
-            height={42}
-            className="rounded-full"
-          />
+          {thumbnail ? (
+            <Image
+              src={`http://13.209.16.46:8090/api/files/${collectionId}/${id}/${thumbnail}`}
+              alt={"img"}
+              width={42}
+              height={42}
+              className="rounded-full"
+            />
+          ) : (
+            <div className="bg-neutral-200 w-[42px] h-[42px] rounded-full"></div>
+          )}
+
           <div className="flex flex-col gap-[5px]">
-            <strong className="text-[14px]">{username}</strong>
-            <span className="text-[10px]">{job}</span>
+            <strong className="text-[14px]">{expand.user.name}</strong>
+            <span className="text-[10px]">{expand.user.myJob}</span>
           </div>
         </div>
       </div>
 
       <div className="flex flex-col justify-between bg-white h-[108px] py-[15px] px-[20px]">
-        <div className="flex">
-          <h4 className="text-[18px] font-bold mb-extraSmall5">{title}</h4>
-          <button>
-            <IconBookmark fill="#000000" />
+        <div className="flex justify-between">
+          <h4 className="text-[18px] font-bold mb-extraSmall5 text-ellipsis overflow-hidden whitespace-nowrap">
+            {title}
+          </h4>
+          <button onClick={handleFavoriteButton}>
+            {isFavorite ? (
+              <IconBookmark fill="#7FACFF" />
+            ) : (
+              <IconBookmark stroke="#7FACFF" />
+            )}
           </button>
         </div>
         <p className="text-[14px] font-normal text-neutral50 text-ellipsis overflow-hidden whitespace-nowrap mb-extraSmall4">
@@ -63,16 +94,16 @@ const LogCard = async ({ log }: { log: LogCardProps }) => {
         </p>
         <div className="flex text-[10px] text-neutral50 gap-[5px] pb-[10px]">
           <div className="flex gap-[2px] items-center">
-            <IconViewer />
-            <span>{viewer}</span>
+            <IconViewer width="12" height="12" fill="#808080" />
+            <span>{hitCount}</span>
           </div>
           <div className="flex gap-[2px] items-center">
-            <IconHeart fill="#EE5C5C" />
-            <span>{like}</span>
+            <IconHeart width="12" height="12" fill="#EE5C5C" />
+            <span>{likeCount}</span>
           </div>
           <div className="flex gap-[2px] items-center">
-            <IconComment />
-            <span>{comment}</span>
+            <IconComment width="12" height="12" fill="#808080" />
+            <span>{commentCount}</span>
           </div>
         </div>
       </div>

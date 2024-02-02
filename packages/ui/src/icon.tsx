@@ -43,13 +43,13 @@ export const UpArrowRed = () => {
       <path
         d="M6 1V12"
         stroke="#FF5454"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         stroke-linecap="round"
       />
       <path
         d="M1 6L6 1L11 6"
         stroke="#FF5454"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         stroke-linecap="round"
         stroke-linejoin="round"
       />

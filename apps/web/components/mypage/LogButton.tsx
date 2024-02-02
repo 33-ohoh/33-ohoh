@@ -1,6 +1,6 @@
 import {
   IconEdit,
-  IconPlue,
+  IconPlus,
 } from "../../../../packages/ui/src/svg/IconComponents";
 
 interface LogButtonProps {
@@ -18,7 +18,7 @@ const LogButton = ({ icon, text }: LogButtonProps) => {
         {icon === "edit" ? (
           <IconEdit width={22} height={22} fill={"#4C8BFF"} />
         ) : (
-          <IconPlue width={22} height={22} fill={"#4C8BFF"} />
+          <IconPlus width={22} height={22} fill={"#4C8BFF"} />
         )}
 
         <p className="font-bold">{text}</p>

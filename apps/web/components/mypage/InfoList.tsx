@@ -1,10 +1,5 @@
 import InfoItem from "./InfoItem";
-import {
-  MenuArrow,
-  SnsGoogle,
-  SnsKakao,
-  SnsNaver,
-} from "../../../../packages/ui/src/svg/ProviderIcon";
+import { IconArrowMenu } from "@repo/ui/IconComponents";
 
 const InfoList = () => {
   const myActivityData = [
@@ -24,7 +19,7 @@ const InfoList = () => {
     return (
       <div key={data.id + data.title} className="flex justify-between">
         <a href={data.link}>{data.title}</a>
-        <MenuArrow width={22} height={22} />
+        <IconArrowMenu width={22} height={22} />
       </div>
     );
   });
@@ -33,7 +28,7 @@ const InfoList = () => {
     return (
       <h4 key={data.id + data.title} className="flex justify-between font-bold">
         <a href={data.link}>{data.title}</a>
-        <MenuArrow width={22} height={22} />
+        <IconArrowMenu width={22} height={22} />
       </h4>
     );
   });
@@ -53,9 +48,9 @@ const InfoList = () => {
 
         <h4 className="font-bold mb-extraSmall4">SNS 연동</h4>
         <div className="flex gap-[10px]">
-          <SnsKakao width={42} height={42} />
-          <SnsNaver width={42} height={42} />
-          <SnsGoogle width={42} height={42} />
+          {/* <SnsKakao width={42} height={42} /> */}
+          {/* <SnsNaver width={42} height={42} /> */}
+          {/* <SnsGoogle width={42} height={42} /> */}
         </div>
       </InfoItem>
 

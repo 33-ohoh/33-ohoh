@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ButtonEdit } from "../../../../packages/ui/src/svg/ProviderIcon";
+import { IconEdit } from "@repo/ui/IconComponents";
 
 interface ProfileBoxProps {
   username: string;
@@ -34,7 +34,7 @@ const ProfileBox = ({
           className="relative w-full bg-primary100 text-white rounded-radius5 block mb-extraSmall3 py-[13px] text-[14px] font-bold"
         >
           <div className="absolute top-2 left-20">
-            <ButtonEdit width={22} height={22} fill="#ffffff" />
+            <IconEdit width={22} height={22} fill="#ffffff" />
           </div>
           내 프로필 편집
         </Link>
