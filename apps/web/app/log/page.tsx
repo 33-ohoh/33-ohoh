@@ -3,19 +3,31 @@
 import QuillEditor from "@repo/ui/quillEditor";
 import { useState, useEffect } from "react";
 import TemplateModal from "../../components/log/templateModal";
+import DraftModal from "../../components/log/DraftModal";
 import Image from "next/image";
-import { IconArrowDropDown } from "@repo/ui/IconComponents";
+import { NavDown } from "@repo/ui/index";
 
 const Page = () => {
-  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [isTemplateModalOpen, setTemplateModalOpen] = useState(false);
+  const [isDraftModalOpen, setDraftModalOpen] = useState(false);
   const [showAllTags, setShowAllTags] = useState<boolean>(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   //   const [images, setImages] = useState([]);
   const [thumbnail, setThumbnail] = useState("");
   const [publishTime, setPublishTime] = useState("now"); // 'now' 또는 'schedule'
 
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+  // 템플릿 모달 토글
+  const toggleTemplateModal = () => {
+    setTemplateModalOpen(!isTemplateModalOpen);
+    if (isDraftModalOpen) setDraftModalOpen(false);
+  };
+
+  // 임시저장 모달 토글
+  const toggleDraftModal = () => {
+    setDraftModalOpen(!isDraftModalOpen);
+    if (isTemplateModalOpen) setTemplateModalOpen(false);
+  };
+
   const toggleTags = () => setShowAllTags(!showAllTags);
 
   const tags = [
@@ -83,23 +95,27 @@ const Page = () => {
         <h1 className="display3 text-neutral80">게시글 작성</h1>
         <div className="flex items-center gap-[23px]">
           <button
-            onClick={openModal}
+            onClick={toggleTemplateModal}
             className="bg-primary50 p-[9px] w-[138px] h-[40px] rounded-radius5 text-white subhead1"
           >
             템플릿 추가
           </button>
 
-          <button className="bg-neutral40 p-[9px] w-[138px] h-[40px] rounded-radius5 text-white subhead1">
+          <button
+            onClick={toggleDraftModal}
+            className="bg-neutral40 p-[9px] w-[138px] h-[40px] rounded-radius5 text-white subhead1"
+          >
             임시저장 | 50
           </button>
         </div>
         <TemplateModal
-          title="스팩로그의 템플릿"
-          isOpen={isModalOpen}
-          onClose={closeModal}
-        >
-          <h2 className="text-lg font-bold mb-4">템플릿 선택</h2>
-        </TemplateModal>
+          isOpen={isTemplateModalOpen}
+          onClose={toggleTemplateModal}
+        ></TemplateModal>
+        <DraftModal
+          isOpen={isDraftModalOpen}
+          onClose={toggleDraftModal}
+        ></DraftModal>
       </div>
       <div>
         <input
@@ -120,11 +136,7 @@ const Page = () => {
               className="ml-extraSmall4 body4M text-neutral30 flex items-center	gap-[5px]"
             >
               {showAllTags ? "간략히" : "더보기"}
-              <IconArrowDropDown
-                width="8.33px"
-                height="13.33px"
-                stroke="#B3B3B3"
-              />
+              <NavDown width="8.33px" height="13.33px" stroke="#B3B3B3" />
             </button>
           </div>
           <ul className="flex flex-wrap mt-extraSmall3 ">
