@@ -1,7 +1,4 @@
-import {
-  IconEdit,
-  IconPlus,
-} from "../../../../packages/ui/src/svg/IconComponents";
+import { IconEdit, IconPlus } from "@repo/ui/IconComponents";
 
 interface LogButtonProps {
   icon: string;
