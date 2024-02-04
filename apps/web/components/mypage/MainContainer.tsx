@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { setLogPage } from "../../store/selectLogSlice";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { Button } from "@repo/ui/button";
 
 interface LogCardProps {
   id: string;
@@ -94,7 +95,14 @@ const MainContainer = () => {
 
   return (
     <main>
-      {/* <h3 className=" text-[28px] font-bold mb-extraSmall5">대표로그</h3> */}
+      {selectState.isSelectedLogPage && (
+        <div>
+          <h3 className=" text-[28px] font-bold mb-extraSmall5">대표로그</h3>
+          <p className="text-[14px] mb-small4">
+            나의 로그 중에 1개를 선택하여 대표글로 지정해보세요.
+          </p>
+        </div>
+      )}
 
       <div className="flex gap-[10px] mb-small1">
         {favoriteLogChip.map((logChip: string, index: number) => (
@@ -122,6 +130,11 @@ const MainContainer = () => {
           limit={6}
         />
       </form>
+      {selectState.isSelectedLogPage && (
+        <Button className="w-[210px] bg-primary80 text-primary5 font-semibold mt-[36px]">
+          완료
+        </Button>
+      )}
     </main>
   );
 };
