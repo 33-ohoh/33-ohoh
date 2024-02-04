@@ -3,13 +3,15 @@ import { Pencil, Plus } from "@repo/ui/index";
 interface LogButtonProps {
   icon: string;
   text: string;
+  onClick?: () => void;
 }
 
-const LogButton = ({ icon, text }: LogButtonProps) => {
+const LogButton = ({ icon, text, onClick }: LogButtonProps) => {
   return (
     <>
       <button
         type="button"
+        onClick={onClick}
         className="bg-primary5 text-primary80 border border-solid border-primary80 rounded-radius5 flex items-center mx-auto gap-[7px] w-full justify-center py-[12px]"
       >
         {icon === "edit" ? (

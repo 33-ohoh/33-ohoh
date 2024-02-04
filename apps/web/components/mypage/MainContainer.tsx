@@ -1,9 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import useSWR from "swr";
 import LogCard from "./LogCard";
 import Pagination from "./Pagination";
+import { useForm } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { setLogPage } from "../../store/selectLogSlice";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface LogCardProps {
   id: string;
@@ -29,29 +34,60 @@ const MainContainer = () => {
     "웹 풀스택 개발자",
     "안드로이드 개발자",
   ];
+  const router = useRouter();
 
-  // 전체 게시글의 개수가 담겨있다.
-  const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState<number>(6);
+  const dispatch = useAppDispatch();
+  const selectState = useAppSelector((state) => state.selectLog);
 
+  let optionUrl = useSearchParams().get("page");
+  useEffect(() => {
+    if (optionUrl !== selectState.logPage) {
+      dispatch(
+        setLogPage({
+          logPage: Number(optionUrl),
+        }),
+      );
+    }
+  }, [optionUrl]);
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const key = `/api/mypage?page=${page}&perPage=${limit}`;
+  const key = `/api/mypage?page=${optionUrl ? optionUrl : 1}&perPage=6`;
 
-  const { data, error, isLoading } = useSWR(key, fetcher, {
-    revalidateOnMount: true,
-    revalidateOnFocus: true,
+  useEffect(() => {
+    return router.push(`mypage?page=${selectState.logPage}`);
+  }, [selectState.logPage]);
+  const { data, error, isLoading } = useSWR(key, fetcher);
+  useEffect(() => {
+    console.log(key);
+  }, [data]);
+
+  const method = useForm({
+    mode: "onChange",
+    defaultValues: {
+      log: "",
+    },
   });
-
-  const handlePrev = () => {
-    setPage((prev) => prev - 1);
-  };
-  const handleNext = () => {
-    setPage((prev) => prev + 1);
-  };
 
   const items = data?.items || [];
   const totalItems = data?.totalItems;
-  console.log("aa", totalItems);
+  const totalPages = Math.ceil(totalItems / 6); // 3
+
+  const handlePrevPagenation = () => {
+    if (totalPages >= selectState.logPage && selectState.logPage > 0) {
+      dispatch(
+        setLogPage({
+          logPage: selectState.logPage - 1,
+        }),
+      );
+    }
+  };
+  const handleNextPagenation = () => {
+    if (selectState.logPage >= 0 || totalPages < selectState.logPage)
+      dispatch(
+        setLogPage({
+          logPage: selectState.logPage + 1,
+        }),
+      );
+  };
 
   if (isLoading) return <div>로딩 중...</div>;
   if (error) return <div>에러 발생: {error}</div>;
@@ -71,21 +107,21 @@ const MainContainer = () => {
           </button>
         ))}
       </div>
-      <div className="flex flex-col justify-center items-center gap-[75px]">
+      <form className="flex flex-col justify-center items-center gap-[75px]">
         <ul className="flex flex-wrap gap-[50px] w-[694px]">
           {items.map((log: LogCardProps) => {
-            return <LogCard key={log.id} log={log} />;
+            return <LogCard key={log.id} log={log} method={method} />;
           })}
         </ul>
+
         <Pagination
-          handlePrev={handlePrev}
-          handleNext={handleNext}
+          handlePrev={handlePrevPagenation}
+          handleNext={handleNextPagenation}
           totalItems={totalItems}
-          page={page}
-          limit={limit}
-          setPage={setPage}
+          page={selectState.logPage}
+          limit={6}
         />
-      </div>
+      </form>
     </main>
   );
 };
