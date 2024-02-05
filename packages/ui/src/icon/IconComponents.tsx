@@ -91,11 +91,15 @@ export const BookmarkActive = ({ fill }: SVGProps<SVGAElement>) => {
   );
 };
 
-export const BookmarkDefault = ({ stroke }: SVGProps<SVGAElement>) => {
+export const BookmarkDefault = ({
+  stroke,
+  width,
+  height,
+}: SVGProps<SVGAElement>) => {
   return (
     <svg
-      width="24"
-      height="24"
+      width={width ? width : "24"}
+      height={height ? height : "24"}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -108,11 +112,11 @@ export const BookmarkDefault = ({ stroke }: SVGProps<SVGAElement>) => {
   );
 };
 
-export const Eyes = ({ stroke }: SVGProps<SVGAElement>) => {
+export const Eyes = ({ stroke, width }: SVGProps<SVGAElement>) => {
   return (
     <svg
-      width="24"
-      height="24"
+      width={width ? width : "24"}
+      height="12"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -125,10 +129,10 @@ export const Eyes = ({ stroke }: SVGProps<SVGAElement>) => {
   );
 };
 
-export const HeartFull = ({ fill, stroke }: SVGProps<SVGAElement>) => {
+export const HeartFull = ({ fill, stroke, width }: SVGProps<SVGAElement>) => {
   return (
     <svg
-      width="24"
+      width={width ? width : "12"}
       height="24"
       viewBox="0 0 24 24"
       fill={fill}
@@ -144,10 +148,10 @@ export const HeartFull = ({ fill, stroke }: SVGProps<SVGAElement>) => {
   );
 };
 
-export const HeartLine = ({ stroke }: SVGProps<SVGAElement>) => {
+export const HeartLine = ({ stroke, width }: SVGProps<SVGAElement>) => {
   return (
     <svg
-      width="24"
+      width={width ? width : "24"}
       height="24"
       viewBox="0 0 24 24"
       fill="none"
@@ -317,20 +321,37 @@ export const Bin = ({ fill }: SVGProps<SVGAElement>) => {
   );
 };
 
-export const Bookmark = ({ fill }: SVGProps<SVGAElement>) => {
+export const Bookmark = () => {
   return (
     <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
+      width="16"
+      height="20"
+      viewBox="0 0 16 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M7 4.75C6.86193 4.75 6.75 4.86193 6.75 5V19.6827C6.75 19.9019 7.01202 20.015 7.1715 19.8646L11.4855 15.7972C11.7744 15.5248 12.2256 15.5248 12.5145 15.7972L16.8285 19.8646C16.988 20.015 17.25 19.9019 17.25 19.6827V5C17.25 4.86193 17.1381 4.75 17 4.75H7ZM5.25 5C5.25 4.0335 6.0335 3.25 7 3.25H17C17.9665 3.25 18.75 4.0335 18.75 5V19.6827C18.75 21.2171 16.9159 22.0086 15.7995 20.956L12 17.3737L8.20052 20.956C7.08411 22.0086 5.25 21.2171 5.25 19.6827V5Z"
-        fill={fill ? fill : "#333333"}
+        d="M8.93613 14.1814L8.9361 14.1814C8.36528 13.785 7.63473 13.785 7.0639 14.1814L7.06387 14.1814L1.08053 18.3366C1.03782 18.3662 1.01216 18.3678 1.0007 18.3677C0.985585 18.3675 0.958368 18.3627 0.922386 18.3385C0.849927 18.2899 0.75 18.1622 0.75 17.9394V1.17647C0.75 1.02191 0.803507 0.901894 0.864348 0.830316C0.923832 0.760335 0.974393 0.75 1 0.75H15C15.0256 0.75 15.0762 0.760338 15.1357 0.830314C15.1965 0.901888 15.25 1.0219 15.25 1.17647V17.9394C15.25 18.1622 15.1501 18.2899 15.0776 18.3385C15.0416 18.3627 15.0144 18.3675 14.9993 18.3677C14.9879 18.3678 14.9622 18.3662 14.9195 18.3366L14.4917 18.9526L14.9195 18.3366L8.93613 14.1814Z"
+        fill="white"
+        stroke="#7FACFF"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+};
+
+export const BookmarkFull = ({ fill }: SVGProps<SVGAElement>) => {
+  return (
+    <svg
+      width="16"
+      height="20"
+      viewBox="0 0 16 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 1.17647C0 0.526724 0.447715 0 1 0H15C15.5523 0 16 0.526724 16 1.17647V17.9394C16 18.8501 15.1583 19.4155 14.4917 18.9526L8.50833 14.7974C8.19472 14.5796 7.80528 14.5796 7.49167 14.7974L1.50833 18.9526C0.841707 19.4155 0 18.8501 0 17.9394V1.17647Z"
+        fill={fill ? fill : "#7FACFF"}
       />
     </svg>
   );
@@ -506,11 +527,11 @@ export const ChatRed = ({ fill }: SVGProps<SVGAElement>) => {
   );
 };
 
-export const Chat = ({ fill }: SVGProps<SVGAElement>) => {
+export const Chat = ({ fill, width }: SVGProps<SVGAElement>) => {
   return (
     <svg
-      width="24"
-      height="24"
+      width={width ? width : "12"}
+      height="12"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

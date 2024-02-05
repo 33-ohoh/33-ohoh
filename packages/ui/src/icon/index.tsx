@@ -17,6 +17,7 @@ export {
   Template,
   Bin,
   Bookmark,
+  BookmarkFull,
   Check,
   Human,
   Left,
