@@ -1,10 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import AsideContainer from "../../components/mypage/AsideContainer";
 import MainContainer from "../../components/mypage/MainContainer";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
+  const pageNum = useSearchParams().get("page");
+  useEffect(() => {
+    if (!pageNum) return router.push("mypage?page=1");
+  }, [pageNum]);
   // TODO:: 방문자 수 증가 구현
   const [visiting, setVisiting] = useState<number>(122);
   const [totalVisiting, setTotalVisiting] = useState<number>(12240);

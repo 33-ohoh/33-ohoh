@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { IconEdit } from "@repo/ui/IconComponents";
+import { Pencil } from "@repo/ui/index";
 
 interface ProfileBoxProps {
   username: string;
@@ -34,7 +34,7 @@ const ProfileBox = ({
           className="relative w-full bg-primary100 text-white rounded-radius5 block mb-extraSmall3 py-[13px] text-[14px] font-bold"
         >
           <div className="absolute top-2 left-20">
-            <IconEdit width={22} height={22} fill="#ffffff" />
+            <Pencil width={22} height={22} fill="#ffffff" />
           </div>
           내 프로필 편집
         </Link>
