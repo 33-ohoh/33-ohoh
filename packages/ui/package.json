@@ -8,7 +8,6 @@
 	"exports": {
 		"./styles.css": "./dist/index.css",
 		"./button": "./src/button.tsx",
-		"./card": "./src/card.tsx",
 		"./code": "./src/code.tsx",
 		"./common": "./src/common.ts",
 		"./quillEditor": "./src/quillEditor.tsx",
@@ -19,7 +18,9 @@
 		"./mainContainer": "./src/mypage/mainContainer.tsx",
 		"./LogCard": "./src/LogCard.tsx",
 		"./index": "./src/icon/index.tsx",
-		"./radioField": "./src/RadioField"
+		"./card": "./src/Card.tsx",
+		"./cardTop": "./src/CardTop.tsx",
+		"./cardBottom": "./src/CardBottom.tsx"
 	},
 	"scripts": {
 		"build": "tailwindcss -i ./src/styles.css -o dist/index.css",
