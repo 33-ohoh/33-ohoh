@@ -1,11 +1,11 @@
 "use client";
 
-import QuillEditor from "@repo/ui/quillEditor";
-import { useState, useEffect } from "react";
-import TemplateModal from "../../components/log/templateModal";
-import DraftModal from "../../components/log/DraftModal";
-import Image from "next/image";
 import { NavDown } from "@repo/ui/index";
+import QuillEditor from "@repo/ui/quillEditor";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import DraftModal from "../../components/log/DraftModal";
+import TemplateModal from "../../components/log/templateModal";
 
 const Page = () => {
   const [isTemplateModalOpen, setTemplateModalOpen] = useState(false);
@@ -174,7 +174,6 @@ const Page = () => {
                   alt={`Thumbnail ${index}`}
                   width={300}
                   height={300}
-                  layout="responsive"
                 />
               </div>
             ))}
