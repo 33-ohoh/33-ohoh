@@ -106,8 +106,6 @@ const LogPage = ({ params }: { params: LogParams }) => {
     ? `http://13.209.16.46:8090/api/files/_pb_users_auth_/${userProfile.id}/${userProfile.avatar}`
     : null;
 
-  console.log(log);
-
   return (
     <div className="mt-regular1 mb-extraLarge">
       <section className="w-[1180px] mx-auto">
