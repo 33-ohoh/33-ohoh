@@ -174,7 +174,6 @@ const Page = () => {
                   alt={`Thumbnail ${index}`}
                   width={300}
                   height={300}
-                  layout="responsive"
                 />
               </div>
             ))}
