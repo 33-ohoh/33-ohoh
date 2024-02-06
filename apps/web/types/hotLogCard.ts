@@ -1,10 +1,18 @@
 export interface HotLogCardProps {
   currentRank: number;
   previousRank: number;
-  profileImg: string;
-  name: string;
-  job: string;
   title: string;
-  preview: string;
+  content: string;
   thumbnail: string;
+  expand: {
+    user: {
+      collectionId: string;
+      name: string;
+      myJob: string;
+      avatar: string;
+      id: string;
+    };
+  };
+  id: string;
+  collectionId: string;
 }
