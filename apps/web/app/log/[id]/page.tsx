@@ -2,7 +2,6 @@
 import PocketBase from "pocketbase";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Chat } from "@repo/ui/index";
 
 const pb = new PocketBase("http://13.209.16.46:8090");
 
