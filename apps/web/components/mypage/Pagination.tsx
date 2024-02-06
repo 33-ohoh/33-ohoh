@@ -1,10 +1,12 @@
+import { useAppDispatch } from "../../hooks/redux";
+import { setLogPage } from "../../store/selectLogSlice";
+
 interface PaginationProps {
   handlePrev: () => void;
   handleNext: () => void;
   totalItems: number;
   page: number;
   limit: number;
-  setPage: (pageNumber: number) => void;
 }
 
 const Pagination = ({
@@ -13,7 +15,6 @@ const Pagination = ({
   totalItems,
   page,
   limit,
-  setPage,
 }: PaginationProps) => {
   const totalPages = Math.ceil(totalItems / limit); // 3
 
@@ -21,22 +22,30 @@ const Pagination = ({
     { length: totalPages },
     (_, index) => index + 1,
   );
-
+  const dispatch = useAppDispatch();
+  const handlePagenation = (pageNumber: number) => {
+    dispatch(
+      setLogPage({
+        logPage: pageNumber,
+      }),
+    );
+  };
   return (
     <div className="flex">
-      <button onClick={handlePrev} disabled={page === 1}>
+      <button type="button" onClick={handlePrev}>
         <span>&lt;</span> 이전
       </button>
       {pageNumbers.map((pageNumber: number) => (
         <button
           key={pageNumber}
+          type="button"
           className={`flex px-[5px] cursor-pointer ${pageNumber === page ? "text-neutral60" : "text-neutral30"}`}
-          onClick={() => setPage(pageNumber)}
+          onClick={() => handlePagenation(pageNumber)}
         >
           {pageNumber}
         </button>
       ))}
-      <button onClick={handleNext} disabled={page === totalPages}>
+      <button type="button" onClick={handleNext}>
         다음 <span>&gt;</span>
       </button>
     </div>

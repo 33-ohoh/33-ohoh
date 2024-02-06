@@ -1,8 +1,23 @@
 import ProfileBox from "./ProfileBox";
 import InfoList from "./InfoList";
-import LogButton from "./LogButton";
+import { selectedToggle } from "../../store/selectLogSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { Button } from "@repo/ui/button";
+import { Pencil, Plus } from "@repo/ui/index";
 
 const AsideContainer = () => {
+  const dispatch = useAppDispatch();
+  const selectState = useAppSelector((state) => state.selectLog);
+  console.log("selectState: ", selectState);
+
+  const handleToggle = async () => {
+    dispatch(
+      selectedToggle({
+        isSelectedLogPage: !selectState.isSelectedLogPage,
+      }),
+    );
+  };
+
   return (
     <aside className="w-[376px] py-[50px] px-[38px] rounded-radius15 border border-solid border-neutral20">
       <div>
@@ -16,8 +31,14 @@ const AsideContainer = () => {
         <InfoList />
 
         <div className="flex flex-col gap-[10px]">
-          <LogButton icon="plus" text="새 로그 작성" />
-          <LogButton icon="edit" text="대표로그 설정" />
+          <Button className="w-full">
+            <Plus stroke="#337AFF" />새 로그 작성
+          </Button>
+
+          <Button className="w-full" onClick={handleToggle}>
+            <Pencil fill="#337AFF" />
+            대표로그 설정
+          </Button>
         </div>
       </div>
     </aside>
