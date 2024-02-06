@@ -5,10 +5,6 @@ export default function Page() {
   return (
     <div>
       <MainPage />
-
-      <AttachAFile />
-      <HeartFull fill="green" stroke="green" />
-      <Bookmark stroke="green" />
     </div>
   );
 }
