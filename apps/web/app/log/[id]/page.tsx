@@ -1,6 +1,7 @@
 "use client";
 import PocketBase from "pocketbase";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Chat } from "@repo/ui/index";
 
 const pb = new PocketBase("http://13.209.16.46:8090");
@@ -29,8 +30,19 @@ interface LogResponse {
   user: string;
 }
 
+interface UserProfile {
+  id: string;
+  username: string;
+  email: string;
+  name: string;
+  avatar: string;
+  introduction: string;
+}
+
 const LogPage = ({ params }: { params: LogParams }) => {
   const [log, setLog] = useState<LogResponse | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+
   const logId = params.id;
 
   useEffect(() => {
@@ -39,21 +51,61 @@ const LogPage = ({ params }: { params: LogParams }) => {
 
       try {
         const record: LogResponse = await pb.collection("logs").getOne(logId, {
-          expand: "relField1,relField2.subRelField",
+          expand: "user",
           requestKey: null,
         });
         setLog(record);
+        fetchUser(record.user);
       } catch (error) {
         console.error("Error fetching log:", error);
+      }
+    };
+
+    const fetchUser = async (userId: string) => {
+      if (!userId) return;
+
+      try {
+        const userRecord = await pb
+          .collection("users")
+          .getOne(userId, { requestKey: null });
+        const userProfile: UserProfile = {
+          id: userRecord.id,
+          username: userRecord.username,
+          email: userRecord.email,
+          name: userRecord.name,
+          avatar: userRecord.avatar,
+          introduction: userRecord.introduction,
+        };
+        setUserProfile(userProfile);
+      } catch (error) {
+        console.error("Error fetching user:", error);
       }
     };
 
     fetchLog();
   }, [logId]);
 
+  // 날짜 포맷 함수
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    };
+
+    return new Date(dateString)
+      .toLocaleDateString("ko-KR", options)
+      .replace(/\. /g, ".")
+      .slice(0, -1);
+  };
+
   if (!log) {
     return <p>Loading...</p>;
   }
+
+  const imageUrl = userProfile?.avatar
+    ? `http://13.209.16.46:8090/api/files/_pb_users_auth_/${userProfile.id}/${userProfile.avatar}`
+    : null;
 
   console.log(log);
 
@@ -61,15 +113,25 @@ const LogPage = ({ params }: { params: LogParams }) => {
     <div className="mt-regular1 mb-extraLarge">
       <section className="w-[1180px] mx-auto">
         <p className="body1R text-neutral30 mb-extraSmall1">
-          &lt;시리즈&gt; 스팩로그 알아보기{" "}
+          &lt;시리즈&gt; {log.series}
         </p>
         <h1 className="display3 text-neutral80 mb-extraSmall4">{log.title}</h1>
         <div className="flex gap-[25px] items-center mb-extraSmall4">
           <div className="flex items-center gap-[10px]">
-            <div className="w-[28px] h-[28px] bg-neutral10 rounded-full"></div>
-            <span>닉네임</span>
+            <div className="w-[28px] h-[28px] bg-neutral10 rounded-full overflow-hidden">
+              {imageUrl && (
+                <Image
+                  src={imageUrl}
+                  alt="User Profile Image"
+                  width={28}
+                  height={28}
+                  className="user-avatar"
+                />
+              )}
+            </div>
+            <span>{userProfile?.username}</span>
           </div>
-          <p>2023.02.02</p>
+          <p className="body1R text-neutral50">{formatDate(log.created)}</p>
         </div>
         <div className="w-full flex justify-end border-b mb-regular1">
           <div className="flex gap-[10px] mb-extraSmall4">
@@ -86,7 +148,7 @@ const LogPage = ({ params }: { params: LogParams }) => {
                   fill="#333333"
                 />
               </svg>
-              <span>1K</span>
+              <span>{log.hitCount}</span>
             </div>
             <div className="flex gap-[5px]">
               <svg
@@ -103,11 +165,11 @@ const LogPage = ({ params }: { params: LogParams }) => {
                   strokeWidth="1.5"
                 />
               </svg>
-              <span>680</span>
+              <span>{log.likeCount}</span>
             </div>
             <div className="flex gap-[5px]">
               <Chat />
-              <span>680</span>
+              <span>{log.commentCount}</span>
             </div>
           </div>
         </div>
@@ -115,11 +177,11 @@ const LogPage = ({ params }: { params: LogParams }) => {
           className="w-[1025px] mx-auto mb-extraLarge"
           dangerouslySetInnerHTML={{ __html: log.content }}
         />
-        <ul className="mb-[100px]">
+        <ul className="mb-[100px] flex">
           {log.tags.map((tag, index) => (
             <li key={index} className="mr-extraSmall4 mb-extraSmall4">
               <div
-                className={`w-[180px] h-[50px] px-[22px] py-[12px] rounded-full body2M border border-primary90 text-primary90`}
+                className={`px-[22px] py-[12px] rounded-full body2M border border-primary90 text-primary90`}
               >
                 {tag}
               </div>
@@ -129,8 +191,18 @@ const LogPage = ({ params }: { params: LogParams }) => {
       </section>
       <section className="bg-neutral5 py-[69px] mb-mediun">
         <div className="flex flex-col items-center gap-[25px]">
-          <div className="w-[160px] h-[160px] bg-neutral30 rounded-full"></div>
-          <span className="display4">닉네임</span>
+          <div className="w-[160px] h-[160px] bg-neutral30 rounded-full overflow-hidden">
+            {imageUrl && (
+              <Image
+                src={imageUrl}
+                alt="User Profile Image"
+                width={160}
+                height={160}
+                className="user-avatar"
+              />
+            )}
+          </div>
+          <span className="display4">{userProfile?.username}</span>
           <div className="flex justify-center gap-[15px]">
             <button className="w-[210px] h-[46px] bg-primary90 text-white subhead1 rounded-radius5">
               팔로우
@@ -192,8 +264,8 @@ const LogPage = ({ params }: { params: LogParams }) => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M0 0V20.27H0.47619V20.7751H18.3742L16.1566 23.1349C15.9707 23.3328 15.9707 23.6537 16.1566 23.8516C16.3426 24.0495 16.6441 24.0495 16.8301 23.8516L19.8605 20.6266C20.0465 20.4287 20.0465 20.1079 19.8605 19.91L16.8301 16.6851C16.6441 16.4872 16.3426 16.4872 16.1566 16.6851C15.9707 16.883 15.9707 17.2038 16.1566 17.4017L18.3742 19.7616H0.952381V0H0Z"
                 fill="#196AFF"
               />
