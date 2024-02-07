@@ -3,10 +3,11 @@
 import { NavDown } from "@repo/ui/index";
 import QuillEditor from "@repo/ui/quillEditor";
 import Image from "next/image";
-import { useEffect, useState, ChangeEvent } from "react";
+import { useRouter } from "next/navigation";
+import PocketBase from "pocketbase";
+import { ChangeEvent, useEffect, useState } from "react";
 import DraftModal from "../../components/log/DraftModal";
 import TemplateModal from "../../components/log/templateModal";
-import PocketBase from "pocketbase";
 
 const pb = new PocketBase("http://13.209.16.46:8090");
 
@@ -19,6 +20,8 @@ const Page = () => {
   const [publishTime, setPublishTime] = useState("now");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+
+  const router = useRouter();
 
   // 제목과 내용 입력 핸들러
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +36,7 @@ const Page = () => {
   // 게시물 등록 함수
   const handleSubmit = async () => {
     try {
-      const newRecord = await pb.collection("logs").create({
+      const logData = {
         collectionName: "logs",
         created: publishTime,
         title,
@@ -48,10 +51,13 @@ const Page = () => {
         tags: selectedTags,
         user: "y78rq48jvf5muh9",
         series: "2o39vccfkf1jcyj",
-      });
+      };
+
+      const newRecord = await pb.collection("logs").create(logData);
 
       // 게시물 등록 성공 후 처리, 예: 사용자에게 성공 메시지 표시, 페이지 리디렉션 등
       console.log("Post created successfully:", newRecord);
+      router.push(`/log-success/${newRecord.id}`);
     } catch (error) {
       // 게시물 등록 실패 처리, 예: 사용자에게 오류 메시지 표시
       console.error("Error creating post:", error);
