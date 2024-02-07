@@ -3,18 +3,60 @@
 import { NavDown } from "@repo/ui/index";
 import QuillEditor from "@repo/ui/quillEditor";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 import DraftModal from "../../components/log/DraftModal";
 import TemplateModal from "../../components/log/templateModal";
+import PocketBase from "pocketbase";
+
+const pb = new PocketBase("http://13.209.16.46:8090");
 
 const Page = () => {
   const [isTemplateModalOpen, setTemplateModalOpen] = useState(false);
   const [isDraftModalOpen, setDraftModalOpen] = useState(false);
   const [showAllTags, setShowAllTags] = useState<boolean>(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  //   const [images, setImages] = useState([]);
   const [thumbnail, setThumbnail] = useState("");
-  const [publishTime, setPublishTime] = useState("now"); // 'now' 또는 'schedule'
+  const [publishTime, setPublishTime] = useState("now");
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+
+  // 제목과 내용 입력 핸들러
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  // QuillEditor에서 사용될 내용 변경 핸들러
+  const handleContentChange = (newContent: string) => {
+    setContent(newContent);
+  };
+
+  // 게시물 등록 함수
+  const handleSubmit = async () => {
+    try {
+      const newRecord = await pb.collection("logs").create({
+        collectionName: "logs",
+        created: publishTime,
+        title,
+        content,
+        thumbnail,
+        isPublic: true,
+        isQuestion: false,
+        isBookmark: false,
+        hitCount: 722,
+        likeCount: 722,
+        commentCount: 722,
+        tags: selectedTags,
+        user: "y78rq48jvf5muh9",
+        series: "2o39vccfkf1jcyj",
+      });
+
+      // 게시물 등록 성공 후 처리, 예: 사용자에게 성공 메시지 표시, 페이지 리디렉션 등
+      console.log("Post created successfully:", newRecord);
+    } catch (error) {
+      // 게시물 등록 실패 처리, 예: 사용자에게 오류 메시지 표시
+      console.error("Error creating post:", error);
+    }
+  };
 
   // 템플릿 모달 토글
   const toggleTemplateModal = () => {
@@ -124,8 +166,10 @@ const Page = () => {
           id="title"
           placeholder="제목"
           className="w-full border-b mb-extraSmall1 display2 focus:outline-none p-[10px]"
+          value={title}
+          onChange={handleTitleChange}
         />
-        <QuillEditor />
+        <QuillEditor value={content} onChange={handleContentChange} />
       </div>
       <div className="flex flex-col gap-[15px] mt-small1">
         <div>
@@ -622,7 +666,10 @@ const Page = () => {
         <button className="w-[210px] h-[46px] border-2 border-primary90 rounded-radius5 text-primary90 subhead1">
           취소
         </button>
-        <button className="w-[210px] h-[46px] bg-primary90 text-white rounded-radius5 subhead1">
+        <button
+          className="w-[210px] h-[46px] bg-primary90 text-white rounded-radius5 subhead1"
+          onClick={handleSubmit}
+        >
           등록
         </button>
       </div>
