@@ -50,13 +50,12 @@ const LogCardList: React.FC<LogCardListProps> = ({
 
   const { data: data } = useSWR(["/api/logs", filter], () =>
     getFullLogList("logs", {
-      sort: "created",
+      sort: "-hitCount",
       expand: "user",
       filter,
     }),
   );
   const items = data || [];
-
   return (
     <div className="w-[full] flex flex-col items-center">
       <div className=" w-[1066px] flex flex-wrap gap-[50px]">

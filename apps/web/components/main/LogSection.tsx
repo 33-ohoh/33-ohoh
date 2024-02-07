@@ -8,11 +8,15 @@ const LogSection = () => {
   const [filteredTags, setFilteredTags] = useState<string[]>([]);
   const [selectedSort, setSelectedSort] = useState<string>("전체");
   const handleTagClick = (clickedTagText: string) => {
-    const isTagFiltered = filteredTags.includes(clickedTagText);
-    if (isTagFiltered) {
-      setFilteredTags(filteredTags.filter((tag) => tag !== clickedTagText));
+    if (clickedTagText === "개발 전체") {
+      setFilteredTags([]);
     } else {
-      setFilteredTags([...filteredTags, clickedTagText]);
+      const isTagFiltered = filteredTags.includes(clickedTagText);
+      if (isTagFiltered) {
+        setFilteredTags(filteredTags.filter((tag) => tag !== clickedTagText));
+      } else {
+        setFilteredTags([...filteredTags, clickedTagText]);
+      }
     }
   };
   const handleSortChange = (sort: string) => {
