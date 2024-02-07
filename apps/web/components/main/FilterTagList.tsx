@@ -6,19 +6,25 @@ interface Tag {
   text: string;
   isActive: boolean;
 }
-
-const FilterTagList: React.FC = () => {
+interface FilterTagListProps {
+  filteredTags: string[];
+  onTagClick: (tagText: string) => void;
+}
+const FilterTagList: React.FC<FilterTagListProps> = ({
+  filteredTags,
+  onTagClick,
+}) => {
   const [tags, setTags] = useState<Tag[]>([
     { text: "개발 전체", isActive: false },
-    { text: "소프트웨어 엔지니어", isActive: false },
-    { text: "서버 개발자", isActive: false },
-    { text: "웹 개발자", isActive: false },
+    { text: "안드로이드 개발자", isActive: false },
+    { text: "서버/백앤드 개발자", isActive: false },
+    { text: "웹 풀스택 개발자", isActive: false },
     { text: "프론트엔드 개발자", isActive: false },
-    { text: "C,C++ 개발자", isActive: false },
+    { text: "IOS 개발자", isActive: false },
     { text: "자바 개발자", isActive: false },
     { text: "파이썬 개발자", isActive: false },
     { text: "머신러닝 엔지니어", isActive: false },
-    { text: "데이터 엔지니어", isActive: false },
+    { text: "빅데이터 엔지니어", isActive: false },
     { text: "하드웨어 엔지니어", isActive: false },
   ]);
 
@@ -45,6 +51,7 @@ const FilterTagList: React.FC = () => {
       }
 
       setTags(updatedTags);
+      onTagClick(clickedTagText);
     }
   };
   return (

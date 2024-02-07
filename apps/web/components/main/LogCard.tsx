@@ -4,24 +4,9 @@ import React from "react";
 import Image from "next/image";
 import CardBottom from "@repo/ui/cardBottom";
 import { Bookmark, Chat, Eyes, HeartFull } from "@repo/ui/index";
+import { LogCardProps } from "../../types/logcard";
 
-interface LogCardProps {
-  id: string;
-  title: string;
-  thumbnail: string;
-  expand: {
-    user: {
-      name: string;
-      myJob: string;
-    };
-  };
-  content: string;
-  hitCount: number;
-  likeCount: number;
-  commentCount: number;
-  collectionId: string;
-}
-const LogCard = ({
+const LogCard: React.FC<LogCardProps> = ({
   id,
   title,
   thumbnail,
@@ -55,7 +40,7 @@ const LogCard = ({
             <div className="flex gap-x-[5px] items-center">
               <div className="w-[30px] h-[30px]">
                 <Image
-                  src={`http://13.209.16.46:8090/api/files/${expand.user.collectionId}/${expand.user.id}/${expand.user.avatar}`}
+                  src={`http://13.209.16.46:8090/api/files/${expand?.user?.collectionId}/${expand?.user?.id}/${expand?.user?.avatar}`}
                   alt="profileImage"
                   width={30}
                   height={30}
@@ -64,8 +49,10 @@ const LogCard = ({
                 />
               </div>
               <div className="flex flex-col">
-                <span className="subhead2 text-white">{expand.user.name}</span>
-                <span className="body6R text-white">{expand.user.myJob}</span>
+                <span className="subhead2 text-white">
+                  {expand?.user?.name}
+                </span>
+                <span className="body6R text-white">{expand?.user?.myJob}</span>
               </div>
             </div>
           </CardTop>

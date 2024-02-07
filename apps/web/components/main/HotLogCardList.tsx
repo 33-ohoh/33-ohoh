@@ -1,34 +1,22 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import HotLogCard from "./HotLogCard";
 import { TwinkleCharacter } from "@repo/ui/index";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import PocketBase from "pocketbase";
-
-const pb = new PocketBase("http://13.209.16.46:8090");
+import useSWR from "swr";
+import { getLogList } from "../../apis/logList";
 
 const HotLogCardList = () => {
-  const [apiData, setApiData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const resultList = await pb.collection("logs").getList(1, 4, {
-          sort: "-hitCount",
-          expand: "user",
-          filter: "isPublic = true",
-        });
-        setApiData(resultList.items);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  const { data: data, error } = useSWR("/api/hotLogs", () =>
+    getLogList("logs", 1, 4, {
+      sort: "-hitCount",
+      expand: "user",
+      filter: "isPublic = true",
+    }),
+  );
+  const items = data || [];
   const settings = {
     dots: false,
     infinite: true,
@@ -59,7 +47,7 @@ const HotLogCardList = () => {
         `}
       </style>
       <Slider {...settings} className="z-10">
-        {apiData.map((data, dataIndex) => (
+        {items.map((data, dataIndex) => (
           <HotLogCard key={dataIndex} {...data} currentRank={dataIndex + 1} />
         ))}
       </Slider>

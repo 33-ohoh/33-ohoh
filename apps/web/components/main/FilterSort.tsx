@@ -3,18 +3,21 @@ import { DownArrowBlack } from "@repo/ui/index";
 import React, { useState } from "react";
 
 const sortType = ["전체", "주간", "월간", "3개월"];
-
-const FilterSort = () => {
+interface FilterSortProps {
+  onSortChange: (sort: string) => void;
+}
+const FilterSort: React.FC<FilterSortProps> = ({ onSortChange }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedSort, setSelectedSort] = useState(null);
+  const [selectedSort, setSelectedSort] = useState("");
 
   const handleSortFilterOpen = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSortItemClick = (item) => {
+  const handleSortItemClick = (item: string) => {
     setSelectedSort(item);
     setIsOpen(false);
+    onSortChange(item);
   };
 
   return (
