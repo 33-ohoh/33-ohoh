@@ -1,55 +1,29 @@
 "use client";
 
-import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./quillEditor.css";
 
-const QuillEditor = () => {
-  const [text, setText] = useState("");
-  const handleChange = (
-    content: string,
-    delta: any,
-    source: string,
-    editor: any,
-  ): void => {
-    setText(editor.getHTML()); // rich text
-  };
+interface QuillEditorProps {
+  value: string;
+  onChange: (newContent: string) => void;
+}
 
-  return (
-    <ReactQuill
-      value={text}
-      onChange={handleChange}
-      modules={QuillEditor.modules}
-      formats={QuillEditor.formats}
-      bounds={".app"}
-      placeholder="내용을 입력하세요."
-    />
-  );
-};
-
-QuillEditor.modules = {
+// Quill 편집기에 사용할 모듈을 정의합니다.
+const modules = {
   toolbar: [
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    [{ header: "1" }, { header: "2" }, { font: [] }],
     [{ size: [] }],
     ["bold", "italic", "underline", "strike", "blockquote"],
-    [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
-    ],
-    ["link", "image", "video", "code-block"],
-    [{ align: [] }, { color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["link", "image", "video"],
     ["clean"],
+    ["code-block"],
   ],
-  clipboard: {
-    // Toggle to add extra line breaks when pasting HTML:
-    matchVisual: false,
-  },
 };
 
-QuillEditor.formats = [
+// Quill 편집기에서 지원하는 포맷을 정의합니다.
+const formats = [
   "header",
   "font",
   "size",
@@ -60,14 +34,35 @@ QuillEditor.formats = [
   "blockquote",
   "list",
   "bullet",
-  "indent",
   "link",
   "image",
   "video",
+  "clean",
   "code-block",
-  "align",
-  "color",
-  "background",
 ];
+
+const QuillEditor: React.FC<QuillEditorProps> = ({ value, onChange }) => {
+  const handleChange = (
+    content: string,
+    delta: any,
+    source: string,
+    editor: any,
+  ): void => {
+    if (source === "user") {
+      onChange(editor.getHTML());
+    }
+  };
+
+  return (
+    <ReactQuill
+      value={value}
+      onChange={handleChange}
+      modules={modules}
+      formats={formats}
+      bounds={".app"}
+      placeholder="내용을 입력하세요."
+    />
+  );
+};
 
 export default QuillEditor;
