@@ -295,9 +295,6 @@ const LogPage = ({ params }: { params: LogParams }) => {
                 <span className="body1M">
                   저도 하고 싶은데 어떻게 신청하면 되나요?
                 </span>
-                <button className="body4M text-neutral50 px-[20px] py-[8px] border rounded-full border-neutral50">
-                  답글달기
-                </button>
               </div>
             </div>
           </li>
