@@ -82,6 +82,11 @@ const Page = () => {
     // const tagsJson = JSON.stringify(selectedTags);
     // formData.append("tags", tagsJson);
 
+    // const tagsString = selectedTags.join(",");
+    // formData.append("tags", tagsString);
+
+    // formData.append("tags", selectedTags.toString());
+
     formData.append("user", "y78rq48jvf5muh9");
     formData.append("series", "2o39vccfkf1jcyj");
 
@@ -89,7 +94,24 @@ const Page = () => {
       formData.append("thumbnail", thumbnailFile);
     }
 
+    console.log(formData);
     try {
+      const logData = {
+        collectionName: "logs",
+        created: publishTime,
+        title,
+        content,
+        thumbnail: thumbnailFile,
+        isPublic: true,
+        isQuestion: false,
+        isBookmark: false,
+        hitCount: 722,
+        likeCount: 722,
+        commentCount: 722,
+        tags: selectedTags,
+        user: "y78rq48jvf5muh9",
+        series: "2o39vccfkf1jcyj",
+      };
       const newRecord = await pb.collection("logs").create(formData);
 
       // 게시물 등록 성공 후 처리, 예: 사용자에게 성공 메시지 표시, 페이지 리디렉션 등
@@ -136,13 +158,12 @@ const Page = () => {
 
   const selectTag = (tag: string): void => {
     setSelectedTags((prevSelectedTags) => {
-      if (prevSelectedTags.includes(tag)) {
-        // 태그가 이미 선택된 경우 제거
-        return prevSelectedTags.filter((t) => t !== tag);
-      } else {
-        // 태그가 선택되지 않은 경우 추가
-        return [...prevSelectedTags, tag];
-      }
+      const newSelectedTags = prevSelectedTags.includes(tag)
+        ? prevSelectedTags.filter((t) => t !== tag) // 태그가 이미 선택된 경우 제거
+        : [...prevSelectedTags, tag]; // 태그가 선택되지 않은 경우 추가
+
+      //   console.log("Updated selectedTags:", newSelectedTags);
+      return newSelectedTags;
     });
   };
 
