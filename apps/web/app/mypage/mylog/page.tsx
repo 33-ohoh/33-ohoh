@@ -2,33 +2,17 @@
 
 import { useEffect } from "react";
 import useSWR from "swr";
-import LogCard from "./LogCard";
 import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { setLogPage } from "../../store/selectLogSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import { setLogPage } from "../../../store/selectLogSlice";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { Button } from "@repo/ui/src/button";
-import Pagination from "./Pagination";
+import { Button } from "@repo/ui/button";
+import { LogCardProps } from "../../../types/log";
+import LogCard from "../../../components/mypage/LogCard";
+import Pagination from "../../../components/mypage/Pagination";
 
-interface LogCardProps {
-  id: string;
-  title: string;
-  thumbnail: string;
-  expand: {
-    user: {
-      name: string;
-      myJob: string;
-    };
-  };
-  content: string;
-  hitCount: number;
-  likeCount: number;
-  commentCount: number;
-  collectionId: string;
-}
-
-const MainContainer = () => {
+const MyLogPage = () => {
   const favoriteLogChip = [
     "전체",
     "서버/밴엔드 개발자",
@@ -36,30 +20,28 @@ const MainContainer = () => {
     "안드로이드 개발자",
   ];
   const router = useRouter();
-
   const dispatch = useAppDispatch();
-  const selectState = useAppSelector((state) => state.selectLog);
+  const selectState = useAppSelector((state) => state.selectLog); // {isSelectedLogPage: false, logPage: 1}
 
-  let optionUrl = useSearchParams().get("page");
+  let optionUrl = useSearchParams().get("page"); // page라는 params의 값을 가져온다.
   useEffect(() => {
     if (optionUrl !== selectState.logPage) {
       dispatch(
         setLogPage({
-          logPage: Number(optionUrl),
+          logPage: Number(optionUrl), // reducer 중 하나
         }),
       );
     }
   }, [optionUrl]);
+
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const key = `/api/mypage?page=${optionUrl ? optionUrl : 1}&perPage=6`;
 
   useEffect(() => {
-    return router.push(`mypage?page=${selectState.logPage}`);
+    return router.push(`/mypage?page=${selectState.logPage}`);
   }, [selectState.logPage]);
+
   const { data, error, isLoading } = useSWR(key, fetcher);
-  useEffect(() => {
-    console.log(key);
-  }, [data]);
 
   const method = useForm({
     mode: "onChange",
@@ -94,7 +76,7 @@ const MainContainer = () => {
   if (error) return <div>에러 발생: {error}</div>;
 
   return (
-    <>
+    <section>
       {selectState.isSelectedLogPage && (
         <div>
           <h3 className=" text-[28px] font-bold mb-extraSmall5">대표로그</h3>
@@ -129,14 +111,14 @@ const MainContainer = () => {
           page={selectState.logPage}
           limit={6}
         />
+        {selectState.isSelectedLogPage && (
+          <Button className="w-[210px] bg-primary80 font-semibold mt-[36px] text-primary5">
+            완료
+          </Button>
+        )}
       </form>
-      {selectState.isSelectedLogPage && (
-        <Button className="w-[210px] bg-primary80 font-semibold mt-[36px] text-primary5">
-          완료
-        </Button>
-      )}
-    </>
+    </section>
   );
 };
 
-export default MainContainer;
+export default MyLogPage;
