@@ -23,6 +23,7 @@ const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
   } = log || {};
 
   // 북마크한거
+  // 북마크한거
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
   const handleFavoriteButton = () => {

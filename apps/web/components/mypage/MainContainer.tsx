@@ -3,13 +3,13 @@
 import { useEffect } from "react";
 import useSWR from "swr";
 import LogCard from "./LogCard";
-import Pagination from "./Pagination";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { setLogPage } from "../../store/selectLogSlice";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { Button } from "@repo/ui/button";
+import { Button } from "@repo/ui/src/button";
+import Pagination from "./Pagination";
 
 interface LogCardProps {
   id: string;
