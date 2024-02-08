@@ -12,11 +12,19 @@ import TemplateModal from "../../components/log/templateModal";
 const pb = new PocketBase("http://13.209.16.46:8090");
 
 const Page = () => {
+  const recommendedThumbnails = [
+    "/recommendedThumbnail.png",
+    "/recommendedThumbnail.png",
+    "/recommendedThumbnail.png",
+  ];
+
   const [isTemplateModalOpen, setTemplateModalOpen] = useState(false);
   const [isDraftModalOpen, setDraftModalOpen] = useState(false);
   const [showAllTags, setShowAllTags] = useState<boolean>(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [thumbnail, setThumbnail] = useState("");
+  const [thumbnails, setThumbnails] = useState(recommendedThumbnails);
+  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
+  const [thumbnailUrl, setThumbnailUrl] = useState<string>("");
   const [publishTime, setPublishTime] = useState("now");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -33,27 +41,56 @@ const Page = () => {
     setContent(newContent);
   };
 
+  // 이미지 파일을 선택했을 때 호출될 함수
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const newThumbnailUrl = URL.createObjectURL(e.target.files[0]);
+
+      setThumbnailFile(e.target.files[0]); // 파일 상태 업데이트
+      setThumbnailUrl(newThumbnailUrl); // 썸네일 URL 상태 업데이트
+
+      // 썸네일 목록을 업데이트합니다. 새 썸네일을 추가하고, 배열의 길이가 3을 초과하면 가장 오래된 썸네일(첫 번째 항목)을 제거합니다.
+      setThumbnails((prevThumbnails) => {
+        const updatedThumbnails = [...prevThumbnails, newThumbnailUrl];
+        if (updatedThumbnails.length > 3) {
+          updatedThumbnails.shift(); // 첫 번째 항목 제거
+        }
+        return updatedThumbnails;
+      });
+    }
+  };
+
   // 게시물 등록 함수
   const handleSubmit = async () => {
-    try {
-      const logData = {
-        collectionName: "logs",
-        created: publishTime,
-        title,
-        content,
-        thumbnail,
-        isPublic: true,
-        isQuestion: false,
-        isBookmark: false,
-        hitCount: 722,
-        likeCount: 722,
-        commentCount: 722,
-        tags: selectedTags,
-        user: "y78rq48jvf5muh9",
-        series: "2o39vccfkf1jcyj",
-      };
+    const formData = new FormData();
 
-      const newRecord = await pb.collection("logs").create(logData);
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("collectionName", "logs");
+    formData.append("created", publishTime);
+    formData.append("isPublic", "true");
+    formData.append("isQuestion", "false");
+    formData.append("isBookmark", "false");
+    formData.append("hitCount", "722");
+    formData.append("likeCount", "722");
+    formData.append("commentCount", "722");
+
+    // selectedTags.forEach((tag, index) => {
+    //   formData.append(`tags[${index}]`, tag);
+    // });
+
+    // const tagsJson = JSON.stringify(selectedTags);
+    // formData.append("tags", tagsJson);
+
+    formData.append("user", "y78rq48jvf5muh9");
+    formData.append("series", "2o39vccfkf1jcyj");
+
+    if (thumbnailFile) {
+      formData.append("thumbnail", thumbnailFile);
+    }
+
+    try {
+      const newRecord = await pb.collection("logs").create(formData);
 
       // 게시물 등록 성공 후 처리, 예: 사용자에게 성공 메시지 표시, 페이지 리디렉션 등
       console.log("Post created successfully:", newRecord);
@@ -109,17 +146,18 @@ const Page = () => {
     });
   };
 
-  const recommendedThumbnails = [
-    "/recommendedThumbnail.png",
-    "/recommendedThumbnail.png",
-    "/recommendedThumbnail.png",
-  ];
+  const handleImageUpload = () => {
+    const inputElement = document.getElementById("thumbnailInput");
+    if (inputElement) {
+      inputElement.click();
+    } else {
+      console.error("Thumbnail input element not found");
+    }
+  };
 
-  const handleImageUpload = () => {};
-
-  // 썸네일 선택 핸들러
-  const selectThumbnail = (image: string) => {
-    setThumbnail(image);
+  // 썸네일을 선택할 때 호출될 함수 (예: 기본 썸네일을 클릭했을 때)
+  const selectThumbnail = (imageUrl: string) => {
+    setThumbnailUrl(imageUrl);
   };
 
   // 예약 시간 입력 필드 활성화/비활성화를 위한 useEffect
@@ -211,12 +249,18 @@ const Page = () => {
             >
               직접 업로드 하기
             </button>
+            <input
+              type="file"
+              id="thumbnailInput"
+              style={{ display: "none" }}
+              onChange={handleImageChange}
+            />
           </div>
           <div className="grid grid-cols-3 border border-solid border-neutral10">
-            {recommendedThumbnails.map((image, index) => (
+            {thumbnails.map((image, index) => (
               <div
                 key={index}
-                className={`border-2 p-4 rounded-lg ${thumbnail === image ? "border-blue-500" : "border-transparent"}`}
+                className={`border-2 p-4 rounded-lg ${thumbnailUrl === image ? "border-blue-500" : "border-transparent"}`}
                 onClick={() => selectThumbnail(image)}
               >
                 <Image
