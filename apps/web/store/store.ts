@@ -1,10 +1,12 @@
 "use client";
 
 import { configureStore } from "@reduxjs/toolkit";
+
 import counterSlice from "./counterSlice";
 import loginSlice from "./loginSlice";
 import signupSlice from "./signupSlice";
 import selectLogSlice from "./selectLogSlice";
+import saveLogSlice from "./saveLogSlice";
 
 const store: any = configureStore({
   reducer: {
@@ -12,6 +14,7 @@ const store: any = configureStore({
     signup: signupSlice,
     login: loginSlice,
     selectLog: selectLogSlice,
+    saveLog: saveLogSlice,
   },
 });
 
