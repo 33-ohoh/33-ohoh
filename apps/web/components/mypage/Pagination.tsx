@@ -31,7 +31,7 @@ const Pagination = ({
     );
   };
   return (
-    <div className="flex">
+    <div className="flex justify-center items-center">
       <button type="button" onClick={handlePrev}>
         <span>&lt;</span> 이전
       </button>

@@ -1,18 +1,13 @@
-import React, {
-  MouseEvent,
-  MouseEventHandler,
-  useEffect,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 import { CheckActive, CheckboxInActive } from "./icon";
 
 interface RadioFieldProps {
-  method: any;
-  id: string;
+  method?: any;
+  id?: string;
 }
 
 const RadioField = ({ id, method }: RadioFieldProps) => {
-  const { register, getValues, watch, setValue } = method;
+  const { register, getValues, watch } = method;
   const [isCheckedState, setIsCheckedState] = useState(false);
   const logState = watch("log");
   useEffect(() => {
