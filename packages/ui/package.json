@@ -20,7 +20,8 @@
 		"./index": "./src/icon/index.tsx",
 		"./card": "./src/Card.tsx",
 		"./cardTop": "./src/CardTop.tsx",
-		"./cardBottom": "./src/CardBottom.tsx"
+		"./cardBottom": "./src/CardBottom.tsx",
+		"./modal": "./src/Modal.tsx"
 	},
 	"scripts": {
 		"build": "tailwindcss -i ./src/styles.css -o dist/index.css",
