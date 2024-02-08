@@ -41,4 +41,6 @@ export {
   CheckActive,
   CheckboxInActive,
   DownArrowBlack,
+  SfaclogLogo,
+  SfacLogo,
 } from "./IconComponents";

@@ -2,6 +2,7 @@ import "@repo/ui/styles.css";
 import "./globals.css";
 
 import Provider from "../app/Provider";
+import Header from "../components/main/Header";
 
 export const metadata = {
   title: "Create Next App",
@@ -16,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <Provider>{children}</Provider>
+        <Provider>
+          <Header />
+          {children}
+        </Provider>
       </body>
     </html>
   );
