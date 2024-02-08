@@ -20,8 +20,13 @@
 		"./index": "./src/icon/index.tsx",
 		"./card": "./src/Card.tsx",
 		"./cardTop": "./src/CardTop.tsx",
+<<<<<<< HEAD
 		"./cardBottom": "./src/CardBottom.tsx",
 		"./modal": "./src/Modal.tsx"
+=======
+		"./cardBottom": "./src/CardBottom.tsx"
+		"./radioField": "./src/RadioField"
+>>>>>>> 0baeb3a3075be0dddb462c25b3db8131789f5cc0
 	},
 	"scripts": {
 		"build": "tailwindcss -i ./src/styles.css -o dist/index.css",
@@ -48,4 +53,7 @@
 		"quill": "^1.3.7",
 		"react-quill": "^2.0.0"
 	}
+<<<<<<< HEAD
 }
+=======
+>>>>>>> 0baeb3a3075be0dddb462c25b3db8131789f5cc0
