@@ -35,4 +35,10 @@ export {
   NavRight,
   NavUp,
   Clock,
+  Crown,
+  UpArrowRed,
+  TwinkleCharacter,
+  CheckActive,
+  CheckboxInActive,
+  DownArrowBlack,
 } from "./IconComponents";

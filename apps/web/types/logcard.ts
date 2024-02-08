@@ -1,4 +1,3 @@
-// 실제 로그 데이터에 맞게 추가 필요
 export interface LogCardProps {
   id: string;
   title: string;
@@ -14,5 +13,4 @@ export interface LogCardProps {
   likeCount: number;
   commentCount: number;
   collectionId: string;
-  isBookmark?: boolean;
 }

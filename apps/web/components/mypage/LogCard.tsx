@@ -1,3 +1,5 @@
+"use client";
+
 import { Bookmark, Chat, Eyes, HeartFull } from "@repo/ui/index";
 import Image from "next/image";
 
@@ -5,23 +7,7 @@ import { useState } from "react";
 
 import RadioField from "../../../../packages/ui/src/radioField";
 import { useAppSelector } from "../../hooks/redux";
-
-interface LogCardProps {
-  id: string;
-  title: string;
-  thumbnail: string;
-  expand: {
-    user: {
-      name: string;
-      myJob: string;
-    };
-  };
-  content: string;
-  hitCount: number;
-  likeCount: number;
-  commentCount: number;
-  collectionId: string;
-}
+import { LogCardProps } from "../../types/log";
 
 const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
   const {
@@ -34,8 +20,9 @@ const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
     likeCount,
     commentCount,
     collectionId,
-  } = log;
+  } = log || {};
 
+  // 북마크한거
   // 북마크한거
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
@@ -46,13 +33,12 @@ const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
   const { setValue, getValues } = method;
 
   const handleClick = () => {
-    console.log("test");
-    console.log(id);
     setValue("log", id);
-    console.log(getValues("log"));
   };
 
   const selectState = useAppSelector((state) => state.selectLog);
+
+  const baseUrl = "http://13.209.16.46:8090/api/files";
   return (
     <li
       key={id + title}
@@ -70,7 +56,7 @@ const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
         <div
           className="bg-gray-100 h-[194px] p-[16px]"
           style={{
-            backgroundImage: `url(http://13.209.16.46:8090/api/files/${collectionId}/${id}/${thumbnail})`,
+            backgroundImage: `url(${baseUrl}/${collectionId}/${id}/${thumbnail})`,
             backgroundSize: "cover",
             backgroundPosition: "center center",
           }}
@@ -78,7 +64,7 @@ const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
           <div className="flex items-center gap-[5px]">
             {thumbnail ? (
               <Image
-                src={`http://13.209.16.46:8090/api/files/${collectionId}/${id}/${thumbnail}`}
+                src={`${baseUrl}/api/files/${collectionId}/${id}/${thumbnail}`}
                 alt={"img"}
                 width={42}
                 height={42}
@@ -89,15 +75,15 @@ const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
             )}
 
             <div className="flex flex-col gap-[5px]">
-              <strong className="text-[14px]">{expand.user.name}</strong>
-              <span className="text-[10px]">{expand.user.myJob}</span>
+              <strong className="text-[14px]">{expand?.user?.name}</strong>
+              <span className="text-[10px]">{expand?.user?.myJob}</span>
             </div>
           </div>
         </div>
 
         <div className="flex flex-col justify-between bg-white h-[108px] py-[15px] px-[20px]">
           <div className="flex justify-between">
-            <h4 className="text-[18px] font-bold mb-extraSmall5 text-ellipsis overflow-hidden whitespace-nowrap">
+            <h4 className="text-[18px] font-bold text-ellipsis overflow-hidden whitespace-nowrap">
               {title}
             </h4>
             <button onClick={handleFavoriteButton}>
@@ -108,10 +94,10 @@ const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
               )}
             </button>
           </div>
-          <p className="text-[14px] font-normal text-neutral50 text-ellipsis overflow-hidden whitespace-nowrap mb-extraSmall4">
-            {content}
+          <p className="text-[14px] font-normal text-neutral50 text-ellipsis overflow-hidden whitespace-nowrap">
+            {content.replace(/(<([^>]+)>)/gi, "")}
           </p>
-          <div className="flex text-[10px] text-neutral50 gap-[5px] pb-[10px]">
+          <div className="flex text-[10px] text-neutral50 gap-[5px]">
             <div className="flex gap-[2px] items-center">
               <Eyes width="12" height="12" fill="#808080" />
               <span>{hitCount}</span>
