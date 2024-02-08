@@ -62,39 +62,6 @@ const Page = () => {
 
   // 게시물 등록 함수
   const handleSubmit = async () => {
-    const formData = new FormData();
-
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("collectionName", "logs");
-    formData.append("created", publishTime);
-    formData.append("isPublic", "true");
-    formData.append("isQuestion", "false");
-    formData.append("isBookmark", "false");
-    formData.append("hitCount", "722");
-    formData.append("likeCount", "722");
-    formData.append("commentCount", "722");
-
-    // selectedTags.forEach((tag, index) => {
-    //   formData.append(`tags[${index}]`, tag);
-    // });
-
-    // const tagsJson = JSON.stringify(selectedTags);
-    // formData.append("tags", tagsJson);
-
-    // const tagsString = selectedTags.join(",");
-    // formData.append("tags", tagsString);
-
-    // formData.append("tags", selectedTags.toString());
-
-    formData.append("user", "y78rq48jvf5muh9");
-    formData.append("series", "2o39vccfkf1jcyj");
-
-    if (thumbnailFile) {
-      formData.append("thumbnail", thumbnailFile);
-    }
-
-    console.log(formData);
     try {
       const logData = {
         collectionName: "logs",
@@ -112,10 +79,10 @@ const Page = () => {
         user: "y78rq48jvf5muh9",
         series: "2o39vccfkf1jcyj",
       };
-      const newRecord = await pb.collection("logs").create(formData);
+      const newRecord = await pb.collection("logs").create(logData);
 
       // 게시물 등록 성공 후 처리, 예: 사용자에게 성공 메시지 표시, 페이지 리디렉션 등
-      console.log("Post created successfully:", newRecord);
+      //   console.log("Post created successfully:", newRecord);
       router.push(`/log-success/${newRecord.id}`);
     } catch (error) {
       // 게시물 등록 실패 처리, 예: 사용자에게 오류 메시지 표시
