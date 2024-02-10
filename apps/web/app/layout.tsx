@@ -3,6 +3,8 @@ import "./globals.css";
 
 import Provider from "../app/Provider";
 import Header from "../components/main/Header";
+import Footer from "../components/main/Footer";
+
 
 export const metadata = {
   title: "Create Next App",
@@ -20,6 +22,7 @@ export default function RootLayout({
         <Provider>
           <Header />
           {children}
+          <Footer />
         </Provider>
       </body>
     </html>
