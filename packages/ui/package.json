@@ -11,6 +11,7 @@
     "./checkbox": "./src/checkbox.tsx",
     "./code": "./src/code.tsx",
     "./common": "./src/common.ts",
+    "./divider": "./src/divider.tsx",
     "./quillEditor": "./src/quillEditor.tsx",
     "./stepper": "./src/stepper.tsx",
     "./icon": "./src/icon.tsx",
