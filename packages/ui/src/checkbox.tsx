@@ -2,7 +2,12 @@
 
 import { InputHTMLAttributes, ReactNode } from "react";
 
-import { CheckActive, CheckboxInActive } from "./icon";
+import {
+  CheckActive,
+  CheckboxInActive,
+  RadioActive,
+  RadioInActive,
+} from "@repo/ui/index";
 interface CheckProps extends InputHTMLAttributes<HTMLInputElement> {
   checked: boolean;
 }
@@ -32,9 +37,9 @@ export const Checkbox = ({ checked, label, ...props }: CheckboxProps) => {
 
 export const Radio = ({ checked, label, ...props }: CheckboxProps) => {
   return (
-    <div className="ui-flex ui-gap-3">
+    <div className="ui-flex ui-items-center ui-gap-1">
       <div onClick={props.onClick} className="ui-cursor-pointer">
-        {checked ? <CheckActive /> : <CheckboxInActive />}
+        {checked ? <RadioActive /> : <RadioInActive />}
       </div>
       {label}
     </div>
