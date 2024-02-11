@@ -1,8 +1,4 @@
-import type {
-  LoginFormData,
-  LoginResponse,
-  signupFormData,
-} from "../types/auth";
+import type { LoginFormData, LoginResponse } from "../types/auth";
 import type { ErrorResponse, ListResponse } from "../types/response";
 import { User } from "../types/user";
 import fetcher from "../utils/fetcher";
@@ -78,14 +74,7 @@ export const getUsersByFields = async (
 };
 
 export const createUser = async (
-  {
-    name,
-    username,
-    email,
-    password,
-    passwordConfirm,
-    emailVisibility,
-  }: signupFormData,
+  { name, username, email, password, passwordConfirm, emailVisibility }: User,
   token: string,
 ) => {
   try {
@@ -114,7 +103,7 @@ export const createUser = async (
 
 export const updateUser = async (id: string, userData: User, token: string) => {
   try {
-    const response = await fetcher<User>(`${apiUrl}/users/records${id}`, {
+    const response = await fetcher<User>(`${apiUrl}/users/records/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -148,7 +137,7 @@ export const usernameDoubleCheck = async (username: string) => {
 };
 
 export const requestVerification = async (
-  email: string,
+  email?: string,
 ): Promise<ErrorResponse | null> => {
   try {
     const response = await fetcher<null>(
