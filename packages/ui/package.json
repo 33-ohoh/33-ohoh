@@ -8,6 +8,7 @@
   "exports": {
     "./styles.css": "./dist/index.css",
     "./button": "./src/button.tsx",
+    "./checkbox": "./src/checkbox.tsx",
     "./code": "./src/code.tsx",
     "./common": "./src/common.ts",
     "./divider": "./src/divider.tsx",
@@ -19,6 +20,7 @@
     "./mainContainer": "./src/mypage/mainContainer.tsx",
     "./LogCard": "./src/LogCard.tsx",
     "./index": "./src/icon/index.tsx",
+    "./input": "./src/input.tsx",
     "./card": "./src/Card.tsx",
     "./cardTop": "./src/CardTop.tsx",
     "./modal": "./src/Modal.tsx",
