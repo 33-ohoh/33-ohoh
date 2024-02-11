@@ -1,38 +1,8 @@
+import { NavRight } from "@repo/ui/index";
 import InfoItem from "./InfoItem";
-import { IconArrowMenu } from "@repo/ui/IconComponents";
+import Link from "next/link";
 
 const InfoList = () => {
-  const myActivityData = [
-    { id: "1", title: "내가 쓴 로그", link: "" },
-    { id: "2", title: "관심 로그", link: "" },
-    { id: "3", title: "최근 본 로그", link: "" },
-    { id: "4", title: "내가 쓴 댓글", link: "" },
-  ];
-
-  const companyData = [
-    { id: "1", title: "이용약관&개인정보처리방침", link: "" },
-    { id: "2", title: "로그아웃", link: "" },
-    { id: "3", title: "회원탈퇴", link: "" },
-  ];
-
-  const myActivity = myActivityData.map((data) => {
-    return (
-      <div key={data.id + data.title} className="flex justify-between">
-        <a href={data.link}>{data.title}</a>
-        <IconArrowMenu width={22} height={22} />
-      </div>
-    );
-  });
-
-  const personalInfoSection = companyData.map((data) => {
-    return (
-      <h4 key={data.id + data.title} className="flex justify-between font-bold">
-        <a href={data.link}>{data.title}</a>
-        <IconArrowMenu width={22} height={22} />
-      </h4>
-    );
-  });
-
   return (
     <div>
       <InfoItem title="소개">
@@ -72,10 +42,38 @@ const InfoList = () => {
       </InfoItem>
 
       <InfoItem title="나의 활동">
-        <div className="">{myActivity}</div>
+        <div className="flex justify-between">
+          <Link href="/mypage/">내가 쓴 로그</Link>
+          <NavRight width={22} height={22} />
+        </div>
+        <div className="flex justify-between">
+          <Link href="/mypage/savelog">내 저장 로그</Link>
+          <NavRight width={22} height={22} />
+        </div>
+        <div className="flex justify-between">
+          <Link href="/mypage/recentlog">최근 본 로그</Link>
+          <NavRight width={22} height={22} />
+        </div>
+        <div className="flex justify-between">
+          <Link href="/mypage/mycomments">내가 쓴 댓글</Link>
+          <NavRight width={22} height={22} />
+        </div>
       </InfoItem>
 
-      <InfoItem title="">{personalInfoSection}</InfoItem>
+      <InfoItem title="">
+        <h4 className="flex justify-between font-bold">
+          <Link href="">이용약관&개인정보처리방침</Link>
+          <NavRight width={22} height={22} />
+        </h4>
+        <h4 className="flex justify-between font-bold">
+          <Link href="">로그아웃</Link>
+          <NavRight width={22} height={22} />
+        </h4>
+        <h4 className="flex justify-between font-bold">
+          <Link href="">회원탈퇴</Link>
+          <NavRight width={22} height={22} />
+        </h4>
+      </InfoItem>
     </div>
   );
 };

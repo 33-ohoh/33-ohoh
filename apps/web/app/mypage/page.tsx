@@ -1,30 +1,68 @@
 "use client";
 
-import { useState } from "react";
-import AsideContainer from "../../components/mypage/AsideContainer";
-import MainContainer from "../../components/mypage/MainContainer";
+import { useEffect, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { SubPageType } from "../../types/mypageConfigure";
+import MyLogPage from "./mylog/page";
+import SaveLogPage from "./savelog/page";
+import RecentLogPage from "./recentlog/page";
+import MyCommentsPage from "./mycomments/page";
 
 const Page = () => {
-  // TODO:: 방문자 수 증가 구현
-  const [visiting, setVisiting] = useState<number>(122);
-  const [totalVisiting, setTotalVisiting] = useState<number>(12240);
+  const router = useRouter();
+  const pageNum = useSearchParams().get("page");
+  useEffect(() => {
+    if (!pageNum) return router.push("mypage?page=1");
+  }, [pageNum]);
+
+  const [mainContent, setMainContent] = useState(<MyLogPage />);
+
+  const pathname = usePathname();
+
+  const getSubPageType = (pathname: string) => {
+    if (pathname.includes("/")) {
+      return SubPageType.MY_LOG;
+    } else if (pathname.includes("savelog")) {
+      return SubPageType.SAVE_LOG;
+    } else if (pathname.includes("recentlog")) {
+      return SubPageType.RECENT_LOG;
+    } else if (pathname.includes("mycomments")) {
+      return SubPageType.MY_COMMENTS;
+    } else {
+      return SubPageType.NONE;
+    }
+  };
+
+  const pageType = getSubPageType(pathname);
+
+  useEffect(() => {
+    if (!pageNum) return router.push("mypage?page=1");
+
+    switch (pageType) {
+      case SubPageType.MY_LOG:
+        setMainContent(<MyLogPage />);
+        break;
+      case SubPageType.SAVE_LOG:
+        setMainContent(<SaveLogPage />);
+        break;
+      case SubPageType.RECENT_LOG:
+        setMainContent(<RecentLogPage />);
+        break;
+      case SubPageType.MY_COMMENTS:
+        setMainContent(<MyCommentsPage />);
+        break;
+      case SubPageType.NONE:
+        setMainContent(<></>);
+        break;
+      default:
+        <MyLogPage />;
+    }
+  }, [pageNum]);
 
   return (
-    <div className="">
-      <h2 className="text-[28px] font-bold mt-[172px] mb-[75px]">마이페이지</h2>
-      <div className="flex mb-extraSmall3">
-        <strong>
-          Today <span>{visiting}</span>
-        </strong>
-        <div>⎪</div>
-        <strong>
-          Total <span>{totalVisiting}</span>
-        </strong>
-      </div>
-      <div className="flex gap-[50px]">
-        <AsideContainer />
-        <MainContainer />
-      </div>
+    <div>
+      <main>{mainContent}</main>
     </div>
   );
 };
