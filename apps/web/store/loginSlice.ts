@@ -2,7 +2,6 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface LoginData {
   email: string;
-  password: string;
   token: string;
   rememberUser: boolean;
   isLoggedIn: boolean;
@@ -10,7 +9,6 @@ interface LoginData {
 
 const loginInitialState: LoginData = {
   email: "",
-  password: "",
   token: "",
   rememberUser: false,
   isLoggedIn: false,
@@ -23,8 +21,10 @@ const loginSlice = createSlice({
     setLoginData: (state, action: PayloadAction<Partial<LoginData>>) => {
       Object.assign(state, action.payload);
     },
-    login: (state, action: PayloadAction<LoginData>) => {
-      state = { ...state, ...action.payload, isLoggedIn: true };
+    login: (state, action: PayloadAction<{ email: string; token: string }>) => {
+      state.email = action.payload.email;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
     },
     logout: () => loginInitialState,
   },
