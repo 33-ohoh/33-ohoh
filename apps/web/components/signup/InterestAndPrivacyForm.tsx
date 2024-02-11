@@ -1,4 +1,4 @@
-import type { Dispatch, FormEvent, SetStateAction } from "react";
+import { Dispatch, FormEvent, SetStateAction, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { setSignupData } from "../../store/signupSlice";
 import { updateUser } from "./../../apis/auth";
@@ -111,6 +111,10 @@ const InterestAndPrivacyForm = ({ setStep }: InterestAndPrivacyFormProps) => {
       }),
     );
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <form

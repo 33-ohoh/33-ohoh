@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useAppSelector } from "../../hooks/redux";
 
 import { Button } from "@repo/ui/button";
@@ -7,6 +8,10 @@ import { Button } from "@repo/ui/button";
 const SignUpSuccess = () => {
   const router = useRouter();
   const signupState = useAppSelector((state) => state.signup);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="flex flex-col items-center">
