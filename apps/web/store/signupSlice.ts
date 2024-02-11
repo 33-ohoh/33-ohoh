@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface SignupData {
+  id: string;
   name: string;
   username: string;
   email: string;
@@ -18,9 +19,11 @@ interface SignupData {
   interests: string[];
   usernameVerification: "Unverified" | "InProgress" | "Verified";
   emailVerification: "Unverified" | "InProgress" | "Verified";
+  token: string;
 }
 
 const signupInitialState: SignupData = {
+  id: "",
   name: "",
   username: "",
   email: "",
@@ -38,6 +41,7 @@ const signupInitialState: SignupData = {
   interests: [],
   usernameVerification: "Unverified",
   emailVerification: "Unverified",
+  token: "",
 };
 
 const signupSlice = createSlice({
