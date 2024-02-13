@@ -2,6 +2,7 @@
 
 import { Bookmark, Chat, Eyes, HeartFull } from "@repo/ui/index";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 
@@ -10,6 +11,7 @@ import { useAppSelector } from "../../hooks/redux";
 import { LogCardProps } from "../../types/log";
 
 const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
+  const router = useRouter();
   const {
     id,
     title,
@@ -26,11 +28,17 @@ const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
   // 북마크한거
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
-  const handleFavoriteButton = () => {
+  const handleFavoriteButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation(); // 북마크 버튼 클릭 시 이벤트 버블링 방지
     setIsFavorite((prev) => !prev);
   };
 
   const { setValue, getValues } = method;
+
+  // 게시물 클릭 시 상세 페이지로 이동
+  const goToDetailPage = () => {
+    router.push(`/log/${id}`);
+  };
 
   const handleClick = () => {
     setValue("log", id);
@@ -43,8 +51,9 @@ const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
     <li
       key={id + title}
       className="relative w-[320px] h-[302px] rounded-[10px] overflow-hidden border border-solid border-neutral20 cursor-pointer"
+      onClick={goToDetailPage}
     >
-      <label className="h-full w-full" onClick={handleClick}>
+      <div className="h-full w-full" onClick={handleClick}>
         {/* isLogSelectSetting 대표로그 설정 클릭 여부 */}
         {selectState?.isSelectedLogPage ? (
           <div className="absolute top-[16px] right-[16px]">
@@ -112,7 +121,7 @@ const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
             </div>
           </div>
         </div>
-      </label>
+      </div>
     </li>
   );
 };
