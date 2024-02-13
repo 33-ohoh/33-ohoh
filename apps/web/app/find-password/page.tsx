@@ -4,11 +4,16 @@ import ChangePasswordForm from "../../components/find-password/ChangePasswordFor
 import FindPasswordForm from "../../components/find-password/FindPasswordForm";
 
 const Page = () => {
+  const [email, setEmail] = useState("");
   const [isVerified, setIsVerified] = useState(false);
   return isVerified ? (
-    <ChangePasswordForm />
+    <ChangePasswordForm email={email} />
   ) : (
-    <FindPasswordForm setIsVerified={setIsVerified} />
+    <FindPasswordForm
+      setIsVerified={setIsVerified}
+      email={email}
+      setEmail={setEmail}
+    />
   );
 };
 
