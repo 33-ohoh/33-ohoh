@@ -31,8 +31,10 @@ export const getLogList = async (
     sort?: string;
     expand?: string;
     filter?: string;
+    page?: number;
+    perPage?: number;
   },
-): Promise<RecordModel[]> => {
+) => {
   try {
     const resultList = await pb
       .collection(collectionName)
@@ -41,7 +43,7 @@ export const getLogList = async (
         expand: options.expand || "",
         filter: options.filter || "",
       });
-    return resultList.items;
+    return resultList;
   } catch (error) {
     console.error("Error fetching data:", error);
     throw error;
