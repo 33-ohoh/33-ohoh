@@ -1,6 +1,6 @@
 export interface HotLogCardProps {
   currentRank: number;
-  previousRank: number;
+  previousRank?: number | undefined;
   title: string;
   content: string;
   thumbnail: string;
