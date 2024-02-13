@@ -1,7 +1,11 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 interface Reply {
   id: number;
   content: string;
   expand: any;
+  log: string;
 }
 
 interface ReplieCardProps {
@@ -10,12 +14,17 @@ interface ReplieCardProps {
 const ReplieCard = ({ repliesData }: ReplieCardProps) => {
   if (repliesData.length === 0) return null;
 
+  const router = useRouter();
+
   return (
     <>
-      {repliesData?.map((data) => (
+      {repliesData?.map((data, index) => (
         <div
           key={data.id}
           className="border border-primary90 flex flex-col w-full p-[25px] rounded-radius15"
+          onClick={() => {
+            router.push(`/log/${data.log}`);
+          }}
         >
           <div className="border-b border-neutral20 pb-[15px] mb-extraSmall3">
             <div className="flex gap-[10px]">
