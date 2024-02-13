@@ -70,19 +70,19 @@ const RecentLogPage = () => {
     });
   }
 
-  async function getServerSideProps(context) {
-    const userId = context.params.userId; // 사용자 ID 파라미터 추출
-    const res = await fetch(
-      `http://13.209.16.46:8090/api/collections/userPosts/records?filter=userId=${userId}`,
-    );
-    const posts = await res.json();
+  //   async function getServerSideProps(context) {
+  //     const userId = context.params.userId; // 사용자 ID 파라미터 추출
+  //     const res = await fetch(
+  //       `http://13.209.16.46:8090/api/collections/userPosts/records?filter=userId=${userId}`,
+  //     );
+  //     const posts = await res.json();
 
-    return {
-      props: {
-        posts,
-      },
-    };
-  }
+  //     return {
+  //       props: {
+  //         posts,
+  //       },
+  //     };
+  //   }
 
   // 페이지 네이션 핸들러
   const handlePrevPagenation = () => {
@@ -144,6 +144,7 @@ const RecentLogPage = () => {
           totalItems={totalItems}
           page={saveLogState.logPage}
           limit={6}
+          type="log"
         />
       </form>
     </section>

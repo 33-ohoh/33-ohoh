@@ -1,4 +1,3 @@
-import * as stylex from "@stylexjs/stylex";
 import { ReactNode } from "react";
 
 interface Props {
@@ -6,7 +5,7 @@ interface Props {
 }
 
 const EditMypageLayout = ({ children }: Props) => {
-  return <div {...stylex.props()}>{children}</div>;
+  return <div>{children}</div>;
 };
 
 export default EditMypageLayout;
