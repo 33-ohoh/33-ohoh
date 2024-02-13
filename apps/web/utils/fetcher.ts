@@ -16,7 +16,8 @@ const fetcher = async <T>(
   });
 
   if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
+    const errorData = await response.json();
+    throw errorData;
   }
 
   if (response.status === 204) {

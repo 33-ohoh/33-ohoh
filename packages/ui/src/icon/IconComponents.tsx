@@ -1069,6 +1069,58 @@ export const CheckboxInActive = () => {
   );
 };
 
+export const RadioActive = () => {
+  return (
+    <svg
+      width="48"
+      height="48"
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g clipPath="url(#clip0_85_41052)">
+        <path
+          d="M24 14C18.48 14 14 18.48 14 24C14 29.52 18.48 34 24 34C29.52 34 34 29.52 34 24C34 18.48 29.52 14 24 14ZM24 32C19.58 32 16 28.42 16 24C16 19.58 19.58 16 24 16C28.42 16 32 19.58 32 24C32 28.42 28.42 32 24 32Z"
+          fill="#196AFF"
+        />
+        <path
+          d="M24 29C26.7614 29 29 26.7614 29 24C29 21.2386 26.7614 19 24 19C21.2386 19 19 21.2386 19 24C19 26.7614 21.2386 29 24 29Z"
+          fill="#196AFF"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_85_41052">
+          <rect x="4" y="4" width="40" height="40" rx="20" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
+
+export const RadioInActive = () => {
+  return (
+    <svg
+      width="48"
+      height="48"
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g clipPath="url(#clip0_85_41055)">
+        <path
+          d="M24 14C18.48 14 14 18.48 14 24C14 29.52 18.48 34 24 34C29.52 34 34 29.52 34 24C34 18.48 29.52 14 24 14ZM24 32C19.58 32 16 28.42 16 24C16 19.58 19.58 16 24 16C28.42 16 32 19.58 32 24C32 28.42 28.42 32 24 32Z"
+          fill="#E6E6E6"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_85_41055">
+          <rect x="4" y="4" width="40" height="40" rx="20" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
+
 export const DownArrowBlack = () => {
   return (
     <svg
@@ -1217,7 +1269,6 @@ export const SfacLogo = () => {
   );
 };
 
-
 export const SfaclogLogWhite = ({ width, height }: SVGProps<SVGAElement>) => {
   return (
     <svg
@@ -1266,4 +1317,3 @@ export const SfaclogLogWhite = ({ width, height }: SVGProps<SVGAElement>) => {
     </svg>
   );
 };
-
