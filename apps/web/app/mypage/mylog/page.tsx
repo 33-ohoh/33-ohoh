@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import useSWR from "swr";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
-import { setLogPage } from "../../../store/selectLogSlice";
+import { setPage } from "../../../store/selectLogSlice";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Button } from "@repo/ui/button";
@@ -27,7 +27,7 @@ const MyLogPage = () => {
   useEffect(() => {
     if (optionUrl !== selectState.logPage) {
       dispatch(
-        setLogPage({
+        setPage({
           logPage: Number(optionUrl), // reducer 중 하나
         }),
       );
@@ -57,7 +57,7 @@ const MyLogPage = () => {
   const handlePrevPagenation = () => {
     if (totalPages >= selectState.logPage && selectState.logPage > 0) {
       dispatch(
-        setLogPage({
+        setPage({
           logPage: selectState.logPage - 1,
         }),
       );
@@ -66,7 +66,7 @@ const MyLogPage = () => {
   const handleNextPagenation = () => {
     if (selectState.logPage >= 0 || totalPages < selectState.logPage)
       dispatch(
-        setLogPage({
+        setPage({
           logPage: selectState.logPage + 1,
         }),
       );
@@ -110,6 +110,7 @@ const MyLogPage = () => {
           totalItems={totalItems}
           page={selectState.logPage}
           limit={6}
+          type="log"
         />
         {selectState.isSelectedLogPage && (
           <Button className="w-[210px] bg-primary80 font-semibold mt-[36px] text-primary5">

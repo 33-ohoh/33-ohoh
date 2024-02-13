@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import Pagination from "../../../components/mypage/Pagination";
 import useSWR from "swr";
-import { saveLog, setSavePage } from "../../../store/saveLogSlice";
+import { setSavePage } from "../../../store/saveLogSlice";
 import { useForm } from "react-hook-form";
 import SaveLog from "../../../components/mypage/savelog/SaveLog";
 
