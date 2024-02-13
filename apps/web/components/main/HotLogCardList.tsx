@@ -52,7 +52,7 @@ const HotLogCardList = () => {
         ))}
       </Slider>
 
-      <span className="absolute top-[1.63rem] left-[22.75rem]">
+      <span className="absolute top-[125px] left-[22.75rem]">
         <TwinkleCharacter />
       </span>
     </div>

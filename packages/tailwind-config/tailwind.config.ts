@@ -59,7 +59,7 @@ const config: Omit<Config, "content"> = {
         small1: "50px",
         regular2: "65px",
         regular1: "75px",
-        mediun: "100px",
+        medium: "100px",
         frame: "128px",
         extraLarge: "150px",
       },

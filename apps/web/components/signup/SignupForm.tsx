@@ -1,47 +1,81 @@
-import type { Dispatch, SetStateAction } from "react";
+import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import {
   authenticateAdminWithPassword,
+  authenticateWithPassword,
   createUser,
   getUsersByFields,
   requestVerification,
+  updateUser,
   usernameDoubleCheck,
 } from "../../apis/auth";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { setSignupData } from "../../store/signupSlice";
+
+import { Button } from "@repo/ui/button";
+import { Checkbox } from "@repo/ui/checkbox";
+import { Input } from "@repo/ui/input";
+
+import { ERROR_MESSAGES } from "../../constants/errorMessages";
+import { PATTERNS } from "../../constants/patterns";
 import type { ListResponse } from "../../types/response";
 import type { User } from "../../types/user";
 
+interface InputDatas {
+  [index: string]: string;
+}
 interface SignupFormProps {
   setStep: Dispatch<SetStateAction<number>>;
 }
 
 const SignupForm = ({ setStep }: SignupFormProps) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    getValues,
+  } = useForm<InputDatas>({ mode: "onBlur" });
+
   const dispatch = useAppDispatch();
   const signupState = useAppSelector((state) => state.signup);
+
   const allChecked =
     signupState.collectionAndUse &&
     signupState.identification &&
     signupState.telCompany &&
     signupState.termsOfService;
 
-  const handleCheckboxChange = (fieldName: string) => {
-    dispatch(setSignupData({ [fieldName]: !signupState[fieldName] }));
+  const disabled =
+    !allChecked ||
+    !isValid ||
+    signupState.usernameVerification !== "Verified" ||
+    signupState.usernameVerification !== "Verified";
+
+  const [isEqualPassword, setIsEqualPassword] = useState(false);
+
+  const validateEmail = (email: string): string | undefined => {
+    if (!PATTERNS.EMAIL.test(email)) {
+      return ERROR_MESSAGES.INVALID_EMAIL_FORMAT;
+    }
   };
 
-  const handleAllCheckChange = () => {
-    dispatch(
-      setSignupData({
-        collectionAndUse: !allChecked,
-        identification: !allChecked,
-        telCompany: !allChecked,
-        termsOfService: !allChecked,
-        marketing: !allChecked,
-      }),
-    );
+  const validatePassword = (password: string): string | undefined => {
+    const password1 = getValues("password");
+    const password2 = getValues("passwordConfirm");
+
+    if (!PATTERNS.PASSWORD.test(password)) {
+      return ERROR_MESSAGES.INVALID_PASSWORD_FORMAT;
+    }
+
+    if (password1 === password2) {
+      setIsEqualPassword(true);
+    } else {
+      setIsEqualPassword(false);
+    }
   };
 
   const handleDoubleCheck = async () => {
-    const username = "jwjeon";
+    const username = getValues("username");
     const response = await usernameDoubleCheck(username);
 
     if (response && "items" in response && response.items.length !== 0) {
@@ -54,9 +88,9 @@ const SignupForm = ({ setStep }: SignupFormProps) => {
   };
 
   const handleEmailAuthentication = async () => {
-    const email = "aaawodhks@nate.com";
-    const password = "password!";
-    const passwordConfirm = "password!";
+    const email = getValues("email");
+    const password = "dlatlqlalfqjsgh";
+    const passwordConfirm = "dlatlqlalfqjsgh";
     const emailVisibility = true;
 
     const response = await getUsersByFields("email", email);
@@ -122,34 +156,101 @@ const SignupForm = ({ setStep }: SignupFormProps) => {
     return response && "token" in response ? response.token : "";
   };
 
-  const submitHandler = (e: any) => {
-    e.preventDefault();
+  const handleSignupSubmit: SubmitHandler<InputDatas> = async () => {
+    const name = getValues("name");
+    const username = getValues("username");
+    const email = getValues("email");
+    const password = getValues("password");
+    const passwordConfirm = getValues("passwordConfirm");
+
+    const response = await authenticateWithPassword({
+      identity: email,
+      password: "dlatlqlalfqjsgh",
+    });
+
+    if (response && "record" in response && response.record.id) {
+      await updateUser(
+        response.record.id,
+        { name, oldPassword: "dlatlqlalfqjsgh", password, passwordConfirm },
+        response.token,
+      );
+
+      dispatch(
+        setSignupData({
+          id: response.record.id,
+          name: name,
+          username: username,
+          email: email,
+          password: password,
+          passwordConfirm: passwordConfirm,
+          collectionAndUse: signupState.collectionAndUse,
+          identification: signupState.identification,
+          telCompany: signupState.telCompany,
+          termsOfService: signupState.termsOfService,
+          marketing: signupState.marketing,
+          token: response.token,
+        }),
+      );
+      setStep(3);
+    }
+  };
+
+  const handleCheckboxChange = (fieldName: string) => {
+    dispatch(setSignupData({ [fieldName]: !signupState[fieldName] }));
+  };
+
+  const handleAllCheckChange = () => {
     dispatch(
       setSignupData({
-        name: "testname",
-        username: "testUsername",
-        email: "testemail@test.com",
-        password: "testpassword!",
-        passwordConfirm: "testpassword!",
-        collectionAndUse: signupState.collectionAndUse,
-        identification: signupState.identification,
-        telCompany: signupState.telCompany,
-        termsOfService: signupState.termsOfService,
-        marketing: signupState.marketing,
+        collectionAndUse: !allChecked,
+        identification: !allChecked,
+        telCompany: !allChecked,
+        termsOfService: !allChecked,
+        marketing: !allChecked,
       }),
     );
-    setStep(3);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <form onSubmit={submitHandler}>
-      <div>
-        <label>이름</label>
-        <input type="text" className="border border-gray-400" />
-      </div>
-      <div>
-        <label>닉네임</label>
-        <input type="text" className="border border-gray-400" />
-        <button
+    <form onSubmit={handleSubmit(handleSignupSubmit)}>
+      <Input
+        label={<label className="display5R">이름</label>}
+        name="name"
+        type="text"
+        register={register}
+        placeholder="이름"
+        font="body1R"
+        margin="mt-small1"
+        options={{
+          required: ERROR_MESSAGES.NAME_REQUIRED,
+        }}
+        errorMessage={errors.name?.message}
+      />
+
+      <div className="flex items-center justify-between mt-extraSmall1">
+        <Input
+          label={<label className="display5R">닉네임</label>}
+          name="username"
+          type="text"
+          register={register}
+          placeholder="닉네임"
+          readOnly={signupState.usernameVerification === "Verified"}
+          width="w-[500px]"
+          font="body1R"
+          options={{
+            required: ERROR_MESSAGES.USERNAME_REQUIRED,
+          }}
+          errorMessage={errors.username?.message}
+        />
+        <Button
+          padding="px-[42px] py-[26px]"
+          border="rounded-radius15"
+          font="body1R"
+          margin={errors.username ? "" : "mt-[40px]"}
           disabled={signupState.usernameVerification === "Verified"}
           onClick={handleDoubleCheck}
           type="button"
@@ -157,13 +258,30 @@ const SignupForm = ({ setStep }: SignupFormProps) => {
           {signupState.usernameVerification === "Unverified"
             ? "중복 확인"
             : "사용 가능"}
-        </button>
+        </Button>
       </div>
 
-      <div>
-        <label>이메일</label>
-        <input type="text" className="border border-gray-400" />
-        <button
+      <div className="flex items-center justify-between mt-extraSmall1">
+        <Input
+          label={<label className="display5R">이메일</label>}
+          name="email"
+          type="text"
+          width="w-[500px]"
+          font="body1R"
+          register={register}
+          readOnly={signupState.emailVerification === "Verified"}
+          options={{
+            required: ERROR_MESSAGES.EMAIL_REQUIRED,
+            validate: (email) => validateEmail(email),
+          }}
+          placeholder="example@example.com"
+          errorMessage={errors.email?.message}
+        />
+        <Button
+          padding="px-[42px] py-[26px]"
+          border="rounded-radius15"
+          font="body1R"
+          margin={errors.email ? "" : "mt-[40px]"}
           disabled={signupState.emailVerification === "Verified"}
           onClick={handleEmailAuthentication}
           type="button"
@@ -171,87 +289,86 @@ const SignupForm = ({ setStep }: SignupFormProps) => {
           {signupState.emailVerification === "Unverified"
             ? "인증요청"
             : "인증확인"}
-        </button>
+        </Button>
       </div>
 
-      <div>
-        <label>비밀번호</label>
-        <input type="password" className="border border-gray-400" />
-      </div>
+      <Input
+        label={<label className="display5R">비밀번호</label>}
+        name="password"
+        type="password"
+        font="body1R"
+        margin="mt-extraSmall1"
+        register={register}
+        options={{
+          required: ERROR_MESSAGES.PASSWORD_REQUIRED,
+          validate: (password) => validatePassword(password),
+        }}
+        placeholder="비밀번호"
+        errorMessage={errors.password?.message}
+      />
 
-      <div>
-        <label>비밀번호 확인</label>
-        <input type="password" className="border border-gray-400" />
-      </div>
+      <Input
+        label={<label className="display5R">비밀번호 확인</label>}
+        name="passwordConfirm"
+        type="password"
+        font="body1R"
+        margin="mt-extraSmall1"
+        register={register}
+        options={{
+          required: ERROR_MESSAGES.PASSWORD_REQUIRED,
+          validate: (password) => validatePassword(password),
+        }}
+        placeholder="비밀번호 확인"
+        errorMessage={errors.passwordConfirm?.message}
+        successMessage={
+          isEqualPassword && !errors.passwordConfirm && "비밀번호가 일치합니다."
+        }
+      />
 
-      <div>
-        <label>본인인증 약관 전체동의 (필수)</label>
-        <input
-          type="checkbox"
+      <div className="flex flex-col gap-5 body1R mt-small1">
+        <Checkbox
+          label={
+            <label className="headline1">본인인증 약관 전체동의 (필수)</label>
+          }
           checked={allChecked}
-          onChange={handleAllCheckChange}
+          onClick={handleAllCheckChange}
         />
-
-        <label>개인정보 수집 이용 동의 (필수)</label>
-        <input
-          required
-          type="checkbox"
+        <Checkbox
+          label={<label>개인정보 수집 이용 동의 (필수)</label>}
           checked={signupState.collectionAndUse}
-          onChange={() => handleCheckboxChange("collectionAndUse")}
+          onClick={() => handleCheckboxChange("collectionAndUse")}
         />
-
-        <label>고유식별 정보처리 동의 (필수)</label>
-        <input
-          required
-          type="checkbox"
+        <Checkbox
+          label={<label>고유식별 정보처리 동의 (필수)</label>}
           checked={signupState.identification}
-          onChange={() => handleCheckboxChange("identification")}
+          onClick={() => handleCheckboxChange("identification")}
         />
-
-        <label>통신사 이용약관 동의 (필수)</label>
-        <input
-          required
-          type="checkbox"
+        <Checkbox
+          label={<label>통신사 이용약관 동의 (필수)</label>}
           checked={signupState.telCompany}
-          onChange={() => handleCheckboxChange("telCompany")}
+          onClick={() => handleCheckboxChange("telCompany")}
         />
-
-        <label>서비스 이용약관 동의 (필수)</label>
-        <input
-          required
-          type="checkbox"
+        <Checkbox
+          label={<label>서비스 이용약관 동의 (필수)</label>}
           checked={signupState.termsOfService}
-          onChange={() => handleCheckboxChange("termsOfService")}
+          onClick={() => handleCheckboxChange("termsOfService")}
         />
-
-        <label>마케팅 정보 수신 동의 (선택)</label>
-        <input
-          type="checkbox"
+        <Checkbox
+          label={<label>마케팅 정보 수신 동의 (선택)</label>}
           checked={signupState.marketing}
-          onChange={() => handleCheckboxChange("marketing")}
+          onClick={() => handleCheckboxChange("marketing")}
         />
       </div>
 
-      <div>
-        <button
-          disabled={!allChecked}
-          type="submit"
-          style={{
-            display: "flex",
-            width: "670px",
-            height: "80px",
-            padding: "25px 314px",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "10px",
-            flexShrink: 0,
-            borderRadius: "15px",
-            background: "var(--neutral-30, #B3B3B3)",
-          }}
-        >
-          다음
-        </button>
-      </div>
+      <Button
+        size="full"
+        color="blue-full"
+        margin="mt-small1"
+        disabled={disabled}
+        type="submit"
+      >
+        다음
+      </Button>
     </form>
   );
 };

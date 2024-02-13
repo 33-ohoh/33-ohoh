@@ -167,6 +167,15 @@ html {
 		sans-serif;
 }
 
+.scrollBar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 1px;
+}
+
 @layer components {
 	.display1 {
 		@apply text-[45px] font-bold leading-[52px];

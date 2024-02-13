@@ -1,8 +1,8 @@
 import type { User } from "./user";
 
 export interface LoginFormData {
-  identity: string;
-  password: string;
+  identity: string | undefined;
+  password: string | undefined;
 }
 
 export interface LoginResponse {
