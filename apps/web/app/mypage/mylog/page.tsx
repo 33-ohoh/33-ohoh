@@ -21,7 +21,7 @@ const MyLogPage = () => {
   ];
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const selectState = useAppSelector((state) => state.selectLog); // {isSelectedLogPage: false, logPage: 1}
+  const selectState = useAppSelector((state) => state.selectState);
 
   let optionUrl = useSearchParams().get("page"); // page라는 params의 값을 가져온다.
   useEffect(() => {
@@ -40,6 +40,7 @@ const MyLogPage = () => {
   useEffect(() => {
     return router.push(`/mypage?page=${selectState.logPage}`);
   }, [selectState.logPage]);
+  2;
 
   const { data, error, isLoading } = useSWR(key, fetcher);
 
