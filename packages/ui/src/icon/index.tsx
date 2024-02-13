@@ -43,4 +43,5 @@ export {
   DownArrowBlack,
   SfaclogLogo,
   SfacLogo,
+  SfaclogLogWhite,
 } from "./IconComponents";
