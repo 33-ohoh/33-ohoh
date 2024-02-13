@@ -16,7 +16,7 @@ const HotLogCardList = () => {
       filter: "isPublic = true",
     }),
   );
-  const items = data || [];
+  const items = data?.items || [];
   const settings = {
     dots: false,
     infinite: true,
