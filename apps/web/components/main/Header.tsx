@@ -19,7 +19,7 @@ const Header = () => {
     setSelectedTab(tabName);
   };
   return (
-    <div className="w-[1440px] h-[94px] bg-primary10 ">
+    <div className="w-[1440px] h-[94px] bg-primary10 mx-auto">
       <div className="flex h-[37px]">
         <span className="px-[18.5px] py-[11.62px] ml-[128px] bg-white">
           <SfaclogLogo width="62" height="18" />
