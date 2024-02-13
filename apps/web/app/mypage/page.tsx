@@ -7,7 +7,7 @@ import { SubPageType } from "../../types/mypageConfigure";
 import MyLogPage from "./mylog/page";
 import SaveLogPage from "./savelog/page";
 import RecentLogPage from "./recentlog/page";
-import MyCommentsPage from "./mycomments/page";
+import RepliesPage from "./replies/page";
 
 const Page = () => {
   const router = useRouter();
@@ -27,7 +27,7 @@ const Page = () => {
       return SubPageType.SAVE_LOG;
     } else if (pathname.includes("recentlog")) {
       return SubPageType.RECENT_LOG;
-    } else if (pathname.includes("mycomments")) {
+    } else if (pathname.includes("replies")) {
       return SubPageType.MY_COMMENTS;
     } else {
       return SubPageType.NONE;
@@ -50,7 +50,7 @@ const Page = () => {
         setMainContent(<RecentLogPage />);
         break;
       case SubPageType.MY_COMMENTS:
-        setMainContent(<MyCommentsPage />);
+        setMainContent(<RepliesPage />);
         break;
       case SubPageType.NONE:
         setMainContent(<></>);

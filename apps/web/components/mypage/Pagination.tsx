@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../hooks/redux";
-import { setLogPage } from "../../store/selectLogSlice";
+import { setPage } from "../../store/selectLogSlice";
 
 interface PaginationProps {
   handlePrev: () => void;
@@ -7,6 +7,7 @@ interface PaginationProps {
   totalItems: number;
   page: number;
   limit: number;
+  type: "log" | "reply";
 }
 
 const Pagination = ({
@@ -15,6 +16,7 @@ const Pagination = ({
   totalItems,
   page,
   limit,
+  type = "log",
 }: PaginationProps) => {
   const totalPages = Math.ceil(totalItems / limit); // 3
 
@@ -23,12 +25,21 @@ const Pagination = ({
     (_, index) => index + 1,
   );
   const dispatch = useAppDispatch();
-  const handlePagenation = (pageNumber: number) => {
-    dispatch(
-      setLogPage({
-        logPage: pageNumber,
-      }),
-    );
+  const handlePagenation = (pageNumber: number, type: "log" | "reply") => {
+    if (type === "log") {
+      dispatch(
+        setPage({
+          logPage: pageNumber,
+        }),
+      );
+    }
+    if (type === "reply") {
+      dispatch(
+        setPage({
+          replyPage: pageNumber,
+        }),
+      );
+    }
   };
   return (
     <div className="flex justify-center items-center">
@@ -40,7 +51,7 @@ const Pagination = ({
           key={pageNumber}
           type="button"
           className={`flex px-[5px] cursor-pointer ${pageNumber === page ? "text-neutral60" : "text-neutral30"}`}
-          onClick={() => handlePagenation(pageNumber)}
+          onClick={() => handlePagenation(pageNumber, type)}
         >
           {pageNumber}
         </button>

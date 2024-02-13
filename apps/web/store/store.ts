@@ -13,7 +13,7 @@ const store: any = configureStore({
     counter: counterSlice,
     signup: signupSlice,
     login: loginSlice,
-    selectLog: selectLogSlice,
+    selectState: selectLogSlice,
     saveLog: saveLogSlice,
   },
 });
