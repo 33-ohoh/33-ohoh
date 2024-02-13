@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import FilterTagList from "./FilterTagList";
 import FilterSort from "./FilterSort";
 import LogCardList from "./LogCardList";
+import NewLogButton from "./NewLogButton";
 
 const LogSection = () => {
   const [filteredTags, setFilteredTags] = useState<string[]>([]);
@@ -30,8 +31,9 @@ const LogSection = () => {
           filteredTags={filteredTags}
           onTagClick={handleTagClick}
         />
-        <div className="mt-[74px] mb-[25px]">
+        <div className="mt-[74px] mb-[25px] flex justify-between">
           <FilterSort onSortChange={handleSortChange} />
+          <NewLogButton />
         </div>
       </div>
       <LogCardList filteredTags={filteredTags} selectedSort={selectedSort} />
