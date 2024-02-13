@@ -2,6 +2,7 @@ import { Crown, UpArrowRed } from "@repo/ui/index";
 import React from "react";
 import { HotLogCardProps } from "../../types/hotLogCard";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const HotLogCard: React.FC<HotLogCardProps> = ({
   currentRank,
@@ -13,8 +14,18 @@ const HotLogCard: React.FC<HotLogCardProps> = ({
   id,
   collectionId,
 }) => {
+  const router = useRouter();
+
+  // 게시물 클릭 시 상세 페이지로 이동
+  const goToDetailPage = () => {
+    router.push(`/log/${id}`);
+  };
+
   return (
-    <div className="flex min-w-[30.9rem] h-[250px] flex-col gap-y-[10px] ml-[2px] mb-[2px] z-10">
+    <div
+      className="flex min-w-[30.9rem] h-[250px] flex-col gap-y-[10px] ml-[2px] mb-[2px] z-10"
+      onClick={goToDetailPage}
+    >
       <div className="flex items-end justify-between w-full px-[0.63rem]">
         <div className="flex gap-x-[15px] items-end">
           <span className="display4 text-neutral80">{currentRank}위</span>

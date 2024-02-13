@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
 import Card from "@repo/ui/card";
-import CardTop from "@repo/ui/cardTop";
 import CardBottom from "@repo/ui/cardBottom";
+import CardTop from "@repo/ui/cardTop";
 import { Bookmark, BookmarkFull, Chat, Eyes, HeartFull } from "@repo/ui/index";
-import SaveLogkModal from "../SaveLogkModal";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import PocketBase from "pocketbase";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { setSavePage } from "../../../store/saveLogSlice";
-import PocketBase from "pocketbase";
+import SaveLogkModal from "../SaveLogkModal";
 
 const SaveLog = ({
   savelogItem,
@@ -18,6 +18,8 @@ const SaveLog = ({
   method: any;
   saveLogState: boolean;
 }) => {
+  const router = useRouter();
+
   const { setValue, getValues, watch } = method;
 
   const handleClick = () => {

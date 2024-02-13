@@ -5,6 +5,7 @@ import Image from "next/image";
 import CardBottom from "@repo/ui/cardBottom";
 import { Bookmark, Chat, Eyes, HeartFull } from "@repo/ui/index";
 import { LogCardProps } from "../../types/logcard";
+import { useRouter } from "next/navigation";
 
 const LogCard: React.FC<LogCardProps> = ({
   id,
@@ -17,6 +18,8 @@ const LogCard: React.FC<LogCardProps> = ({
   commentCount,
   collectionId,
 }) => {
+  const router = useRouter();
+
   const formatNumber = (count: number) => {
     if (count >= 1000) {
       const formattedCount = (count / 1000).toFixed(1);
@@ -24,8 +27,14 @@ const LogCard: React.FC<LogCardProps> = ({
     }
     return count.toString();
   };
+
+  // 게시물 클릭 시 상세 페이지로 이동
+  const goToDetailPage = () => {
+    router.push(`/log/${id}`);
+  };
+
   return (
-    <div>
+    <div onClick={goToDetailPage}>
       <Card className="w-[320px] h-[300px] rounded-radius15 border-solid border-[1px] border-[#cccccc]">
         <div
           className="h-[190px]"
