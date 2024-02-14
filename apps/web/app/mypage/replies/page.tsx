@@ -17,7 +17,6 @@ const RepliesPage = () => {
   const pageParam = useSearchParams().get("page");
 
   const isDeleteState = useAppSelector((state) => state.deleteReply);
-  console.log("isDeleteState", isDeleteState);
 
   const handleToggle = async () => {
     dispatch(
