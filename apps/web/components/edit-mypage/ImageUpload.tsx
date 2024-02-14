@@ -1,8 +1,8 @@
 "use client";
 
-import * as stylex from "@stylexjs/stylex";
 import { useRef, useState } from "react";
 import PocketBase from "pocketbase";
+import Image from "next/image";
 
 const pb = new PocketBase("http://13.209.16.46:8090");
 
@@ -20,7 +20,7 @@ export const ImageUpload = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreviewFile(reader.result);
+        // setPreviewFile(reader.result);
       };
       reader.readAsDataURL(file);
     } else {
@@ -57,13 +57,9 @@ export const ImageUpload = () => {
 
   return (
     <div>
-      <div {...stylex.props(styles.profileImage)}>
-        <div>
-          <img
-            src={previewFile || ""}
-            alt=""
-            {...stylex.props(styles.imgStyle)}
-          />
+      <div className="flex flex-col items-center mx-auto bg-neutral5 w-[170px] h-[170px] rounded-radius100 text-center overflow-hidden">
+        <div className="">
+          <Image src={previewFile || ""} alt="" />
         </div>
         <input
           id="fileInput"
@@ -71,51 +67,35 @@ export const ImageUpload = () => {
           accept="image/*"
           ref={imgRef}
           onChange={handleChangeFile}
-          {...stylex.props(styles.profileInput)}
+          className="opacity-0 w-full h-full cursor-pointer"
         />
       </div>
 
-      <p>20MB 이내의 이미지 파일을 업로드 해주세요.</p>
-      <div {...stylex.props(styles.buttons)}>
-        <button onClick={handleUploadFile}>업로드 하기</button>
-        <button type="button" onClick={handleDeleteFile}>
-          프로필 사진 삭제
-        </button>
+      <p className="my-[20px] text-[16px] text-neutral50 text-center">
+        20MB 이내의 이미지 파일을 업로드 해주세요.
+      </p>
+
+      <div className="text-center text-white flex gap-[15px] font-semibold mb-[55px]">
+        <div className="bg-neutral80 rounded-radius5">
+          <button
+            type="button"
+            onClick={handleUploadFile}
+            className="py-[15px] w-[210px]"
+          >
+            업로드 하기
+          </button>
+        </div>
+
+        <div className="bg-neutral80 rounded-radius5">
+          <button
+            type="button"
+            onClick={handleDeleteFile}
+            className="py-[15px] w-[210px]"
+          >
+            프로필 사진 삭제
+          </button>
+        </div>
       </div>
     </div>
   );
 };
-
-const styles = stylex.create({
-  profileImage: {
-    width: "180px",
-    height: "180px",
-    borderRadius: "50%",
-    background: "#ddd",
-    marginBottom: "10px",
-    border: "none",
-    overflow: "hidden",
-  },
-
-  profileInput: {
-    width: "100%",
-    height: "100%",
-    objectFit: "contain",
-  },
-
-  buttons: {
-    display: "flex",
-    gap: "15px",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  imgStyle: {
-    maxWidth: "180px",
-    maxHeight: "auto",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    objectFit: "contain",
-  },
-});
