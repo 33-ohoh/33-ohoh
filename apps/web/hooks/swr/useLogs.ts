@@ -1,12 +1,6 @@
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
-import {
-  createLog,
-  deleteLog,
-  getLog,
-  getLogs,
-  updateLog,
-} from "../../apis/log";
+import { createLog, deleteLog, updateLog } from "../../apis/log";
 import type { Log, LogsResponse } from "../../types/log";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -14,7 +8,7 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 export const useGetLogs = () => {
   const { data, error, isLoading } = useSWR<LogsResponse | null>(
     `${apiUrl}/logs/records`,
-    getLogs,
+    // getLogs,
   );
 
   return {
@@ -27,7 +21,7 @@ export const useGetLogs = () => {
 export const useGetLog = (id: string) => {
   const { data, error, isLoading } = useSWR<Log | null>(
     `${apiUrl}/logs/records/${id}`,
-    getLog,
+    // getLog,
   );
 
   return {
