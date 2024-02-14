@@ -7,6 +7,7 @@ import loginSlice from "./loginSlice";
 import signupSlice from "./signupSlice";
 import selectLogSlice from "./selectLogSlice";
 import saveLogSlice from "./saveLogSlice";
+import deleteReplySlice from "./deleteReplySlice";
 
 const store: any = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ const store: any = configureStore({
     login: loginSlice,
     selectState: selectLogSlice,
     saveLog: saveLogSlice,
+    deleteReply: deleteReplySlice,
   },
 });
 

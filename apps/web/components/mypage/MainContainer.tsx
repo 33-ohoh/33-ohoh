@@ -5,11 +5,12 @@ import useSWR from "swr";
 import LogCard from "./LogCard";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { setLogPage } from "../../store/selectLogSlice";
+import { setPage } from "../../store/selectLogSlice";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { Button } from "@repo/ui/src/button";
+
 import Pagination from "./Pagination";
+import { Button } from "@repo/ui/button";
 
 interface LogCardProps {
   id: string;
@@ -44,7 +45,7 @@ const MainContainer = () => {
   useEffect(() => {
     if (optionUrl !== selectState.logPage) {
       dispatch(
-        setLogPage({
+        setPage({
           logPage: Number(optionUrl),
         }),
       );
@@ -75,7 +76,7 @@ const MainContainer = () => {
   const handlePrevPagenation = () => {
     if (totalPages >= selectState.logPage && selectState.logPage > 0) {
       dispatch(
-        setLogPage({
+        setPage({
           logPage: selectState.logPage - 1,
         }),
       );
@@ -84,7 +85,7 @@ const MainContainer = () => {
   const handleNextPagenation = () => {
     if (selectState.logPage >= 0 || totalPages < selectState.logPage)
       dispatch(
-        setLogPage({
+        setPage({
           logPage: selectState.logPage + 1,
         }),
       );
@@ -128,6 +129,7 @@ const MainContainer = () => {
           totalItems={totalItems}
           page={selectState.logPage}
           limit={6}
+          type="log"
         />
       </form>
       {selectState.isSelectedLogPage && (
