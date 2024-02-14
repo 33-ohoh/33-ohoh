@@ -29,7 +29,6 @@ const ReplieCard = ({ repliesData: initialRepliesData }: ReplieCardProps) => {
 
     try {
       await pb.collection("replies").delete(id.toString());
-      // UI를 업데이트하기 위해 삭제된 댓글을 상태에서 제거합니다.
       const updatedReplies = repliesData.filter((reply) => reply.id !== id);
       sestRepliesData(updatedReplies);
     } catch (error) {
@@ -48,7 +47,7 @@ const ReplieCard = ({ repliesData: initialRepliesData }: ReplieCardProps) => {
             className="w-[24px] h-[24px] bg-red-300 absolute right-[40px] top-[40px] z-50"
             onClick={(e) => {
               handleDelete(data.id, e);
-            }} // 수정: 이벤트 핸들러에 id와 event 전달
+            }}
           >
             {isDeleteState ? <Bin /> : <div></div>}
           </button>

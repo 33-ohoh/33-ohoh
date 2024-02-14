@@ -10,13 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { setSavePage } from "../../../store/saveLogSlice";
 import SaveLogkModal from "../SaveLogkModal";
 
-const SaveLog = ({
-  savelogItem,
-}: {
-  savelogItem: any;
-  method: any;
-  saveLogState: boolean;
-}) => {
+const SaveLog = ({ savelogItem }: { savelogItem: any }) => {
   const pb = new PocketBase("http://13.209.16.46:8090");
   const baseUrl = "http://13.209.16.46:8090/api/files";
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -46,8 +40,6 @@ const SaveLog = ({
       console.error("삭제 에러: ", error);
     }
   };
-
-  console.log(savelogItem);
 
   return (
     <>
