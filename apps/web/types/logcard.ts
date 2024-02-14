@@ -4,8 +4,11 @@ export interface LogCardProps {
   thumbnail: string;
   expand: {
     user: {
+      collectionId: string;
       name: string;
       myJob: string;
+      avatar: string;
+      id: string;
     };
   };
   content: string;

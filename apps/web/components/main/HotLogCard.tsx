@@ -20,7 +20,6 @@ const HotLogCard: React.FC<HotLogCardProps> = ({
   const goToDetailPage = () => {
     router.push(`/log/${id}`);
   };
-
   return (
     <div
       className="flex min-w-[30.9rem] h-[250px] flex-col gap-y-[10px] ml-[2px] mb-[2px] z-10"
@@ -39,7 +38,7 @@ const HotLogCard: React.FC<HotLogCardProps> = ({
         </div>
         <div className="flex gap-x-[0.31rem] items-center">
           <span className="body4M text-neutral80">
-            {previousRank - currentRank} up
+            {/* {previousRank- currentRank} up */}
           </span>
           <UpArrowRed />
         </div>
@@ -48,7 +47,7 @@ const HotLogCard: React.FC<HotLogCardProps> = ({
         <div className="flex flex-col gap-y-[1.25rem]">
           <div className="flex gap-x-[0.62rem] items-center">
             <Image
-              src={`http://13.209.16.46:8090/api/files/${expand.user.collectionId}/${expand.user.id}/${expand.user.avatar}`}
+              src={`http://13.209.16.46:8090/api/files/${(expand?.user as { collectionId: string })?.collectionId}/${expand?.user?.id}/${expand?.user?.avatar}`}
               alt={"profileImage"}
               width={31}
               height={31}
