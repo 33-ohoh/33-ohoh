@@ -60,6 +60,7 @@ export const Input = ({
         readOnly={props.readOnly}
         className={`${padding} ${rounded} ${font} ui-w-full ui-border ui-border-neutral50 ui-text-neutral50`}
         onChange={props.onChange}
+        value={props.value}
       />
       {errorMessage && <ErrorText errorMessage={errorMessage} />}
       {successMessage && <SuccessText successMessage={successMessage} />}
