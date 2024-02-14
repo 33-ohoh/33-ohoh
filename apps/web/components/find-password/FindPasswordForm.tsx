@@ -1,16 +1,53 @@
 "use client";
-import { Dispatch, SetStateAction, useState } from "react";
-import { getUsersByFields, requestVerification } from "../../apis/auth";
+import { Button } from "@repo/ui/button";
+import { Input } from "@repo/ui/input";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { useForm } from "react-hook-form";
+import {
+  authenticateAdminWithPassword,
+  getUsersByFields,
+  requestVerification,
+  updateUser,
+} from "../../apis/auth";
+
+import { PATTERNS } from "../../constants/patterns";
+import { ERROR_MESSAGES } from "./../../constants/errorMessages";
+
+interface InputDatas {
+  [index: string]: string;
+}
 
 interface FindPasswordFormProps {
   setIsVerified: Dispatch<SetStateAction<boolean>>;
+  email: string;
+  setEmail: Dispatch<SetStateAction<string>>;
 }
-const FindPasswordForm = ({ setIsVerified }: FindPasswordFormProps) => {
+
+const validateEmail = (email: string): string | undefined => {
+  if (!PATTERNS.EMAIL.test(email)) {
+    return ERROR_MESSAGES.INVALID_EMAIL_FORMAT;
+  }
+};
+
+const FindPasswordForm = ({
+  setIsVerified,
+  email,
+  setEmail,
+}: FindPasswordFormProps) => {
+  const {
+    register,
+    formState: { errors },
+  } = useForm<InputDatas>({ mode: "onBlur" });
+
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [emailVerification, setEmailVerification] = useState("Unverified");
 
   const requestVerificationHandler = async () => {
+    if (emailVerification === "InProgress") {
+      emailVerificationCheckHandler();
+      return;
+    }
+
     const nameResponse = await getUsersByFields("name", name);
 
     if (
@@ -18,6 +55,13 @@ const FindPasswordForm = ({ setIsVerified }: FindPasswordFormProps) => {
       "items" in nameResponse &&
       nameResponse.items.length !== 0
     ) {
+      const token = await getAdminToken();
+      const userId = nameResponse.items[0]?.id;
+
+      if (userId) {
+        await updateUser(userId, { verified: false }, token);
+      }
+
       const emailResponse = await requestVerification(email);
 
       if (emailResponse === null) {
@@ -51,48 +95,81 @@ const FindPasswordForm = ({ setIsVerified }: FindPasswordFormProps) => {
     }
   };
 
-  const nameChangeHandler = (e: any) => {
+  const getAdminToken = async () => {
+    const response = await authenticateAdminWithPassword();
+    return response && "token" in response ? response.token : "";
+  };
+
+  const nameChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
-  const emailChangeHandler = (e: any) => {
+  const emailChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
   return (
-    <div>
-      <h1>비밀번호찾기</h1>
-      <label>이름</label>
-      <input
+    <form className="flex flex-col justify-center items-center">
+      <h1 className="display4 mt-regular1">비밀번호찾기</h1>
+      <Input
+        label={<label className="display5R">이름</label>}
+        name="name"
+        type="text"
+        register={register}
+        placeholder="이름"
         onChange={nameChangeHandler}
-        className="border border-gray-400"
-        type="text"
+        value={name}
+        font="body1R"
+        margin="mt-small1"
+        options={{
+          required: ERROR_MESSAGES.NAME_REQUIRED,
+        }}
+        errorMessage={errors.name?.message}
       />
 
-      <label>이메일 인증</label>
-      <input
-        onChange={emailChangeHandler}
-        className="border border-gray-400"
-        type="text"
-      />
-
-      <button
-        disabled={emailVerification === "Verified"}
-        onClick={requestVerificationHandler}
-      >
-        {emailVerification === "Unverified" ? "인증요청" : "인증확인"}
-      </button>
-
-      <button
-        disabled={emailVerification === "Verified"}
-        onClick={emailVerificationCheckHandler}
-      >
-        {"인증확인"}
-      </button>
+      <div className="flex items-center justify-between mt-extraSmall1 w-[670px]">
+        <Input
+          label={<label className="display5R">이메일 인증</label>}
+          name="email"
+          type="text"
+          onChange={emailChangeHandler}
+          value={email}
+          width="w-[500px]"
+          font="body1R"
+          register={register}
+          readOnly={false}
+          options={{
+            required: ERROR_MESSAGES.EMAIL_REQUIRED,
+            validate: (email) => validateEmail(email),
+          }}
+          placeholder="example@example.com"
+          errorMessage={errors.email?.message}
+        />
+        <Button
+          padding="px-[42px] py-[26px]"
+          border="rounded-radius15"
+          font="body1R"
+          margin={errors.email ? "" : "mt-[40px]"}
+          disabled={emailVerification === "Verified"}
+          onClick={requestVerificationHandler}
+          type="button"
+        >
+          {emailVerification === "Unverified" ? "인증요청" : "인증확인"}
+        </Button>
+      </div>
 
       <div>
-        <button onClick={() => setIsVerified(true)}>다음</button>
+        <Button
+          onClick={() => setIsVerified(true)}
+          size="full"
+          color="blue-full"
+          margin="mt-medium"
+          disabled={emailVerification !== "Verified"}
+          type="button"
+        >
+          다음
+        </Button>
       </div>
-    </div>
+    </form>
   );
 };
 

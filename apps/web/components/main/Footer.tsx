@@ -4,7 +4,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="w-[1440px] h-[270px] flex flex-col justify-center bg-neutral60 px-[120px] py-[54px] mt-[150px] text-white">
+    <div className="w-[1440px] h-[270px] flex flex-col justify-center bg-neutral60 px-[120px] py-[54px] mt-[150px] text-white mx-auto">
       <div className="w-full display5B border-solid border-b-[1px] border-whtie pb-[15px]">
         <span>인사이드아웃 사회적 협동조합</span>
       </div>

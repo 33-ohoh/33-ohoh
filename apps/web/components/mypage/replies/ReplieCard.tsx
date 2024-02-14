@@ -1,3 +1,4 @@
+"use client";
 import { Bin } from "@repo/ui/index";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "../../../hooks/redux";

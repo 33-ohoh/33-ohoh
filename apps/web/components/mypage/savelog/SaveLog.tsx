@@ -1,20 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Card from "@repo/ui/card";
-import CardTop from "@repo/ui/cardTop";
 import CardBottom from "@repo/ui/cardBottom";
+import CardTop from "@repo/ui/cardTop";
 import { Bookmark, BookmarkFull, Chat, Eyes, HeartFull } from "@repo/ui/index";
-import SaveLogkModal from "../SaveLogkModal";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import PocketBase from "pocketbase";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { setSavePage } from "../../../store/saveLogSlice";
-import PocketBase from "pocketbase";
-import { useRouter } from "next/navigation";
+import SaveLogkModal from "../SaveLogkModal";
 
 const SaveLog = ({
   savelogItem,
-  method,
-  saveLogState,
 }: {
   savelogItem: any;
   method: any;
@@ -26,8 +23,6 @@ const SaveLog = ({
   const dispatch = useAppDispatch();
   const saveLog = useAppSelector((state) => state.saveLog);
   const router = useRouter();
-
-  const { setValue, getValues, watch } = method;
 
   let optionUrl = useSearchParams().get("page");
 

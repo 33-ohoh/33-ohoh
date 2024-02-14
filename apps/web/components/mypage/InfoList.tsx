@@ -1,10 +1,79 @@
 import { NavRight } from "@repo/ui/index";
-import InfoItem from "./InfoItem";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { deleteUser } from "../../apis/auth";
+import { useAppDispatch } from "../../hooks/redux";
+import { logout } from "../../store/loginSlice";
+import InfoItem from "./InfoItem";
 
 const InfoList = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [isWithdrawn, setIsWithdrawn] = useState(false);
+
+  const logoutHandler = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("tokenExpiration");
+    dispatch(logout());
+    router.replace("/");
+  };
+
+  const withdrawalHandler = async () => {
+    if (isWithdrawn) {
+      logoutHandler();
+      return;
+    }
+
+    const token = sessionStorage.getItem("token");
+
+    if (token) {
+      const base64Payload = token.split(".")[1];
+      if (base64Payload) {
+        const payload = Buffer.from(base64Payload, "base64").toString("utf-8");
+        const { id: userId } = JSON.parse(payload.toString());
+        await deleteUser(userId, token);
+        setIsWithdrawn(true);
+      }
+    }
+  };
+
   return (
     <div>
+      {isOpen && (
+        <div className="flex justify-center items-center bg-[#0000005A] top-0 left-0 fixed w-full h-full z-[999]">
+          <div className="w-[444px] h-[222px] rounded-radius15">
+            <div className="flex flex-col justify-center items-center bg-white h-[162px] rounded-t-radius15">
+              <span className="headline2">
+                {isWithdrawn ? "회원탈퇴" : "정말 탈퇴하시겠습니까?"}
+              </span>
+              <span>
+                {isWithdrawn
+                  ? "회원 탈퇴가 완료되었습니다."
+                  : "회원님의 정보가 삭제됩니다."}
+              </span>
+            </div>
+            {!isWithdrawn && (
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-1/2 h-[60px] bg-primary10 rounded-bl-radius15"
+              >
+                취소
+              </button>
+            )}
+
+            <button
+              onClick={withdrawalHandler}
+              className={`${isWithdrawn ? "w-full rounded-b-radius15" : "w-1/2 rounded-br-radius15"} h-[60px] bg-primary90 text-white`}
+            >
+              확인
+            </button>
+          </div>
+        </div>
+      )}
+
       <InfoItem title="소개">
         <p className="mb-extraSmall1">
           개발은 저에게 항상 즐겁고 재밌는 것입니다. 사용자에게 도움이 되는
@@ -55,7 +124,7 @@ const InfoList = () => {
           <NavRight width={22} height={22} />
         </div>
         <div className="flex justify-between">
-          <Link href="/mypage/replies">내가 쓴 댓글</Link>
+          <Link href="/mypage/mycomments">내가 쓴 댓글</Link>
           <NavRight width={22} height={22} />
         </div>
       </InfoItem>
@@ -66,11 +135,11 @@ const InfoList = () => {
           <NavRight width={22} height={22} />
         </h4>
         <h4 className="flex justify-between font-bold">
-          <Link href="">로그아웃</Link>
+          <button onClick={logoutHandler}>로그아웃</button>
           <NavRight width={22} height={22} />
         </h4>
         <h4 className="flex justify-between font-bold">
-          <Link href="">회원탈퇴</Link>
+          <button onClick={() => setIsOpen(true)}>회원탈퇴</button>
           <NavRight width={22} height={22} />
         </h4>
       </InfoItem>
