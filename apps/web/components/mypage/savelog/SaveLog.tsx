@@ -1,15 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Card from "@repo/ui/card";
-import CardTop from "@repo/ui/cardTop";
 import CardBottom from "@repo/ui/cardBottom";
+import CardTop from "@repo/ui/cardTop";
 import { Bookmark, BookmarkFull, Chat, Eyes, HeartFull } from "@repo/ui/index";
-import SaveLogkModal from "../SaveLogkModal";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import PocketBase from "pocketbase";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { setSavePage } from "../../../store/saveLogSlice";
 import PocketBase from "pocketbase";
 import { useRouter } from "next/navigation";
+import SaveLogkModal from "../SaveLogkModal";
 
 const SaveLog = ({
   savelogItem,
@@ -20,6 +22,7 @@ const SaveLog = ({
   method: any;
   saveLogState: boolean;
 }) => {
+  
   const pb = new PocketBase("http://13.209.16.46:8090");
   const baseUrl = "http://13.209.16.46:8090/api/files";
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -51,8 +54,6 @@ const SaveLog = ({
       console.error("삭제 에러: ", error);
     }
   };
-
-  console.log(savelogItem);
 
   return (
     <>

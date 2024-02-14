@@ -1,8 +1,10 @@
+"use client";
 import { Bin } from "@repo/ui/index";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "../../../hooks/redux";
 import PocketBase from "pocketbase";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Reply {
   id: number;
@@ -38,6 +40,8 @@ const ReplieCard = ({ repliesData: initialRepliesData }: ReplieCardProps) => {
 
   if (initialRepliesData.length === 0) return null;
 
+  const router = useRouter();
+
   return (
     <>
       {repliesData?.map((data) => (
@@ -66,7 +70,6 @@ const ReplieCard = ({ repliesData: initialRepliesData }: ReplieCardProps) => {
                     {data.expand?.user?.myJob}
                   </span>
                 </div>
-              </div>
             </div>
 
             <div>

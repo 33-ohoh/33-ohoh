@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import LogCard from "./LogCard";
-import { getFullLogList } from "../../apis/logList";
+import { getLogList } from "../../apis/logList";
 import useSWR from "swr";
+import { useEffect, useState } from "react";
+import Pagination from "./Pagination";
 interface LogCardListProps {
   filteredTags: string[];
   selectedSort: string;
@@ -47,15 +49,23 @@ const LogCardList: React.FC<LogCardListProps> = ({
     "isPublic=true",
     `created >= "${startDate} 00:00:00"`,
   ].join(" && ");
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const { data: data } = useSWR(["/api/logs", filter], () =>
-    getFullLogList("logs", {
+  const { data } = useSWR(["/api/logs", filter, currentPage], () =>
+    getLogList("logs", currentPage, 15, {
       sort: "-hitCount",
       expand: "user",
       filter,
     }),
   );
-  const items = data || [];
+
+  const items = data?.items || [];
+  const onPageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredTags, selectedSort]);
   return (
     <div className="w-[full] flex flex-col items-center">
       <div className=" w-[1066px] flex flex-wrap gap-[50px]">
@@ -78,6 +88,11 @@ const LogCardList: React.FC<LogCardListProps> = ({
             .slice(9)
             .map((data, dataIndex) => <LogCard key={dataIndex} {...data} />)}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={data?.totalPages}
+        onPageChange={onPageChange}
+      />
     </div>
   );
 };
