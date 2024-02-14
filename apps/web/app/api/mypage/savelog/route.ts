@@ -25,14 +25,14 @@ export async function GET(req: Request) {
   }
 }
 
-export async function DELETE(recordId: string) {
-  // console.log("📌 삭제: ", recordId);
-  try {
-    await pb.collection("savelogs").delete(recordId);
-    // 상태 업데이트 하기
-  } catch (error) {
-    console.error("에러 발생:", error);
+// export async function DELETE(recordId: string) {
+//   // console.log("📌 삭제: ", recordId);
+//   try {
+//     await pb.collection("savelogs").delete(recordId);
+//     // 상태 업데이트 하기
+//   } catch (error) {
+//     console.error("에러 발생:", error);
 
-    return NextResponse.error();
-  }
-}
+//     return NextResponse.error();
+//   }
+// }

@@ -51,8 +51,10 @@ const LogCardList: React.FC<LogCardListProps> = ({
   ].join(" && ");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data } = useSWR(["/api/logs", filter, currentPage], () =>
-    getLogList("logs", currentPage, 15, {
+  const { data: data } = useSWR(["/api/logs", filter, currentPage], () =>
+    getLogList("logs", {
+      page: currentPage,
+      perPage: 15,
       sort: "-hitCount",
       expand: "user",
       filter,
@@ -70,9 +72,28 @@ const LogCardList: React.FC<LogCardListProps> = ({
     <div className="w-[full] flex flex-col items-center">
       <div className=" w-[1066px] flex flex-wrap gap-[50px]">
         {items.length > 0 &&
-          items
-            .slice(0, 9)
-            .map((data, dataIndex) => <LogCard key={dataIndex} {...data} />)}
+          items.slice(0, 9).map((data, dataIndex) => (
+            <LogCard
+              key={dataIndex}
+              title={data.title}
+              content={data.content}
+              thumbnail={data.thumbnail}
+              expand={{
+                user: {
+                  collectionId: data.expand?.user.collectionId,
+                  name: data.expand?.user.name,
+                  myJob: data.expand?.user.myJob,
+                  avatar: data.expand?.user.avatar,
+                  id: data.expand?.user.id,
+                },
+              }}
+              id={data.id}
+              collectionId={data.collectionId}
+              hitCount={data.hitCount}
+              likeCount={data.likeCount}
+              commentCount={data.commentCount}
+            />
+          ))}
       </div>
       <Image
         src={"/mainBanner.png"}
@@ -84,9 +105,28 @@ const LogCardList: React.FC<LogCardListProps> = ({
       />
       <div className=" w-[1066px] flex flex-wrap gap-[50px]">
         {items.length > 9 &&
-          items
-            .slice(9)
-            .map((data, dataIndex) => <LogCard key={dataIndex} {...data} />)}
+          items.slice(9).map((data, dataIndex) => (
+            <LogCard
+              key={dataIndex}
+              title={data.title}
+              content={data.content}
+              thumbnail={data.thumbnail}
+              expand={{
+                user: {
+                  collectionId: data.expand?.user.collectionId,
+                  name: data.expand?.user.name,
+                  myJob: data.expand?.user.myJob,
+                  avatar: data.expand?.user.avatar,
+                  id: data.expand?.user.id,
+                },
+              }}
+              id={data.id}
+              collectionId={data.collectionId}
+              hitCount={data.hitCount}
+              likeCount={data.likeCount}
+              commentCount={data.commentCount}
+            />
+          ))}
       </div>
       <Pagination
         currentPage={currentPage}

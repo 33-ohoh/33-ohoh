@@ -15,12 +15,6 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === totalPages;
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, [currentPage]);
 
   return (
     <div className="flex justify-center items-center body4R text-neutral60 mt-[75px]">

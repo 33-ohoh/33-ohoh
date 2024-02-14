@@ -117,6 +117,7 @@ const SaveLogPage = () => {
           totalItems={totalItems}
           page={saveLogState.logPage}
           limit={6}
+          type="log"
         />
       </form>
     </section>

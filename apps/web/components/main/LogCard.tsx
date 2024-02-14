@@ -49,7 +49,7 @@ const LogCard: React.FC<LogCardProps> = ({
             <div className="flex gap-x-[5px] items-center">
               <div className="w-[30px] h-[30px]">
                 <Image
-                  src={`http://13.209.16.46:8090/api/files/${expand?.user?.collectionId}/${expand?.user?.id}/${expand?.user?.avatar}`}
+                  src={`http://13.209.16.46:8090/api/files/${(expand?.user as { collectionId: string })?.collectionId}/${expand?.user?.id}/${expand?.user?.avatar}`}
                   alt="profileImage"
                   width={30}
                   height={30}

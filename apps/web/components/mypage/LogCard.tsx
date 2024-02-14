@@ -24,8 +24,6 @@ const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
     collectionId,
   } = log || {};
 
-  // 북마크한거
-  // 북마크한거
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
   const handleFavoriteButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -33,7 +31,7 @@ const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
     setIsFavorite((prev) => !prev);
   };
 
-  const { setValue, getValues } = method;
+  const { setValue } = method;
 
   // 게시물 클릭 시 상세 페이지로 이동
   const goToDetailPage = () => {

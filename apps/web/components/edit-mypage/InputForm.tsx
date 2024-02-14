@@ -1,7 +1,5 @@
 "use client";
 
-import { stylex } from "@stylexjs/stylex";
-
 interface inputFormProps {
   children?: string;
   labelId?: string;
