@@ -134,12 +134,15 @@ const Page = () => {
     });
   };
 
+  // 이미지 업로드 핸들러
   const handleImageUpload = () => {
-    const inputElement = document.getElementById("thumbnailInput");
-    if (inputElement) {
-      inputElement.click();
-    } else {
-      console.error("Thumbnail input element not found");
+    if (typeof window !== "undefined") {
+      const inputElement = document.getElementById("thumbnailInput");
+      if (inputElement) {
+        inputElement.click();
+      } else {
+        console.error("Thumbnail input element not found");
+      }
     }
   };
 
@@ -150,18 +153,21 @@ const Page = () => {
 
   // 예약 시간 입력 필드 활성화/비활성화를 위한 useEffect
   useEffect(() => {
-    const scheduleDateInput = document.getElementById(
-      "scheduleDate",
-    ) as HTMLInputElement;
-    const scheduleTimeInput = document.getElementById(
-      "scheduleTime",
-    ) as HTMLInputElement;
-    const disabled = publishTime !== "schedule";
-    if (scheduleDateInput && scheduleTimeInput) {
-      scheduleDateInput.disabled = disabled;
-      scheduleTimeInput.disabled = disabled;
+    if (typeof window !== "undefined") {
+      const scheduleDateInput = document.getElementById(
+        "scheduleDate",
+      ) as HTMLInputElement; // HTMLInputElement로 타입 캐스팅
+      const scheduleTimeInput = document.getElementById(
+        "scheduleTime",
+      ) as HTMLInputElement; // HTMLInputElement로 타입 캐스팅
+      // publishTime이 "schedule"일 때만 입력 필드를 활성화하고, 그 외의 경우에는 비활성화합니다.
+      const disabled = publishTime !== "schedule";
+      if (scheduleDateInput && scheduleTimeInput) {
+        scheduleDateInput.disabled = disabled;
+        scheduleTimeInput.disabled = disabled;
+      }
     }
-  }, [publishTime]); // publishTime이 변경될 때마다 실행
+  }, [publishTime]);
 
   return (
     <section className="mx-auto w-[1185px]">
