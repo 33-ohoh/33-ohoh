@@ -28,6 +28,7 @@ const Page = () => {
   const [publishTime, setPublishTime] = useState("now");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [triggerFileInput, setTriggerFileInput] = useState(false);
 
   const router = useRouter();
 
@@ -136,15 +137,21 @@ const Page = () => {
 
   // 이미지 업로드 핸들러
   const handleImageUpload = () => {
+    setTriggerFileInput(true); // 파일 입력 트리거 상태를 true로 설정
+  };
+
+  // 파일 입력 트리거 상태 감지 및 처리
+  useEffect(() => {
     if (typeof window !== "undefined") {
+      // 클라이언트 사이드에서 실행되는 코드
       const inputElement = document.getElementById("thumbnailInput");
       if (inputElement) {
         inputElement.click();
-      } else {
-        console.error("Thumbnail input element not found");
       }
     }
-  };
+  }, [triggerFileInput]);
+
+  console.log(document);
 
   // 썸네일을 선택할 때 호출될 함수 (예: 기본 썸네일을 클릭했을 때)
   const selectThumbnail = (imageUrl: string) => {
