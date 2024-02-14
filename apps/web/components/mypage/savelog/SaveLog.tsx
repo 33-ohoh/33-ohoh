@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import Card from "@repo/ui/card";
 import CardBottom from "@repo/ui/cardBottom";
 import CardTop from "@repo/ui/cardTop";
@@ -9,8 +8,6 @@ import PocketBase from "pocketbase";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { setSavePage } from "../../../store/saveLogSlice";
-import PocketBase from "pocketbase";
-import { useRouter } from "next/navigation";
 import SaveLogkModal from "../SaveLogkModal";
 
 const SaveLog = ({

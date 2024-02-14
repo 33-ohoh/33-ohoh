@@ -91,7 +91,7 @@ const SaveLogCard = ({ items, isSaveLog, setIsSaveLog, method }: any) => {
               <h4 className="text-[18px] font-bold text-ellipsis overflow-hidden whitespace-nowrap">
                 {log.expand.logs.title}
               </h4>
-              <button onClick={() => handleClickLog(index)} type="button">
+              <button onClick={() => handleClickLog()} type="button">
                 {saveState[index] ? (
                   <BookmarkFull fill="#7FACFF" />
                 ) : (
