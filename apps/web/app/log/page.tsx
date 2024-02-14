@@ -1,13 +1,19 @@
 "use client";
 
 import { NavDown } from "@repo/ui/index";
-import QuillEditor from "@repo/ui/quillEditor";
+// import QuillEditor from "@repo/ui/quillEditor";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import PocketBase from "pocketbase";
 import { ChangeEvent, useEffect, useState, useRef } from "react";
 import DraftModal from "../../components/log/DraftModal";
 import TemplateModal from "../../components/log/templateModal";
+
+import dynamic from "next/dynamic";
+
+const QuillEditor = dynamic(() => import("@repo/ui/quillEditor"), {
+  ssr: false, // 서버 사이드 렌더링 비활성화
+});
 
 const pb = new PocketBase("http://13.209.16.46:8090");
 
