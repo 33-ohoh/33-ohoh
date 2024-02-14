@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import Pagination from "../../../components/mypage/Pagination";
 import useSWR from "swr";
 import { setSavePage } from "../../../store/saveLogSlice";
-import { useForm } from "react-hook-form";
 import SaveLog from "../../../components/mypage/savelog/SaveLog";
 
 const SaveLogPage = () => {
@@ -39,17 +38,11 @@ const SaveLogPage = () => {
   }, [saveLogState.logPage]);
   const { data, error, isLoading } = useSWR(key, fetcher);
 
-  const method = useForm({
-    mode: "onChange",
-    defaultValues: {
-      log: "",
-    },
-  });
-
   const items = data?.items || [];
   const [savelogItem, setSaveLogItem] = useState([]);
   const totalItems = data?.totalItems;
   const totalPages = Math.ceil(totalItems / 6); // 3
+  console.log(savelogItem);
 
   useEffect(() => {
     const newSavelogItems = items.map((item: any) => item?.expand?.logs);
@@ -100,14 +93,7 @@ const SaveLogPage = () => {
       <form className="flex flex-col justify-center items-center gap-[75px]">
         <ul className="flex flex-wrap gap-[50px] w-[694px]">
           {items.map((savelogItem: any) => {
-            return (
-              <SaveLog
-                key={savelogItem.id}
-                savelogItem={savelogItem}
-                method={method}
-                saveLogState={saveLogState}
-              />
-            );
+            return <SaveLog key={savelogItem.id} savelogItem={savelogItem} />;
           })}
         </ul>
 
