@@ -8,7 +8,7 @@ import { setPage } from "../../../store/selectLogSlice";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Button } from "@repo/ui/button";
-import { LogCardProps } from "../../../types/log";
+import { Log } from "../../../types/log";
 import LogCard from "../../../components/mypage/LogCard";
 import Pagination from "../../../components/mypage/Pagination";
 
@@ -100,7 +100,7 @@ const MyLogPage = () => {
       </div>
       <form className="flex flex-col justify-center items-center gap-[75px]">
         <ul className="flex flex-wrap gap-[50px] w-[694px]">
-          {items.map((log: LogCardProps) => {
+          {items.map((log: Log) => {
             return <LogCard key={log.id} log={log} method={method} />;
           })}
         </ul>
