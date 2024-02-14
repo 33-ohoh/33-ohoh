@@ -6,26 +6,15 @@ import CardTop from "@repo/ui/cardTop";
 import { Bookmark, BookmarkFull, Chat, Eyes, HeartFull } from "@repo/ui/index";
 import Image from "next/image";
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import { useAppSelector } from "../../../hooks/redux";
 import SaveLogkModal from "../SaveLogkModal";
 
-// 삭제 흐름
-// 북마크가 애초에 true 상태인 북마크 페이지 ✅
-// 이때, true 상태인 북마크의 아이콘을 클릭하면, false로 바뀜
-// 그러면 삭제 여부를 묻는 모달이 나온다.
-// 모달에서 확인 버튼 클릭 시, db로 삭제 요청을 보낸다.
-
-const SaveLogCard = ({ items, isSaveLog, setIsSaveLog, method }: any) => {
+const SaveLogCard = ({ items }: any) => {
   // 위에서 내려온 isSaveLog 북마크 상태는 true
-
-  const handleSaveButton = () => {
-    setIsSaveLog((prev: boolean) => !prev);
-  };
 
   // isSaveLog 상태를 false로 바꾸면 모달 나오게 만들기
   const handleClickLog = () => {};
 
-  const dispatch = useAppDispatch();
   const saveState = useAppSelector((state) => state.saveLog);
 
   // 로그의 북마크 true 상태인 아이콘 클릭 시, 삭제 여부 묻는 모달 띄우기
@@ -33,16 +22,6 @@ const SaveLogCard = ({ items, isSaveLog, setIsSaveLog, method }: any) => {
   const handleDeleteCancle = () => {
     setIsOpenDeleteModal((prev) => !prev);
   };
-
-  // 북마크가 해제 됐을 떄, 모달창 띄우기
-  // 모달창에서 삭제에 대한 물음에 확인 클릭 시, db에서 삭제하기
-  // const handleFavoriteButton = () => {
-  // 	setIsUnsaveLog((prev) => !prev);
-
-  // 	if (isUnsaveLog === false) {
-  // 		setIsOpenDeleteModal((prev) => !prev);
-  // 	}
-  // };
 
   return (
     <div className="flex flex-wrap gap-[50px]">

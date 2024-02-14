@@ -12,8 +12,6 @@ import SaveLogkModal from "../SaveLogkModal";
 
 const SaveLog = ({
   savelogItem,
-  method,
-  saveLogState,
 }: {
   savelogItem: any;
   method: any;
@@ -25,8 +23,6 @@ const SaveLog = ({
   const dispatch = useAppDispatch();
   const saveLog = useAppSelector((state) => state.saveLog);
   const router = useRouter();
-
-  const { setValue, getValues, watch } = method;
 
   let optionUrl = useSearchParams().get("page");
 
