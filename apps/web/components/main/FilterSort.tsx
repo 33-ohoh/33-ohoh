@@ -21,7 +21,7 @@ const FilterSort: React.FC<FilterSortProps> = ({ onSortChange }) => {
   };
 
   return (
-    <div className="flex gap-x-[10px] body2M items-center">
+    <div className="relative flex gap-x-[10px] body2M items-center">
       <span className="text-neutral50">정렬방식</span>
       <div
         className="flex items-center gap-x-[5px] "
@@ -35,7 +35,7 @@ const FilterSort: React.FC<FilterSortProps> = ({ onSortChange }) => {
       <div
         className={`${
           isOpen
-            ? "absolute top-[755px] left-[15px] flex flex-col p-[7px] w-[164px] shadow-light20 rounded-radius15 body1R bg-white"
+            ? "absolute top-[10px] left-[-170px] flex flex-col p-[7px] w-[164px] shadow-light20 rounded-radius15 body1R bg-white"
             : "hidden"
         }`}
       >
