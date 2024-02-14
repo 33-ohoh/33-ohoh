@@ -5,18 +5,12 @@ import CardTop from "@repo/ui/cardTop";
 import { Bookmark, BookmarkFull, Chat, Eyes, HeartFull } from "@repo/ui/index";
 import { useRouter, useSearchParams } from "next/navigation";
 import PocketBase from "pocketbase";
-import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { setSavePage } from "../../../store/saveLogSlice";
 import SaveLogkModal from "../SaveLogkModal";
+import { useEffect, useState } from "react";
 
-const SaveLog = ({
-  savelogItem,
-}: {
-  savelogItem: any;
-  method: any;
-  saveLogState: boolean;
-}) => {
+const SaveLog = ({ savelogItem }: { savelogItem: any }) => {
   const pb = new PocketBase("http://13.209.16.46:8090");
   const baseUrl = "http://13.209.16.46:8090/api/files";
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);

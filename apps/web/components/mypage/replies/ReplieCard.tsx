@@ -29,7 +29,6 @@ const ReplieCard = ({ repliesData: initialRepliesData }: ReplieCardProps) => {
 
     try {
       await pb.collection("replies").delete(id.toString());
-      // UI를 업데이트하기 위해 삭제된 댓글을 상태에서 제거합니다.
       const updatedReplies = repliesData.filter((reply) => reply.id !== id);
       setRepliesData(updatedReplies);
     } catch (error) {
@@ -43,15 +42,15 @@ const ReplieCard = ({ repliesData: initialRepliesData }: ReplieCardProps) => {
     <>
       {repliesData?.map((data) => (
         <div className="relative w-full cursor-pointer" key={data.id}>
-          {isDeleteState && (
-            <button
-              type="button"
-              className="w-[24px] h-[24px] bg-red-300 absolute right-[40px] top-[40px] z-50"
-              onClick={(e) => handleDelete(data.id, e)}
-            >
-              <Bin />
-            </button>
-          )}
+          <button
+            type="button"
+            className="w-[24px] h-[24px] bg-red-300 absolute right-[40px] top-[40px] z-50"
+            onClick={(e) => {
+              handleDelete(data.id, e);
+            }}
+          >
+            {isDeleteState ? <Bin /> : <div></div>}
+          </button>
           <div
             className="border border-primary90 flex flex-col w-full p-[25px] rounded-radius15"
             onClick={() => router.push(`/log/${data.log}`)}

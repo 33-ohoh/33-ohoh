@@ -124,7 +124,7 @@ const InfoList = () => {
           <NavRight width={22} height={22} />
         </div>
         <div className="flex justify-between">
-          <Link href="/mypage/mycomments">내가 쓴 댓글</Link>
+          <Link href="/mypage/replies">내가 쓴 댓글</Link>
           <NavRight width={22} height={22} />
         </div>
       </InfoItem>
