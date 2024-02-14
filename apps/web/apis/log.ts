@@ -1,12 +1,12 @@
-import type { LogCardProps } from "../types/log";
+import type { Log } from "../types/log";
 import type { ErrorResponse, ListResponse } from "../types/response";
 import fetcher from "../utils/fetcher";
 
 export const getLogs = async (
   url: string,
-): Promise<ListResponse<LogCardProps> | ErrorResponse | null> => {
+): Promise<ListResponse<Log> | ErrorResponse | null> => {
   try {
-    const response = await fetcher<ListResponse<LogCardProps>>(url, {
+    const response = await fetcher<ListResponse<Log>>(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -21,9 +21,9 @@ export const getLogs = async (
 
 export const getLog = async (
   url: string,
-): Promise<LogCardProps | ErrorResponse | null> => {
+): Promise<Log | ErrorResponse | null> => {
   try {
-    const response = await fetcher<LogCardProps>(url, {
+    const response = await fetcher<Log>(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -38,12 +38,10 @@ export const getLog = async (
 
 export const createLog = async (
   url: string,
-  {
-    arg: { logData, token },
-  }: { arg: { logData: LogCardProps; token: string } },
-): Promise<LogCardProps | ErrorResponse | null> => {
+  { arg: { logData, token } }: { arg: { logData: Log; token: string } },
+): Promise<Log | ErrorResponse | null> => {
   try {
-    const response = await fetcher<LogCardProps>(url, {
+    const response = await fetcher<Log>(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,12 +58,10 @@ export const createLog = async (
 
 export const updateLog = async (
   url: string,
-  {
-    arg: { logData, token },
-  }: { arg: { logData: LogCardProps; token: string } },
+  { arg: { logData, token } }: { arg: { logData: Log; token: string } },
 ) => {
   try {
-    const response = await fetcher<LogCardProps>(url, {
+    const response = await fetcher<Log>(url, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
