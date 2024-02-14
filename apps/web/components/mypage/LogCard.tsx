@@ -8,9 +8,9 @@ import { useState } from "react";
 
 import RadioField from "../../../../packages/ui/src/radioField";
 import { useAppSelector } from "../../hooks/redux";
-import { LogCardProps } from "../../types/log";
+import { Log } from "../../types/log";
 
-const LogCard = ({ log, method }: { log: LogCardProps; method: any }) => {
+const LogCard = ({ log, method }: { log: Log; method: any }) => {
   const router = useRouter();
   const {
     id,
