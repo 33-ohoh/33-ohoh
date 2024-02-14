@@ -28,6 +28,18 @@ const LogSection = () => {
       <div className="w-[1066px] flex flex-col gap-y-[0.94rem] mt-[4.69rem]">
         <span className="display4">로그 분야</span>
         <FilterTagList
+          tagTexts={[
+            "개발 전체",
+            "프론트엔드 개발자",
+            "서버/백앤드 개발자",
+            "웹 풀스택 개발자",
+            "안드로이드 개발자",
+            "IOS 개발자",
+            "빅데이터 엔지니어",
+            "인공지능/머신러닝",
+            "게임 서버 개발자",
+            "웹퍼블리셔",
+          ]}
           filteredTags={filteredTags}
           onTagClick={handleTagClick}
         />
