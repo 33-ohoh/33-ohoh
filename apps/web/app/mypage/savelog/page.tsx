@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import Pagination from "../../../components/mypage/Pagination";
 import useSWR from "swr";
@@ -91,11 +91,13 @@ const SaveLogPage = () => {
       </div>
 
       <form className="flex flex-col justify-center items-center gap-[75px]">
-        <ul className="flex flex-wrap gap-[50px] w-[694px]">
-          {items.map((savelogItem: any) => {
-            return <SaveLog key={savelogItem.id} savelogItem={savelogItem} />;
-          })}
-        </ul>
+        <Suspense fallback={<div>로딩중...</div>}>
+          <ul className="flex flex-wrap gap-[50px] w-[694px]">
+            {items.map((savelogItem: any) => {
+              return <SaveLog key={savelogItem.id} savelogItem={savelogItem} />;
+            })}
+          </ul>
+        </Suspense>
 
         <Pagination
           handlePrev={handlePrevPagenation}

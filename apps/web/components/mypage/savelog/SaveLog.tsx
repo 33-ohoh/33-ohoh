@@ -8,7 +8,7 @@ import PocketBase from "pocketbase";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { setSavePage } from "../../../store/saveLogSlice";
 import SaveLogkModal from "../SaveLogkModal";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 const SaveLog = ({ savelogItem }: { savelogItem: any }) => {
   const pb = new PocketBase("http://13.209.16.46:8090");
@@ -17,15 +17,17 @@ const SaveLog = ({ savelogItem }: { savelogItem: any }) => {
   const dispatch = useAppDispatch();
   const saveLog = useAppSelector((state) => state.saveLog);
   const router = useRouter();
-
-  let optionUrl = useSearchParams().get("page");
+  const params = useSearchParams();
+  let optionUrl = params.get("page");
 
   useEffect(() => {
-    const page = optionUrl ? Number(optionUrl) : 1;
-    if (page !== saveLog.logPage) {
-      dispatch(setSavePage({ logPage: page }));
+    if (typeof window !== "undefined") {
+      const page = optionUrl ? Number(optionUrl) : 1;
+      if (page !== saveLog.logPage) {
+        dispatch(setSavePage({ logPage: page }));
+      }
     }
-  }, [optionUrl, dispatch, saveLog.logPage]);
+  }, [optionUrl, saveLog.logPage]);
 
   // 저장로그 아이콘 클릭 시, 상태 변경해줌
   const handleToggleSaveLog = () => {
@@ -48,7 +50,7 @@ const SaveLog = ({ savelogItem }: { savelogItem: any }) => {
         handleCancle={() => setIsOpenModal(false)}
         handleDelete={handleDelete}
       />
-      <>
+      <Suspense fallback={<div>로딩중</div>}>
         <Card
           className="relative w-[320px] h-[302px] rounded-[10px] overflow-hidden border border-solid border-neutral20 cursor-pointer"
           onClick={() => router.push(`/log/${savelogItem.expand.logs.id}`)}
@@ -93,7 +95,7 @@ const SaveLog = ({ savelogItem }: { savelogItem: any }) => {
             </div>
           </CardBottom>
         </Card>
-      </>
+      </Suspense>
     </>
   );
 };

@@ -20,10 +20,11 @@ const MyLogPage = () => {
     "안드로이드 개발자",
   ];
   const router = useRouter();
+  const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
   const selectState = useAppSelector((state) => state.selectState);
 
-  let optionUrl = useSearchParams().get("page"); // page라는 params의 값을 가져온다.
+  let optionUrl = new URLSearchParams(searchParams).get("page");
   useEffect(() => {
     if (optionUrl !== selectState.logPage) {
       dispatch(
