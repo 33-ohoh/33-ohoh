@@ -5,7 +5,7 @@ import QuillEditor from "@repo/ui/quillEditor";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import PocketBase from "pocketbase";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState, useRef } from "react";
 import DraftModal from "../../components/log/DraftModal";
 import TemplateModal from "../../components/log/templateModal";
 
@@ -28,9 +28,12 @@ const Page = () => {
   const [publishTime, setPublishTime] = useState("now");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [triggerFileInput, setTriggerFileInput] = useState(false);
 
   const router = useRouter();
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const scheduleDateRef = useRef<HTMLInputElement>(null);
+  const scheduleTimeRef = useRef<HTMLInputElement>(null);
 
   // 제목과 내용 입력 핸들러
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -137,21 +140,11 @@ const Page = () => {
 
   // 이미지 업로드 핸들러
   const handleImageUpload = () => {
-    setTriggerFileInput(true); // 파일 입력 트리거 상태를 true로 설정
-  };
-
-  // 파일 입력 트리거 상태 감지 및 처리
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      // 클라이언트 사이드에서 실행되는 코드
-      const inputElement = document.getElementById("thumbnailInput");
-      if (inputElement) {
-        inputElement.click();
-      }
+    // ref를 통해 파일 입력 요소에 접근하고, click 이벤트를 발생시킵니다.
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
     }
-  }, [triggerFileInput]);
-
-  console.log(document);
+  };
 
   // 썸네일을 선택할 때 호출될 함수 (예: 기본 썸네일을 클릭했을 때)
   const selectThumbnail = (imageUrl: string) => {
@@ -160,19 +153,11 @@ const Page = () => {
 
   // 예약 시간 입력 필드 활성화/비활성화를 위한 useEffect
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const scheduleDateInput = document.getElementById(
-        "scheduleDate",
-      ) as HTMLInputElement; // HTMLInputElement로 타입 캐스팅
-      const scheduleTimeInput = document.getElementById(
-        "scheduleTime",
-      ) as HTMLInputElement; // HTMLInputElement로 타입 캐스팅
-      // publishTime이 "schedule"일 때만 입력 필드를 활성화하고, 그 외의 경우에는 비활성화합니다.
-      const disabled = publishTime !== "schedule";
-      if (scheduleDateInput && scheduleTimeInput) {
-        scheduleDateInput.disabled = disabled;
-        scheduleTimeInput.disabled = disabled;
-      }
+    // publishTime이 "schedule"일 때만 입력 필드를 활성화하고, 그 외의 경우에는 비활성화합니다.
+    const disabled = publishTime !== "schedule";
+    if (scheduleDateRef.current && scheduleTimeRef.current) {
+      scheduleDateRef.current.disabled = disabled;
+      scheduleTimeRef.current.disabled = disabled;
     }
   }, [publishTime]);
 
@@ -252,6 +237,7 @@ const Page = () => {
             </button>
             <input
               type="file"
+              ref={fileInputRef} // 생성한 ref를 input 요소에 연결합니다.
               id="thumbnailInput"
               style={{ display: "none" }}
               onChange={handleImageChange}
@@ -672,8 +658,16 @@ const Page = () => {
               <label htmlFor="schedulePublish" className="body3M">
                 예약
               </label>
-              <input type="date" name="" id="" className="ml-extraSmall3" />
-              <input type="time" name="" id="" className="ml-extraSmall3" />
+              <input
+                type="date"
+                ref={scheduleDateRef}
+                className="ml-extraSmall3"
+              />
+              <input
+                type="time"
+                ref={scheduleTimeRef}
+                className="ml-extraSmall3"
+              />
             </div>
           </div>
         </div>
