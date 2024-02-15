@@ -39,7 +39,7 @@ const LogCard: React.FC<LogCardProps> = ({
         <div
           className="h-[190px]"
           style={{
-            backgroundImage: `url(http://13.209.16.46:8090/api/files/${collectionId}/${id}/${thumbnail})`,
+            backgroundImage: `url(https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/api/files/${collectionId}/${id}/${thumbnail})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             transition: "transform 0.3s",
@@ -49,7 +49,7 @@ const LogCard: React.FC<LogCardProps> = ({
             <div className="flex gap-x-[5px] items-center">
               <div className="w-[30px] h-[30px]">
                 <Image
-                  src={`http://13.209.16.46:8090/api/files/${(expand?.user as { collectionId: string })?.collectionId}/${expand?.user?.id}/${expand?.user?.avatar}`}
+                  src={`https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/api/files/${(expand?.user as { collectionId: string })?.collectionId}/${expand?.user?.id}/${expand?.user?.avatar}`}
                   alt="profileImage"
                   width={30}
                   height={30}

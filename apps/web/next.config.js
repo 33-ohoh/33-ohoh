@@ -8,7 +8,8 @@ module.exports = {
 				protocol: "http",
 				hostname: "assets.example.com",
 				port: "",
-				pathname: "http://13.209.16.46:8090/**",
+				pathname:
+					"https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/**",
 			},
 		],
 	},

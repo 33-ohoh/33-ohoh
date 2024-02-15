@@ -15,7 +15,9 @@ const QuillEditor = dynamic(() => import("@repo/ui/quillEditor"), {
   ssr: false, // 서버 사이드 렌더링 비활성화
 });
 
-const pb = new PocketBase("http://13.209.16.46:8090");
+const pb = new PocketBase(
+  "https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com",
+);
 
 const Page = () => {
   const recommendedThumbnails = [

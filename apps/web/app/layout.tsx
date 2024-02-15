@@ -1,4 +1,4 @@
-import "@repo/ui/styles.css";
+import "../../../packages/ui/src/styles.css";
 import "./globals.css";
 
 import Provider from "../app/Provider";

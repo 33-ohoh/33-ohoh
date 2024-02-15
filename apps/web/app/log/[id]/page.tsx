@@ -3,7 +3,9 @@ import PocketBase from "pocketbase";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-const pb = new PocketBase("http://13.209.16.46:8090");
+const pb = new PocketBase(
+  "https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com",
+);
 
 type LogParams = {
   id: string;

@@ -47,7 +47,7 @@ const HotLogCard: React.FC<HotLogCardProps> = ({
         <div className="flex flex-col gap-y-[1.25rem]">
           <div className="flex gap-x-[0.62rem] items-center">
             <Image
-              src={`http://13.209.16.46:8090/api/files/${(expand?.user as { collectionId: string })?.collectionId}/${expand?.user?.id}/${expand?.user?.avatar}`}
+              src={`https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/api/files/${(expand?.user as { collectionId: string })?.collectionId}/${expand?.user?.id}/${expand?.user?.avatar}`}
               alt={"profileImage"}
               width={31}
               height={31}
@@ -70,7 +70,7 @@ const HotLogCard: React.FC<HotLogCardProps> = ({
           <div
             className="w-[146px] h-[119px]"
             style={{
-              backgroundImage: `url(http://13.209.16.46:8090/api/files/${collectionId}/${id}/${thumbnail})`,
+              backgroundImage: `url(https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/api/files/${collectionId}/${id}/${thumbnail})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
