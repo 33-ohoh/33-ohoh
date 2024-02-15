@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-const pb = new PocketBase("http://13.209.16.46:8090");
+const pb = new PocketBase(
+  "https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com",
+);
 
 type LogParams = {
   id: string;
@@ -64,7 +66,7 @@ const LogSuccess = ({ params }: { params: LogParams }) => {
 
   const defaultThumbnail = "/recommendedThumbnail.png";
 
-  const logThumbnail = `http://13.209.16.46:8090/api/files/fa9narwwpt53ps8/${log?.id}/${log?.thumbnail}`;
+  const logThumbnail = `https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/api/files/fa9narwwpt53ps8/${log?.id}/${log?.thumbnail}`;
 
   return (
     <div className="w-[470px] mx-auto flex flex-col items-center mt-mediun mb-extraLarge">

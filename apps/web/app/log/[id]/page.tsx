@@ -105,7 +105,7 @@ const LogPage = ({ params }: { params: LogParams }) => {
   }
 
   const imageUrl = userProfile?.avatar
-    ? `http://13.209.16.46:8090/api/files/_pb_users_auth_/${userProfile.id}/${userProfile.avatar}`
+    ? `https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/api/files/_pb_users_auth_/${userProfile.id}/${userProfile.avatar}`
     : null;
 
   return (

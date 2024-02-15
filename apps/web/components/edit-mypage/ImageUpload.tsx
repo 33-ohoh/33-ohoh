@@ -4,7 +4,9 @@ import { useRef, useState } from "react";
 import PocketBase from "pocketbase";
 import Image from "next/image";
 
-const pb = new PocketBase("http://13.209.16.46:8090");
+const pb = new PocketBase(
+  "https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com",
+);
 
 export const ImageUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);

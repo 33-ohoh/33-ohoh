@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import PocketBase from "pocketbase";
 
-const pb = new PocketBase("http://13.209.16.46:8090");
+const pb = new PocketBase(
+  "https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com",
+);
 
 export async function GET(req: Request) {
   let params = new URL(req.url).searchParams.get("page");

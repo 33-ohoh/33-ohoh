@@ -44,7 +44,8 @@ const LogCard = ({ log, method }: { log: Log; method: any }) => {
 
   const selectState = useAppSelector((state) => state.selectLog);
 
-  const baseUrl = "http://13.209.16.46:8090/api/files";
+  const baseUrl =
+    "https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/api/files";
   return (
     <li
       key={id + title}

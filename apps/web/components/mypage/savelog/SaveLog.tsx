@@ -11,8 +11,11 @@ import SaveLogkModal from "../SaveLogkModal";
 import { Suspense, useEffect, useState } from "react";
 
 const SaveLog = ({ savelogItem }: { savelogItem: any }) => {
-  const pb = new PocketBase("http://13.209.16.46:8090");
-  const baseUrl = "http://13.209.16.46:8090/api/files";
+  const pb = new PocketBase(
+    "https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com",
+  );
+  const baseUrl =
+    "https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/api/files";
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const saveLog = useAppSelector((state) => state.saveLog);

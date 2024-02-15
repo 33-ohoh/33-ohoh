@@ -35,7 +35,7 @@ const SaveLogCard = ({ items }: any) => {
           <CardTop className="flex-grow">
             <div
               style={{
-                backgroundImage: `url(http://13.209.16.46:8090/api/files/${log.expand.logs.collectionId}/${log.expand.logs.id}/${log.expand.logs.thumbnail})`,
+                backgroundImage: `url(https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/api/files/${log.expand.logs.collectionId}/${log.expand.logs.id}/${log.expand.logs.thumbnail})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center center",
               }}
@@ -44,7 +44,7 @@ const SaveLogCard = ({ items }: any) => {
               <div className="flex items-center gap-[5px]">
                 {log.expand.logs.thumbnail ? (
                   <Image
-                    src={`http://13.209.16.46:8090/api/files/${log.expand.logs.collectionId}/${log.expand.logs.id}/${log.expand.logs.thumbnail}`}
+                    src={`https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/api/files/${log.expand.logs.collectionId}/${log.expand.logs.id}/${log.expand.logs.thumbnail}`}
                     alt={"img"}
                     width={42}
                     height={42}
