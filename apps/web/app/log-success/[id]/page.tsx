@@ -66,7 +66,7 @@ const LogSuccess = ({ params }: { params: LogParams }) => {
 
   const defaultThumbnail = "/recommendedThumbnail.png";
 
-  const logThumbnail = `https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/api/files/fa9narwwpt53ps8/${log?.collectionId}/${log?.id}/${log?.thumbnail}`;
+  const logThumbnail = `https://eb1bir7wdc.execute-api.ap-northeast-2.amazonaws.com/api/files/${log?.collectionId}/${log?.id}/${log?.thumbnail}`;
 
   return (
     <div className="w-[470px] mx-auto flex flex-col items-center mt-mediun mb-extraLarge">

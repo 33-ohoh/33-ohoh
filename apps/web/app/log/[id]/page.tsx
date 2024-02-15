@@ -78,6 +78,7 @@ const LogPage = ({ params }: { params: LogParams }) => {
           introduction: userRecord.introduction,
         };
         setUserProfile(userProfile);
+        console.log(userProfile);
       } catch (error) {
         console.error("Error fetching user:", error);
       }
