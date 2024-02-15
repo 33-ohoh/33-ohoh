@@ -35,7 +35,7 @@ const HotLogCardList = () => {
     variableWidth: true,
   };
   return (
-    <div className="w-full h-[430px] bg-primary10 pl-[12.93rem] flex flex-col gap-y-[1.75rem] py-[4.5rem] overflow-hidden">
+    <div className="w-full h-[430px] bg-primary10 pl-[12.93rem] relative flex flex-col gap-y-[1.75rem] py-[4.5rem] overflow-hidden">
       <div className="display4 text-neutral80">
         <span>오늘의 </span>
         <span className="text-primary90">HOT</span>
@@ -52,7 +52,7 @@ const HotLogCardList = () => {
         {items.map((data, dataIndex) => (
           <HotLogCard
             key={dataIndex}
-            currentRank={dataIndex}
+            currentRank={dataIndex + 1}
             title={data.title}
             content={data.content}
             thumbnail={data.thumbnail}
@@ -70,8 +70,7 @@ const HotLogCardList = () => {
           />
         ))}
       </Slider>
-
-      <span className="absolute top-[125px] left-[22.75rem]">
+      <span className="absolute top-[25px] left-[370px]">
         <TwinkleCharacter />
       </span>
     </div>
