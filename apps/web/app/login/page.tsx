@@ -121,6 +121,7 @@ const Login = () => {
           }}
           placeholder="example@example.com"
           errorMessage={errors.email?.message}
+          padding="py-[20px] pl-[20px]"
         />
         <Input
           name="password"
@@ -132,6 +133,7 @@ const Login = () => {
           }}
           placeholder="password"
           errorMessage={errors.password?.message}
+          padding="py-[20px] pl-[20px]"
         />
 
         <div className="w-[670px] flex justify-end">
@@ -147,7 +149,13 @@ const Login = () => {
             checked={loginState.rememberUser}
           />
         </div>
-        <Button size="full" color="blue-full" margin="mt-small1" type="submit">
+        <Button
+          size="full"
+          color="blue-full"
+          margin="mt-small1"
+          type="submit"
+          padding="py-[15px]"
+        >
           로그인
         </Button>
       </form>
