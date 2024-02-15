@@ -10,22 +10,26 @@
   },
   "dependencies": {
     "@repo/ui": "*",
-    "@stylexjs/stylex": "^0.4.1",
     "next": "^14.0.4",
+    "pocketbase": "^0.21.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.4",
     "@repo/eslint-config": "*",
+    "@repo/tailwind-config": "*",
     "@repo/typescript-config": "*",
-    "@stylexjs/babel-plugin": "^0.4.1",
-    "@stylexjs/nextjs-plugin": "^0.4.1",
     "@types/eslint": "^8.56.1",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
+    "@types/react-slick": "^0.23.13",
+    "autoprefixer": "^10.4.17",
     "eslint": "^8.56.0",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   }
 }

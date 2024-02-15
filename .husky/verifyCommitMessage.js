@@ -1,19 +1,19 @@
 #!/usr/bin/env node
-import { readFileSync, writeFileSync } from "fs";
+const fs = require("fs");
 
 // 커밋 메시지 형식을 정의합니다.
 const commitMessagePattern =
-	/^(Feat|Update|Fix|Style|Refactor|Comment|Chore|Docs|Rename|Remove): .{1,50}$/;
+  /^(Feat|Update|Fix|Style|Refactor|Comment|Chore|Docs|Rename|Remove): .{1,50}$/;
 
 // 커밋 메시지 파일 경로를 가져옵니다. (Husky 훅 스크립트에서 자동으로 전달됩니다.)
 const commitMessageFilePath = process.argv[2];
 
 // 커밋 메시지를 읽어옵니다.
-const commitMessage = readFileSync(commitMessageFilePath, "utf-8").trim();
+const commitMessage = fs.readFileSync(commitMessageFilePath, "utf-8").trim();
 
 // 커밋 메시지 형식을 검증합니다.
 if (!commitMessagePattern.test(commitMessage)) {
-	console.error(`
+  console.error(`
   사용가능한 commit의 Prefix는 아래와 같습니다.
 
   ===================== 반드시 콜론 한 개(:)를 사용하고 띄어쓰기 후 내용을 입력합니다. =====================
@@ -29,9 +29,9 @@ if (!commitMessagePattern.test(commitMessage)) {
   Remove:           파일을 삭제하는 작업만 수행한 경우
   ==============================================================================================
   `);
-	process.exit(1); // 검증 실패 시 프로세스를 종료합니다.
+  process.exit(1); // 검증 실패 시 프로세스를 종료합니다.
 }
 
 // 조정된 커밋 메시지를 파일에 씁니다.
-writeFileSync(commitMessageFilePath, commitMessage);
+fs.writeFileSync(commitMessageFilePath, commitMessage);
 process.exit(0); // 성공적으로 완료되면 프로세스를 종료합니다.

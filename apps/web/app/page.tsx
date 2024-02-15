@@ -1,11 +1,4 @@
-"use client";
-
-import Counter from "./Counter";
-
-export default function Page(): JSX.Element {
-  return (
-    <div>
-      <Counter />
-    </div>
-  );
+import MainPage from "./main/page";
+export default function Page() {
+  return <MainPage />;
 }
