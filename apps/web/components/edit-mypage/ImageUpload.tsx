@@ -8,7 +8,7 @@ const pb = new PocketBase("http://13.209.16.46:8090");
 
 export const ImageUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [previewFile, setPreviewFile] = useState<string>("");
+  const [previewFile, setPreviewFile] = useState("");
   const imgRef = useRef<HTMLInputElement>(null);
 
   // 이미지 선택하기
@@ -20,7 +20,7 @@ export const ImageUpload = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        // setPreviewFile(reader.result);
+        setPreviewFile(reader.result);
       };
       reader.readAsDataURL(file);
     } else {
@@ -58,32 +58,32 @@ export const ImageUpload = () => {
   return (
     <div>
       <div className="flex flex-col items-center mx-auto bg-neutral5 w-[170px] h-[170px] rounded-radius100 text-center overflow-hidden">
-        <div className="">
-          <Image src={previewFile || ""} alt="" />
+        <div className="bg-[#C0C0C0]">
+          <Image src={previewFile || ""} alt="" width={175} height={175} />
         </div>
-        <input
-          id="fileInput"
-          type="file"
-          accept="image/*"
-          ref={imgRef}
-          onChange={handleChangeFile}
-          className="opacity-0 w-full h-full cursor-pointer"
-        />
       </div>
 
       <p className="my-[20px] text-[16px] text-neutral50 text-center">
         20MB 이내의 이미지 파일을 업로드 해주세요.
       </p>
 
-      <div className="text-center text-white flex gap-[15px] font-semibold mb-[55px]">
+      <div className="text-center text-white flex gap-[15px] font-semibold mb-[55px] justify-center">
         <div className="bg-neutral80 rounded-radius5">
-          <button
-            type="button"
+          <label
+            htmlFor="fileInput"
+            className="w-[210px] h-full py-[15px] cursor-pointer flex items-center justify-center "
             onClick={handleUploadFile}
-            className="py-[15px] w-[210px]"
           >
+            <input
+              id="fileInput"
+              type="file"
+              accept="image/*"
+              ref={imgRef}
+              onChange={handleChangeFile}
+              className="hidden"
+            />
             업로드 하기
-          </button>
+          </label>
         </div>
 
         <div className="bg-neutral80 rounded-radius5">
