@@ -229,6 +229,7 @@ const SignupForm = ({ setStep }: SignupFormProps) => {
           required: ERROR_MESSAGES.NAME_REQUIRED,
         }}
         errorMessage={errors.name?.message}
+        padding="py-[20px] pl-[20px]"
       />
 
       <div className="flex items-center justify-between mt-extraSmall1">
@@ -245,9 +246,10 @@ const SignupForm = ({ setStep }: SignupFormProps) => {
             required: ERROR_MESSAGES.USERNAME_REQUIRED,
           }}
           errorMessage={errors.username?.message}
+          padding="py-[20px] pl-[20px]"
         />
         <Button
-          padding="px-[42px] py-[26px]"
+          padding="px-[42px] py-[20px]"
           border="rounded-radius15"
           font="body1R"
           margin={errors.username ? "" : "mt-[40px]"}
@@ -256,8 +258,8 @@ const SignupForm = ({ setStep }: SignupFormProps) => {
           type="button"
         >
           {signupState.usernameVerification === "Unverified"
-            ? "중복 확인"
-            : "사용 가능"}
+            ? "중복확인"
+            : "사용가능"}
         </Button>
       </div>
 
@@ -276,9 +278,10 @@ const SignupForm = ({ setStep }: SignupFormProps) => {
           }}
           placeholder="example@example.com"
           errorMessage={errors.email?.message}
+          padding="py-[20px] pl-[20px]"
         />
         <Button
-          padding="px-[42px] py-[26px]"
+          padding="px-[42px] py-[20px]"
           border="rounded-radius15"
           font="body1R"
           margin={errors.email ? "" : "mt-[40px]"}
@@ -305,6 +308,7 @@ const SignupForm = ({ setStep }: SignupFormProps) => {
         }}
         placeholder="비밀번호"
         errorMessage={errors.password?.message}
+        padding="py-[20px] pl-[20px]"
       />
 
       <Input
@@ -323,6 +327,7 @@ const SignupForm = ({ setStep }: SignupFormProps) => {
         successMessage={
           isEqualPassword && !errors.passwordConfirm && "비밀번호가 일치합니다."
         }
+        padding="py-[20px] pl-[20px]"
       />
 
       <div className="flex flex-col gap-5 body1R mt-small1">
@@ -366,6 +371,7 @@ const SignupForm = ({ setStep }: SignupFormProps) => {
         margin="mt-small1"
         disabled={disabled}
         type="submit"
+        padding="py-[15px]"
       >
         다음
       </Button>
