@@ -20,7 +20,7 @@ export const ImageUpload = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreviewFile(reader.result);
+        // setPreviewFile(reader.result);
       };
       reader.readAsDataURL(file);
     } else {
