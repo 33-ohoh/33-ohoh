@@ -1,4 +1,3 @@
-import { NavRight } from "@repo/ui/index";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -6,6 +5,8 @@ import { deleteUser } from "../../apis/auth";
 import { useAppDispatch } from "../../hooks/redux";
 import { logout } from "../../store/loginSlice";
 import InfoItem from "./InfoItem";
+import Image from "next/image";
+import { MypageNavRight } from "../../../../packages/ui/src/icon/IconComponents";
 
 const InfoList = () => {
   const dispatch = useAppDispatch();
@@ -75,11 +76,11 @@ const InfoList = () => {
       )}
 
       <InfoItem title="소개">
-        <p className="mb-extraSmall1">
+        <p className="mb-extraSmall1 leading-6">
           개발은 저에게 항상 즐겁고 재밌는 것입니다. 사용자에게 도움이 되는
           서비스를 만들고 싶습니다.
         </p>
-        <p className="mb-extraSmall1">
+        <p className="mb-extraSmall1 leading-6">
           [경력]
           <br />
           Frontend Engineer (2017.03.01 ~ 현재)
@@ -87,9 +88,30 @@ const InfoList = () => {
 
         <h4 className="font-bold mb-extraSmall4">SNS 연동</h4>
         <div className="flex gap-[10px]">
-          {/* <SnsKakao width={42} height={42} /> */}
-          {/* <SnsNaver width={42} height={42} /> */}
-          {/* <SnsGoogle width={42} height={42} /> */}
+          <Image
+            className="cursor-pointer"
+            priority
+            src="/common/kakao-logo-circle.svg"
+            alt="kakao-logo-circle"
+            width="42"
+            height="42"
+          />
+          <Image
+            className="cursor-pointer"
+            priority
+            src="/common/naver-logo-circle.svg"
+            alt="naver-logo-circle"
+            width="42"
+            height="42"
+          />
+          <Image
+            className="cursor-pointer"
+            priority
+            src="/common/google-logo-circle.svg"
+            alt="google-logo-circle"
+            width="42"
+            height="42"
+          />
         </div>
       </InfoItem>
 
@@ -113,34 +135,34 @@ const InfoList = () => {
       <InfoItem title="나의 활동">
         <div className="flex justify-between">
           <Link href="/mypage/">내가 쓴 로그</Link>
-          <NavRight width={22} height={22} />
+          <MypageNavRight />
         </div>
         <div className="flex justify-between">
           <Link href="/mypage/savelog">내 저장 로그</Link>
-          <NavRight width={22} height={22} />
+          <MypageNavRight />
         </div>
         <div className="flex justify-between">
           <Link href="/mypage/recentlog">최근 본 로그</Link>
-          <NavRight width={22} height={22} />
+          <MypageNavRight />
         </div>
         <div className="flex justify-between">
           <Link href="/mypage/replies">내가 쓴 댓글</Link>
-          <NavRight width={22} height={22} />
+          <MypageNavRight />
         </div>
       </InfoItem>
 
       <InfoItem title="">
         <h4 className="flex justify-between font-bold">
           <Link href="">이용약관&개인정보처리방침</Link>
-          <NavRight width={22} height={22} />
+          <MypageNavRight />
         </h4>
         <h4 className="flex justify-between font-bold">
           <button onClick={logoutHandler}>로그아웃</button>
-          <NavRight width={22} height={22} />
+          <MypageNavRight />
         </h4>
         <h4 className="flex justify-between font-bold">
           <button onClick={() => setIsOpen(true)}>회원탈퇴</button>
-          <NavRight width={22} height={22} />
+          <MypageNavRight />
         </h4>
       </InfoItem>
     </div>
