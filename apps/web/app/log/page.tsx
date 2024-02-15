@@ -1,13 +1,19 @@
 "use client";
 
 import { NavDown } from "@repo/ui/index";
-import QuillEditor from "@repo/ui/quillEditor";
+// import QuillEditor from "@repo/ui/quillEditor";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import PocketBase from "pocketbase";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState, useRef } from "react";
 import DraftModal from "../../components/log/DraftModal";
 import TemplateModal from "../../components/log/templateModal";
+
+import dynamic from "next/dynamic";
+
+const QuillEditor = dynamic(() => import("@repo/ui/quillEditor"), {
+  ssr: false, // 서버 사이드 렌더링 비활성화
+});
 
 const pb = new PocketBase("http://13.209.16.46:8090");
 
@@ -30,6 +36,10 @@ const Page = () => {
   const [content, setContent] = useState<string>("");
 
   const router = useRouter();
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const scheduleDateRef = useRef<HTMLInputElement>(null);
+  const scheduleTimeRef = useRef<HTMLInputElement>(null);
 
   // 제목과 내용 입력 핸들러
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -134,12 +144,11 @@ const Page = () => {
     });
   };
 
+  // 이미지 업로드 핸들러
   const handleImageUpload = () => {
-    const inputElement = document.getElementById("thumbnailInput");
-    if (inputElement) {
-      inputElement.click();
-    } else {
-      console.error("Thumbnail input element not found");
+    // ref를 통해 파일 입력 요소에 접근하고, click 이벤트를 발생시킵니다.
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
     }
   };
 
@@ -150,18 +159,13 @@ const Page = () => {
 
   // 예약 시간 입력 필드 활성화/비활성화를 위한 useEffect
   useEffect(() => {
-    const scheduleDateInput = document.getElementById(
-      "scheduleDate",
-    ) as HTMLInputElement;
-    const scheduleTimeInput = document.getElementById(
-      "scheduleTime",
-    ) as HTMLInputElement;
+    // publishTime이 "schedule"일 때만 입력 필드를 활성화하고, 그 외의 경우에는 비활성화합니다.
     const disabled = publishTime !== "schedule";
-    if (scheduleDateInput && scheduleTimeInput) {
-      scheduleDateInput.disabled = disabled;
-      scheduleTimeInput.disabled = disabled;
+    if (scheduleDateRef.current && scheduleTimeRef.current) {
+      scheduleDateRef.current.disabled = disabled;
+      scheduleTimeRef.current.disabled = disabled;
     }
-  }, [publishTime]); // publishTime이 변경될 때마다 실행
+  }, [publishTime]);
 
   return (
     <section className="mx-auto w-[1185px]">
@@ -239,6 +243,7 @@ const Page = () => {
             </button>
             <input
               type="file"
+              ref={fileInputRef} // 생성한 ref를 input 요소에 연결합니다.
               id="thumbnailInput"
               style={{ display: "none" }}
               onChange={handleImageChange}
@@ -659,8 +664,16 @@ const Page = () => {
               <label htmlFor="schedulePublish" className="body3M">
                 예약
               </label>
-              <input type="date" name="" id="" className="ml-extraSmall3" />
-              <input type="time" name="" id="" className="ml-extraSmall3" />
+              <input
+                type="date"
+                ref={scheduleDateRef}
+                className="ml-extraSmall3"
+              />
+              <input
+                type="time"
+                ref={scheduleTimeRef}
+                className="ml-extraSmall3"
+              />
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ import { setPage } from "../../../store/selectLogSlice";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Button } from "@repo/ui/button";
-import { LogCardProps } from "../../../types/log";
+import { Log } from "../../../types/log";
 import LogCard from "../../../components/mypage/LogCard";
 import Pagination from "../../../components/mypage/Pagination";
 
@@ -20,10 +20,11 @@ const MyLogPage = () => {
     "안드로이드 개발자",
   ];
   const router = useRouter();
+  const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
   const selectState = useAppSelector((state) => state.selectState);
 
-  let optionUrl = useSearchParams().get("page"); // page라는 params의 값을 가져온다.
+  let optionUrl = new URLSearchParams(searchParams).get("page");
   useEffect(() => {
     if (optionUrl !== selectState.logPage) {
       dispatch(
@@ -100,7 +101,7 @@ const MyLogPage = () => {
       </div>
       <form className="flex flex-col justify-center items-center gap-[75px]">
         <ul className="flex flex-wrap gap-[50px] w-[694px]">
-          {items.map((log: LogCardProps) => {
+          {items.map((log: Log) => {
             return <LogCard key={log.id} log={log} method={method} />;
           })}
         </ul>

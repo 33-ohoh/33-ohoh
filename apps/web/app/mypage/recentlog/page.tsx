@@ -2,11 +2,11 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { setSavePage } from "../../../store/saveLogSlice";
-import { useForm } from "react-hook-form";
 import useSWR from "swr";
 import Pagination from "../../../components/mypage/Pagination";
+import SaveLog from "../../../components/mypage/savelog/SaveLog";
 
 const RecentLogPage = () => {
   const jobFilter = [
@@ -25,7 +25,6 @@ const RecentLogPage = () => {
 
   const { data, error, isLoading } = useSWR(key, fetcher);
   const items = data?.items || [];
-  const [recentlogItem, setRecentlogItem] = useState([]);
   const totalItems = data?.totalItems;
   const totalPages = Math.ceil(totalItems / 6);
 
@@ -48,41 +47,6 @@ const RecentLogPage = () => {
   useEffect(() => {
     return router.push(`/mypage/recentlog?page=${saveLogState.logPage}`);
   }, [saveLogState.logPage]);
-
-  const method = useForm({
-    mode: "onChange",
-    defaultValues: {
-      log: "",
-    },
-  });
-
-  async function handleLogClick(recordId: string) {
-    const userId = "사용자ID"; // 사용자 식별 정보
-    await fetch("http://13.209.16.46:8090/api/collections/recentlogs/records", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId,
-        recordId,
-      }),
-    });
-  }
-
-  async function getServerSideProps(context) {
-    const userId = context.params.userId; // 사용자 ID 파라미터 추출
-    const res = await fetch(
-      `http://13.209.16.46:8090/api/collections/userPosts/records?filter=userId=${userId}`,
-    );
-    const posts = await res.json();
-
-    return {
-      props: {
-        posts,
-      },
-    };
-  }
 
   // 페이지 네이션 핸들러
   const handlePrevPagenation = () => {
@@ -125,18 +89,11 @@ const RecentLogPage = () => {
       </div>
 
       <form className="flex flex-col justify-center items-center gap-[75px]">
-        {/* <ul className="flex flex-wrap gap-[50px] w-[694px]">
+        <ul className="flex flex-wrap gap-[50px] w-[694px]">
           {items.map((savelogItem: any) => {
-            return (
-              <SaveLog
-                key={savelogItem.id}
-                savelogItem={savelogItem}
-                method={method}
-                saveLogState={saveLogState}
-              />
-            );
+            return <SaveLog key={savelogItem.id} savelogItem={savelogItem} />;
           })}
-        </ul> */}
+        </ul>
 
         <Pagination
           handlePrev={handlePrevPagenation}
@@ -144,6 +101,7 @@ const RecentLogPage = () => {
           totalItems={totalItems}
           page={saveLogState.logPage}
           limit={6}
+          type="log"
         />
       </form>
     </section>

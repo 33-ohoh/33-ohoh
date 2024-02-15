@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { SubPageType } from "../../types/mypageConfigure";
@@ -41,16 +41,28 @@ const Page = () => {
 
     switch (pageType) {
       case SubPageType.MY_LOG:
-        setMainContent(<MyLogPage />);
+        setMainContent(
+          <Suspense fallback={<div>로딩중...</div>}>
+            <MyLogPage />
+          </Suspense>,
+        );
         break;
       case SubPageType.SAVE_LOG:
         setMainContent(<SaveLogPage />);
         break;
       case SubPageType.RECENT_LOG:
-        setMainContent(<RecentLogPage />);
+        setMainContent(
+          <Suspense fallback={<div>로딩중...</div>}>
+            <RecentLogPage />
+          </Suspense>,
+        );
         break;
       case SubPageType.MY_COMMENTS:
-        setMainContent(<RepliesPage />);
+        setMainContent(
+          <Suspense fallback={<div>로딩중...</div>}>
+            <RepliesPage />
+          </Suspense>,
+        );
         break;
       case SubPageType.NONE:
         setMainContent(<></>);

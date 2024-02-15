@@ -9,14 +9,17 @@ import useSWR from "swr";
 import { getLogList } from "../../apis/logList";
 
 const HotLogCardList = () => {
-  const { data: data, error } = useSWR("/api/hotLogs", () =>
-    getLogList("logs", 1, 4, {
+  const { data: data } = useSWR("/api/hotLogs", () =>
+    getLogList("logs", {
+      page: 1,
+      perPage: 4,
       sort: "-hitCount",
       expand: "user",
       filter: "isPublic = true",
     }),
   );
   const items = data?.items || [];
+
   const settings = {
     dots: false,
     infinite: true,
@@ -31,7 +34,6 @@ const HotLogCardList = () => {
     initialSlide: 0,
     variableWidth: true,
   };
-
   return (
     <div className="w-full h-[430px] bg-primary10 pl-[12.93rem] flex flex-col gap-y-[1.75rem] py-[4.5rem] overflow-hidden">
       <div className="display4 text-neutral80">
@@ -48,7 +50,24 @@ const HotLogCardList = () => {
       </style>
       <Slider {...settings} className="z-10">
         {items.map((data, dataIndex) => (
-          <HotLogCard key={dataIndex} {...data} currentRank={dataIndex + 1} />
+          <HotLogCard
+            key={dataIndex}
+            currentRank={dataIndex}
+            title={data.title}
+            content={data.content}
+            thumbnail={data.thumbnail}
+            expand={{
+              user: {
+                collectionId: data.expand?.user.collectionId,
+                name: data.expand?.user.name,
+                myJob: data.expand?.user.myJob,
+                avatar: data.expand?.user.avatar,
+                id: data.expand?.user.id,
+              },
+            }}
+            id={data.id}
+            collectionId={data.collectionId}
+          />
         ))}
       </Slider>
 

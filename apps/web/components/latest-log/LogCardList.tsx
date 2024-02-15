@@ -1,11 +1,9 @@
 "use client";
-
-import Image from "next/image";
-import LogCard from "./LogCard";
+import LogCard from "../main/LogCard";
 import { getLogList } from "../../apis/logList";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
-import Pagination from "./Pagination";
+import Pagination from "../main/Pagination";
 interface LogCardListProps {
   filteredTags: string[];
   selectedSort: string;
@@ -54,13 +52,12 @@ const LogCardList: React.FC<LogCardListProps> = ({
   const { data: data } = useSWR(["/api/logs", filter, currentPage], () =>
     getLogList("logs", {
       page: currentPage,
-      perPage: 15,
+      perPage: 18,
       sort: "-hitCount",
       expand: "user",
       filter,
     }),
   );
-
   const items = data?.items || [];
   const onPageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -72,40 +69,7 @@ const LogCardList: React.FC<LogCardListProps> = ({
     <div className="w-[full] flex flex-col items-center">
       <div className=" w-[1066px] flex flex-wrap gap-[50px]">
         {items.length > 0 &&
-          items.slice(0, 9).map((data, dataIndex) => (
-            <LogCard
-              key={dataIndex}
-              title={data.title}
-              content={data.content}
-              thumbnail={data.thumbnail}
-              expand={{
-                user: {
-                  collectionId: data.expand?.user.collectionId,
-                  name: data.expand?.user.name,
-                  myJob: data.expand?.user.myJob,
-                  avatar: data.expand?.user.avatar,
-                  id: data.expand?.user.id,
-                },
-              }}
-              id={data.id}
-              collectionId={data.collectionId}
-              hitCount={data.hitCount}
-              likeCount={data.likeCount}
-              commentCount={data.commentCount}
-            />
-          ))}
-      </div>
-      <Image
-        src={"/mainBanner.png"}
-        alt="mainBanner"
-        width={1440}
-        height={350}
-        objectFit="cover"
-        className="relative top-[50px] left-0 mb-[100px]"
-      />
-      <div className=" w-[1066px] flex flex-wrap gap-[50px]">
-        {items.length > 9 &&
-          items.slice(9).map((data, dataIndex) => (
+          items.map((data, dataIndex) => (
             <LogCard
               key={dataIndex}
               title={data.title}

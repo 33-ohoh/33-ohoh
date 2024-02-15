@@ -21,7 +21,7 @@
     "./LogCard": "./src/LogCard.tsx",
     "./index": "./src/icon/index.tsx",
     "./input": "./src/input.tsx",
-    "./card": "./src/Card.tsx",
+    "./card": "./src/card.tsx",
     "./cardTop": "./src/CardTop.tsx",
     "./modal": "./src/Modal.tsx",
     "./cardBottom": "./src/CardBottom.tsx",

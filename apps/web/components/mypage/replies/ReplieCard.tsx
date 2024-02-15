@@ -1,9 +1,9 @@
 "use client";
 import { Bin } from "@repo/ui/index";
 import { useRouter } from "next/navigation";
-import { useAppSelector } from "../../../hooks/redux";
 import PocketBase from "pocketbase";
 import { useState } from "react";
+import { useAppSelector } from "../../../hooks/redux";
 
 interface Reply {
   id: number;
@@ -16,7 +16,7 @@ interface ReplieCardProps {
   repliesData: Reply[];
 }
 const ReplieCard = ({ repliesData: initialRepliesData }: ReplieCardProps) => {
-  const [repliesData, sestRepliesData] = useState(initialRepliesData);
+  const [repliesData, setRepliesData] = useState(initialRepliesData);
   const pb = new PocketBase("http://13.209.16.46:8090");
   const router = useRouter();
   const isDeleteState = useAppSelector(
@@ -30,7 +30,7 @@ const ReplieCard = ({ repliesData: initialRepliesData }: ReplieCardProps) => {
     try {
       await pb.collection("replies").delete(id.toString());
       const updatedReplies = repliesData.filter((reply) => reply.id !== id);
-      sestRepliesData(updatedReplies);
+      setRepliesData(updatedReplies);
     } catch (error) {
       console.error("댓글 삭제 중 오류 발생:", error);
     }
@@ -52,7 +52,6 @@ const ReplieCard = ({ repliesData: initialRepliesData }: ReplieCardProps) => {
             {isDeleteState ? <Bin /> : <div></div>}
           </button>
           <div
-            key={data.id}
             className="border border-primary90 flex flex-col w-full p-[25px] rounded-radius15"
             onClick={() => router.push(`/log/${data.log}`)}
           >
@@ -71,7 +70,7 @@ const ReplieCard = ({ repliesData: initialRepliesData }: ReplieCardProps) => {
 
             <div>
               <h3 className="mb-extraSmall5 text-[24px] font-bold">
-                {data.expand.log.title}
+                {data.expand?.log?.title}
               </h3>
               <p className="text-overflow text-neutral80">{data.content}</p>
             </div>
